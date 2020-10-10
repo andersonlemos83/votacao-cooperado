@@ -1,7 +1,9 @@
 package br.com.dbccompany.votacaocooperado.web.conversor.impl;
 
 import br.com.dbccompany.votacaocooperado.domain.Pauta;
+import br.com.dbccompany.votacaocooperado.domain.SessaoVotacao;
 import br.com.dbccompany.votacaocooperado.web.conversor.ConversorPauta;
+import br.com.dbccompany.votacaocooperado.web.dto.PautaConsolidadaDto;
 import br.com.dbccompany.votacaocooperado.web.dto.PautaDto;
 import org.springframework.stereotype.Component;
 
@@ -36,5 +38,16 @@ public class ConversorPautaImpl implements ConversorPauta {
         pautaDto.setId(pauta.getId());
         pautaDto.setDescricao(pauta.getDescricao());
         return pautaDto;
+    }
+
+    @Override
+    public PautaConsolidadaDto converterParaConsolidada(Pauta pauta) {
+        PautaConsolidadaDto pautaConsolidadaDto = new PautaConsolidadaDto();
+        pautaConsolidadaDto.setDescricao(pauta.getDescricao());
+        SessaoVotacao sessaoVotacao = pauta.obterUltimaSessaoVotacao();
+        pautaConsolidadaDto.setDataCriacao(sessaoVotacao.getDataCriacao());
+        pautaConsolidadaDto.setQuantidadeVotosSim(sessaoVotacao.obterQuantidadeVotosSim());
+        pautaConsolidadaDto.setQuantidadeVotosNao(sessaoVotacao.obterQuantidadeVotosNao());
+        return pautaConsolidadaDto;
     }
 }

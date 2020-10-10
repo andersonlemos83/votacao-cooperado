@@ -19,9 +19,13 @@ public class ValidadorVotoImpl implements ValidadorVoto {
 
     @Override
     public void validar(Voto voto) {
-        Optional<Voto> votoOptinal = Optional.ofNullable(votoRepository.findByAssociado_IdAndSessaoVotacao_Id(voto.obterIdAssociado(), voto.obterIdSessaoVotacao()));
+        Optional<Voto> votoOptinal = buscarVoto(voto);
         if (votoOptinal.isPresent()) {
             throw new NegocioException("O associado já exerceu seu direito de voto para esta pauta");
         }
+    }
+
+    private Optional<Voto> buscarVoto(Voto voto) {
+        return Optional.ofNullable(votoRepository.findByAssociado_IdAndSessaoVotacao_Id(voto.obterIdAssociado(), voto.obterIdSessaoVotacao()));
     }
 }

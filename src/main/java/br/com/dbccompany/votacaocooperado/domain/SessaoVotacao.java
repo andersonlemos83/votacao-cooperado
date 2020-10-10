@@ -2,11 +2,12 @@ package br.com.dbccompany.votacaocooperado.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static java.util.Calendar.MINUTE;
+import static java.util.Collections.emptyList;
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
 
 @Entity
 public class SessaoVotacao implements Serializable {
@@ -96,6 +97,22 @@ public class SessaoVotacao implements Serializable {
         }
     }
 
+    public int obterQuantidadeVotosSim() {
+        Map<TipoVoto, Long> apuracao = Optional.ofNullable(votos)
+                .orElse(emptyList())
+                .stream()
+                .collect(groupingBy(p -> p.getTipoVoto(), counting()));
+        return apuracao.getOrDefault(TipoVoto.SIM, 0l).intValue();
+    }
+
+    public int obterQuantidadeVotosNao() {
+        Map<TipoVoto, Long> apuracao = Optional.ofNullable(votos)
+                .orElse(emptyList())
+                .stream()
+                .collect(groupingBy(p -> p.getTipoVoto(), counting()));
+        return apuracao.getOrDefault(TipoVoto.NAO, 0l).intValue();
+    }
+
     @Override
     public String toString() {
         return "SessaoVotacao{" +
@@ -103,7 +120,6 @@ public class SessaoVotacao implements Serializable {
                 ", dataCriacao=" + dataCriacao +
                 ", tempoDuracao=" + tempoDuracao +
                 ", pauta=" + pauta +
-                ", votos=" + votos +
                 '}';
     }
 }

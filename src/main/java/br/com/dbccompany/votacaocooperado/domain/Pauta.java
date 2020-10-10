@@ -1,7 +1,5 @@
 package br.com.dbccompany.votacaocooperado.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -16,8 +14,8 @@ public class Pauta implements Serializable {
     @Column(nullable = false)
     private String descricao;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "pauta", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OrderBy("dataCriacao")
     public List<SessaoVotacao> sessoesVotacao;
 
     public Pauta() {
@@ -49,6 +47,10 @@ public class Pauta implements Serializable {
 
     public void setSessoesVotacao(List<SessaoVotacao> sessoesVotacao) {
         this.sessoesVotacao = sessoesVotacao;
+    }
+
+    public SessaoVotacao obterUltimaSessaoVotacao() {
+        return sessoesVotacao.stream().reduce((primeiro, segundo) -> segundo).orElse(null);
     }
 
     @Override

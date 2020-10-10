@@ -3,6 +3,7 @@ package br.com.dbccompany.votacaocooperado.web.rest;
 import br.com.dbccompany.votacaocooperado.domain.Pauta;
 import br.com.dbccompany.votacaocooperado.service.PautaService;
 import br.com.dbccompany.votacaocooperado.web.conversor.ConversorPauta;
+import br.com.dbccompany.votacaocooperado.web.dto.PautaConsolidadaDto;
 import br.com.dbccompany.votacaocooperado.web.dto.PautaDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,5 +48,13 @@ public class PautaResource {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(conversorPauta.converter(pautaCadastrada));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PautaConsolidadaDto> buscarPorId(@PathVariable Long id) {
+        log.info("Requisição Rest para buscar pauta por id: {}", id);
+        Pauta pautaRetornada = pautaService.buscarPorId(id);
+        PautaConsolidadaDto consolidadoPautaDto = conversorPauta.converterParaConsolidada(pautaRetornada);
+        return ResponseEntity.ok().body(consolidadoPautaDto);
     }
 }

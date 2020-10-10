@@ -10,4 +10,5 @@ public interface PautaService {
 
     Pauta cadastrar(Pauta pauta);
 
+    Pauta buscarPorId(Long id);
 }

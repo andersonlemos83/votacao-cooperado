@@ -61,7 +61,6 @@ public class SessaoVotacaoDto implements Serializable {
                 ", dataCriacao=" + dataCriacao +
                 ", tempoDuracao=" + tempoDuracao +
                 ", idPauta=" + idPauta +
-                ", votos=" + votos +
                 '}';
     }
 }

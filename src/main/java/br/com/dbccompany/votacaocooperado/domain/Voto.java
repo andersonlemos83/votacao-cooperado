@@ -66,6 +66,14 @@ public class Voto implements Serializable {
         return sessaoVotacao.getId();
     }
 
+    public boolean ehSim() {
+        return tipoVoto != null && tipoVoto == TipoVoto.SIM;
+    }
+
+    public boolean ehNao() {
+        return tipoVoto != null && tipoVoto == TipoVoto.NAO;
+    }
+
     @Override
     public String toString() {
         return "Voto{" +

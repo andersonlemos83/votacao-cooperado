@@ -1,7 +1,5 @@
 package br.com.dbccompany.votacaocooperado.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -16,7 +14,6 @@ public class Associado implements Serializable {
     @Column(nullable = false)
     private String nome;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "associado", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Voto> votos;
 
