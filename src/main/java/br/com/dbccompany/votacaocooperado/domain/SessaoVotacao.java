@@ -2,8 +2,11 @@ package br.com.dbccompany.votacaocooperado.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import static java.util.Calendar.MINUTE;
 
 @Entity
 public class SessaoVotacao implements Serializable {
@@ -76,6 +79,13 @@ public class SessaoVotacao implements Serializable {
             return null;
         }
         return pauta.getId();
+    }
+
+    public boolean estaFechada() {
+        Calendar dataCriacaoCalendar = Calendar.getInstance();
+        dataCriacaoCalendar.setTime(dataCriacao);
+        dataCriacaoCalendar.add(MINUTE, tempoDuracao);
+        return Calendar.getInstance().after(dataCriacaoCalendar);
     }
 
     @PrePersist

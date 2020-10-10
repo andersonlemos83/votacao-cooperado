@@ -1,5 +1,6 @@
 package br.com.dbccompany.votacaocooperado.web.dto;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -9,6 +10,7 @@ public class SessaoVotacaoDto implements Serializable {
     private Long id;
     private Date dataCriacao;
     private int tempoDuracao;
+    @NotNull(message = "O id da pauta é obrigatório")
     private Long idPauta;
     private List<VotoDto> votos;
 

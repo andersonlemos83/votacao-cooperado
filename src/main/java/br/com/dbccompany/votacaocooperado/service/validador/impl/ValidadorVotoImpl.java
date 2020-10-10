@@ -1,0 +1,27 @@
+package br.com.dbccompany.votacaocooperado.service.validador.impl;
+
+import br.com.dbccompany.votacaocooperado.domain.Voto;
+import br.com.dbccompany.votacaocooperado.repository.VotoRepository;
+import br.com.dbccompany.votacaocooperado.service.validador.ValidadorVoto;
+import br.com.dbccompany.votacaocooperado.shared.exception.NegocioException;
+import org.springframework.stereotype.Component;
+
+import java.util.Optional;
+
+@Component
+public class ValidadorVotoImpl implements ValidadorVoto {
+
+    private final VotoRepository votoRepository;
+
+    public ValidadorVotoImpl(VotoRepository votoRepository) {
+        this.votoRepository = votoRepository;
+    }
+
+    @Override
+    public void validar(Voto voto) {
+        Optional<Voto> votoOptinal = Optional.ofNullable(votoRepository.findByAssociado_IdAndSessaoVotacao_Id(voto.obterIdAssociado(), voto.obterIdSessaoVotacao()));
+        if (votoOptinal.isPresent()) {
+            throw new NegocioException("O associado já exerceu seu direito de voto para esta pauta");
+        }
+    }
+}

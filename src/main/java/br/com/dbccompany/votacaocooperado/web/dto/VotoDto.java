@@ -15,6 +15,7 @@ public class VotoDto implements Serializable {
     @NotNull(message = "O id do associado é obrigatório")
     private Long idAssociado;
 
+    @NotNull(message = "O id da sessão de votação é obrigatório")
     private Long idSessaoVotacao;
 
     public Long getId() {
