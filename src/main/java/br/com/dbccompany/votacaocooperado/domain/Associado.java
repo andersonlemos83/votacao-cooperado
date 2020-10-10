@@ -6,13 +6,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Votacao {
+public class Associado {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String voto;
+    private String nome;
 
     public Long getId() {
         return id;
@@ -22,19 +22,19 @@ public class Votacao {
         this.id = id;
     }
 
-    public String getVoto() {
-        return voto;
+    public String getNome() {
+        return nome;
     }
 
-    public void setVoto(String voto) {
-        this.voto = voto;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     @Override
     public String toString() {
-        return "Votacao{" +
+        return "Associado{" +
                 "id=" + id +
-                ", voto='" + voto + '\'' +
+                ", nome='" + nome + '\'' +
                 '}';
     }
 }
