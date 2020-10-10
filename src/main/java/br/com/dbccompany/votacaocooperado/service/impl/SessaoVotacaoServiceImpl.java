@@ -26,7 +26,6 @@ public class SessaoVotacaoServiceImpl implements SessaoVotacaoService {
 
     @Override
     public SessaoVotacao cadastrar(SessaoVotacao sessaoVotacao) {
-        sessaoVotacao.setDataCriacao(new Date());
         return sessaoVotacaoRepository.save(sessaoVotacao);
     }
 }

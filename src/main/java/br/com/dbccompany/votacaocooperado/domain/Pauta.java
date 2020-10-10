@@ -10,15 +10,22 @@ import java.util.List;
 public class Pauta implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String descricao;
 
     @JsonIgnore
-//    @JsonBackReference
     @OneToMany(mappedBy = "pauta", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public List<SessaoVotacao> sessoesVotacao;
+
+    public Pauta() {
+    }
+
+    public Pauta(Long id) {
+        this.id = id;
+    }
 
     public Long getId() {
         return id;

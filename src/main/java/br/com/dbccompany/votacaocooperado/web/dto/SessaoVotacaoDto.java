@@ -1,24 +1,14 @@
-package br.com.dbccompany.votacaocooperado.domain;
+package br.com.dbccompany.votacaocooperado.web.dto;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-@Entity
-public class SessaoVotacao implements Serializable {
+public class SessaoVotacaoDto implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
     private Date dataCriacao;
-
-    @Column(nullable = false)
     private int tempoDuracao;
-
-    @ManyToOne
-    private Pauta pauta;
+    private Long idPauta;
 
     public Long getId() {
         return id;
@@ -44,36 +34,21 @@ public class SessaoVotacao implements Serializable {
         this.tempoDuracao = tempoDuracao;
     }
 
-    public Pauta getPauta() {
-        return pauta;
+    public Long getIdPauta() {
+        return idPauta;
     }
 
-    public void setPauta(Pauta pauta) {
-        this.pauta = pauta;
-    }
-
-    public Long obterIdPauta() {
-        if (pauta == null) {
-            return null;
-        }
-        return pauta.getId();
-    }
-
-    @PrePersist
-    public void prePersist() {
-        dataCriacao = new Date();
-        if (tempoDuracao == 0) {
-            tempoDuracao = 1;
-        }
+    public void setIdPauta(Long idPauta) {
+        this.idPauta = idPauta;
     }
 
     @Override
     public String toString() {
-        return "SessaoVotacao{" +
+        return "SessaoVotacaoDto{" +
                 "id=" + id +
                 ", dataCriacao=" + dataCriacao +
                 ", tempoDuracao=" + tempoDuracao +
-                ", pauta=" + pauta +
+                ", idPauta=" + idPauta +
                 '}';
     }
 }

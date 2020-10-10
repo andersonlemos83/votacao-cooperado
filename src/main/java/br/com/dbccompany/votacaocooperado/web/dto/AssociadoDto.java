@@ -1,16 +1,13 @@
-package br.com.dbccompany.votacaocooperado.domain;
+package br.com.dbccompany.votacaocooperado.web.dto;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
-@Entity
-public class Associado implements Serializable {
+public class AssociadoDto implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @NotEmpty(message = "O nome do associado é obrigatório")
     private String nome;
 
     public Long getId() {
