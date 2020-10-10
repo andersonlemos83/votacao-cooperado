@@ -3,6 +3,7 @@ package br.com.dbccompany.votacaocooperado.domain;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class SessaoVotacao implements Serializable {
@@ -19,6 +20,16 @@ public class SessaoVotacao implements Serializable {
 
     @ManyToOne
     private Pauta pauta;
+
+    @OneToMany(mappedBy = "sessaoVotacao", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Voto> votos;
+
+    public SessaoVotacao() {
+    }
+
+    public SessaoVotacao(Long id) {
+        this.id = id;
+    }
 
     public Long getId() {
         return id;
@@ -52,6 +63,14 @@ public class SessaoVotacao implements Serializable {
         this.pauta = pauta;
     }
 
+    public List<Voto> getVotos() {
+        return votos;
+    }
+
+    public void setVotos(List<Voto> votos) {
+        this.votos = votos;
+    }
+
     public Long obterIdPauta() {
         if (pauta == null) {
             return null;
@@ -74,6 +93,7 @@ public class SessaoVotacao implements Serializable {
                 ", dataCriacao=" + dataCriacao +
                 ", tempoDuracao=" + tempoDuracao +
                 ", pauta=" + pauta +
+                ", votos=" + votos +
                 '}';
     }
 }

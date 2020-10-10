@@ -20,6 +20,9 @@ public class ConversorPautaImpl implements ConversorPauta {
 
     @Override
     public List<PautaDto> converter(List<Pauta> pautas) {
+        if (pautas == null) {
+            return new ArrayList<>();
+        }
         List<PautaDto> pautasDto = new ArrayList<>();
         for (Pauta pauta : pautas) {
             pautasDto.add(converter(pauta));

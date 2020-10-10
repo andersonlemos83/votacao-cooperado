@@ -2,6 +2,7 @@ package br.com.dbccompany.votacaocooperado.web.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class SessaoVotacaoDto implements Serializable {
 
@@ -9,6 +10,7 @@ public class SessaoVotacaoDto implements Serializable {
     private Date dataCriacao;
     private int tempoDuracao;
     private Long idPauta;
+    private List<VotoDto> votos;
 
     public Long getId() {
         return id;
@@ -42,6 +44,14 @@ public class SessaoVotacaoDto implements Serializable {
         this.idPauta = idPauta;
     }
 
+    public List<VotoDto> getVotos() {
+        return votos;
+    }
+
+    public void setVotos(List<VotoDto> votos) {
+        this.votos = votos;
+    }
+
     @Override
     public String toString() {
         return "SessaoVotacaoDto{" +
@@ -49,6 +59,7 @@ public class SessaoVotacaoDto implements Serializable {
                 ", dataCriacao=" + dataCriacao +
                 ", tempoDuracao=" + tempoDuracao +
                 ", idPauta=" + idPauta +
+                ", votos=" + votos +
                 '}';
     }
 }

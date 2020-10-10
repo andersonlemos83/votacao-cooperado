@@ -21,6 +21,9 @@ public class ConversorAssociadoImpl implements ConversorAssociado {
 
     @Override
     public List<AssociadoDto> converter(List<Associado> associados) {
+        if (associados == null) {
+            return new ArrayList<>();
+        }
         List<AssociadoDto> associadosDto = new ArrayList<>();
         for (Associado associado : associados) {
             associadosDto.add(converter(associado));
