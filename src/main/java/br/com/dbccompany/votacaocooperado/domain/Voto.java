@@ -14,8 +14,7 @@ public class Voto implements Serializable {
     @Column(nullable = false)
     private TipoVoto tipoVoto;
 
-    @Column(nullable = false)
-    @Transient
+    @ManyToOne
     private Associado associado;
 
     public Long getId() {
@@ -40,6 +39,13 @@ public class Voto implements Serializable {
 
     public void setAssociado(Associado associado) {
         this.associado = associado;
+    }
+
+    public Long obterIdAssociado() {
+        if (associado == null) {
+            return null;
+        }
+        return associado.getId();
     }
 
     @Override

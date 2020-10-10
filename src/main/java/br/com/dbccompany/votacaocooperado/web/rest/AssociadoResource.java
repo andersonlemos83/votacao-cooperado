@@ -33,7 +33,7 @@ public class AssociadoResource {
 
     @GetMapping
     public ResponseEntity<List<AssociadoDto>> listar() {
-        log.info("Requisição Rest para listar todas os associados");
+        log.info("Requisição Rest para listar todos os associados");
         List<Associado> associados = associadoService.listarTodos();
         List<AssociadoDto> associadosDto = conversorAssociado.converter(associados);
         return ResponseEntity.ok(associadosDto);
