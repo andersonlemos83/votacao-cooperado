@@ -92,7 +92,7 @@ public class SessaoVotacao implements Serializable {
     @PrePersist
     public void prePersist() {
         dataCriacao = new Date();
-        if (tempoDuracao == 0) {
+        if (tempoDuracao <= 0) {
             tempoDuracao = 1;
         }
     }

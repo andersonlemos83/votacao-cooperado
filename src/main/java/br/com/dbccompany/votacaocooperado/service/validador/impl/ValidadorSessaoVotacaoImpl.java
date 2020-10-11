@@ -24,7 +24,7 @@ public class ValidadorSessaoVotacaoImpl implements ValidadorSessaoVotacao {
         Optional<SessaoVotacao> sessaoVotacaoOptional = sessaoVotacaoRepository.findById(idSessaoVotacao);
 
         if (!sessaoVotacaoOptional.isPresent()) {
-            throw new NegocioException("A sessão de votação informada não exite");
+            throw new NegocioException("A sessão de votação informada não existe");
         }
 
         SessaoVotacao sessaoVotacao = sessaoVotacaoOptional.get();
