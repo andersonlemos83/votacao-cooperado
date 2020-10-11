@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import static java.util.Collections.emptyList;
 
 @Component
 public class ConversorAssociadoImpl implements ConversorAssociado {
@@ -21,11 +24,8 @@ public class ConversorAssociadoImpl implements ConversorAssociado {
 
     @Override
     public List<AssociadoDto> converter(List<Associado> associados) {
-        if (associados == null) {
-            return new ArrayList<>();
-        }
         List<AssociadoDto> associadosDto = new ArrayList<>();
-        for (Associado associado : associados) {
+        for (Associado associado : Optional.ofNullable(associados).orElse(emptyList())) {
             associadosDto.add(converter(associado));
         }
         return associadosDto;

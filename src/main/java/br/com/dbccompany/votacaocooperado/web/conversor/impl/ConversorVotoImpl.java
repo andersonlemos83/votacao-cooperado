@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import static java.util.Collections.emptyList;
 
 @Component
 public class ConversorVotoImpl implements ConversorVoto {
@@ -24,11 +27,8 @@ public class ConversorVotoImpl implements ConversorVoto {
 
     @Override
     public List<VotoDto> converter(List<Voto> votos) {
-        if (votos == null) {
-            return new ArrayList<>();
-        }
         List<VotoDto> votosDto = new ArrayList<>();
-        for (Voto voto : votos) {
+        for (Voto voto : Optional.ofNullable(votos).orElse(emptyList())) {
             votosDto.add(converter(voto));
         }
         return votosDto;

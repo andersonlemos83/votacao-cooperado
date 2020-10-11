@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import static java.util.Collections.emptyList;
 
 @Component
 public class ConversorAssembleiaImpl implements ConversorAssembleia {
@@ -32,11 +35,8 @@ public class ConversorAssembleiaImpl implements ConversorAssembleia {
 
     @Override
     public List<AssembleiaDto> converter(List<Assembleia> assembleias) {
-        if (assembleias == null) {
-            return new ArrayList<>();
-        }
         List<AssembleiaDto> assembleiasDto = new ArrayList<>();
-        for (Assembleia assembleia : assembleias) {
+        for (Assembleia assembleia : Optional.ofNullable(assembleias).orElse(emptyList())) {
             assembleiasDto.add(converter(assembleia));
         }
         return assembleiasDto;

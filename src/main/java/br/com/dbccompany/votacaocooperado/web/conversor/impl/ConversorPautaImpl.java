@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import static java.util.Collections.emptyList;
 
 @Component
 public class ConversorPautaImpl implements ConversorPauta {
@@ -22,11 +25,8 @@ public class ConversorPautaImpl implements ConversorPauta {
 
     @Override
     public List<PautaDto> converter(List<Pauta> pautas) {
-        if (pautas == null) {
-            return new ArrayList<>();
-        }
         List<PautaDto> pautasDto = new ArrayList<>();
-        for (Pauta pauta : pautas) {
+        for (Pauta pauta : Optional.ofNullable(pautas).orElse(emptyList())) {
             pautasDto.add(converter(pauta));
         }
         return pautasDto;
