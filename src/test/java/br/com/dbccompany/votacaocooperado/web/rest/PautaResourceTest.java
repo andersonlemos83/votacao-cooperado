@@ -26,6 +26,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.ABERTA;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -92,6 +93,7 @@ public class PautaResourceTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.descricao").value(pautaConsolidadaDto.getDescricao()))
                 .andExpect(jsonPath("$.dataCriacao").value(converter(pautaConsolidadaDto.getDataCriacao())))
+                .andExpect(jsonPath("$.statusAssembleia").value(pautaConsolidadaDto.getStatusAssembleia().name()))
                 .andExpect(jsonPath("$.quantidadeVotosSim").value(pautaConsolidadaDto.getQuantidadeVotosSim()))
                 .andExpect(jsonPath("$.quantidadeVotosNao").value(pautaConsolidadaDto.getQuantidadeVotosNao()));
     }
@@ -131,6 +133,7 @@ public class PautaResourceTest {
         PautaConsolidadaDto pautaConsolidadaDto = new PautaConsolidadaDto();
         pautaConsolidadaDto.setDescricao("Votar sobre novo fundo de investimento.");
         pautaConsolidadaDto.setDataCriacao(dataCriacao);
+        pautaConsolidadaDto.setStatusAssembleia(ABERTA);
         pautaConsolidadaDto.setQuantidadeVotosSim(1);
         pautaConsolidadaDto.setQuantidadeVotosNao(3);
         return pautaConsolidadaDto;

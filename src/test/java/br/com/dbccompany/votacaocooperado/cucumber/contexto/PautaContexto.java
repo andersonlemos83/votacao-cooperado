@@ -1,5 +1,7 @@
-package br.com.dbccompany.votacaocooperado.cucumber.stepdefs.listartodasaspautas;
+package br.com.dbccompany.votacaocooperado.cucumber.contexto;
 
+import br.com.dbccompany.votacaocooperado.cucumber.datatable.PautaDataTable;
+import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.PautaRepositoryTestHelper;
 import br.com.dbccompany.votacaocooperado.domain.Pauta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

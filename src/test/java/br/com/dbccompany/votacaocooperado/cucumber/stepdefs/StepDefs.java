@@ -1,10 +1,10 @@
 package br.com.dbccompany.votacaocooperado.cucumber.stepdefs;
 
 import br.com.dbccompany.votacaocooperado.VotacaoCooperadoApplication;
-import br.com.dbccompany.votacaocooperado.cucumber.stepdefs.listartodasasassembleias.AssembleiaRepositoryTestHelper;
-import br.com.dbccompany.votacaocooperado.cucumber.stepdefs.listartodasaspautas.PautaRepositoryTestHelper;
-import br.com.dbccompany.votacaocooperado.cucumber.stepdefs.listartodososassociados.AssociadoRepositoryTestHelper;
-import br.com.dbccompany.votacaocooperado.cucumber.stepdefs.listatodososvotos.VotoRepositoryTestHelper;
+import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.AssembleiaRepositoryTestHelper;
+import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.AssociadoRepositoryTestHelper;
+import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.PautaRepositoryTestHelper;
+import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.VotoRepositoryTestHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;

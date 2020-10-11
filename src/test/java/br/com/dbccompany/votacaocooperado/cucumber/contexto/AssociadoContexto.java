@@ -1,5 +1,7 @@
-package br.com.dbccompany.votacaocooperado.cucumber.stepdefs.listartodososassociados;
+package br.com.dbccompany.votacaocooperado.cucumber.contexto;
 
+import br.com.dbccompany.votacaocooperado.cucumber.datatable.AssociadoDataTable;
+import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.AssociadoRepositoryTestHelper;
 import br.com.dbccompany.votacaocooperado.domain.Associado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

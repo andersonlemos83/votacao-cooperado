@@ -1,4 +1,4 @@
-package br.com.dbccompany.votacaocooperado.cucumber.stepdefs.listartodasasassembleias;
+package br.com.dbccompany.votacaocooperado.cucumber.datatable;
 
 public class AssembleiaDataTable {
 

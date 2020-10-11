@@ -4,6 +4,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
 
+import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.ABERTA;
+import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.FECHADA;
 import static java.util.Calendar.MINUTE;
 import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.counting;
@@ -103,6 +105,13 @@ public class Assembleia implements Serializable {
                 .stream()
                 .collect(groupingBy(p -> p.getTipoVoto(), counting()));
         return apuracao.getOrDefault(TipoVoto.NAO, 0l).intValue();
+    }
+
+    public StatusAssembleia obterStatusAssembleia() {
+        if (estaFechada()) {
+            return FECHADA;
+        }
+        return ABERTA;
     }
 
     @PrePersist

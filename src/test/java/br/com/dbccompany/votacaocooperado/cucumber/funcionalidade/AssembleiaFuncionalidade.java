@@ -1,4 +1,4 @@
-package br.com.dbccompany.votacaocooperado.cucumber.stepdefs.listartodasasassembleias;
+package br.com.dbccompany.votacaocooperado.cucumber.funcionalidade;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

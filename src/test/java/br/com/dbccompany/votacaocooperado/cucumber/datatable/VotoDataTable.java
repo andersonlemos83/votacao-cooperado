@@ -1,4 +1,4 @@
-package br.com.dbccompany.votacaocooperado.cucumber.stepdefs.listatodososvotos;
+package br.com.dbccompany.votacaocooperado.cucumber.datatable;
 
 import br.com.dbccompany.votacaocooperado.domain.TipoVoto;
 

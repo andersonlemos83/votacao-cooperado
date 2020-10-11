@@ -15,6 +15,7 @@ import static java.util.Collections.emptyList;
 
 @Component
 public class ConversorPautaImpl implements ConversorPauta {
+
     @Override
     public Pauta converter(PautaDto pautaDto) {
         Pauta pauta = new Pauta();
@@ -46,6 +47,7 @@ public class ConversorPautaImpl implements ConversorPauta {
         pautaConsolidadaDto.setDescricao(pauta.getDescricao());
         Assembleia assembleia = pauta.obterUltimaAssembleia();
         pautaConsolidadaDto.setDataCriacao(assembleia.getDataCriacao());
+        pautaConsolidadaDto.setStatusAssembleia(assembleia.obterStatusAssembleia());
         pautaConsolidadaDto.setQuantidadeVotosSim(assembleia.obterQuantidadeVotosSim());
         pautaConsolidadaDto.setQuantidadeVotosNao(assembleia.obterQuantidadeVotosNao());
         return pautaConsolidadaDto;

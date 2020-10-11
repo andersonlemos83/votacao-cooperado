@@ -1,5 +1,6 @@
-package br.com.dbccompany.votacaocooperado.cucumber.stepdefs.listartodososassociados;
+package br.com.dbccompany.votacaocooperado.cucumber.verificador;
 
+import br.com.dbccompany.votacaocooperado.cucumber.datatable.AssociadoDataTable;
 import org.springframework.stereotype.Component;
 import org.springframework.test.web.servlet.ResultActions;
 

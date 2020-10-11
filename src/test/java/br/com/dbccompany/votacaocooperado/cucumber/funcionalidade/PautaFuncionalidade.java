@@ -1,4 +1,4 @@
-package br.com.dbccompany.votacaocooperado.cucumber.stepdefs.listartodasaspautas;
+package br.com.dbccompany.votacaocooperado.cucumber.funcionalidade;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -15,6 +15,12 @@ public class PautaFuncionalidade {
 
     public ResultActions listarTodas() throws Exception {
         return mockMvc.perform(MockMvcRequestBuilders.get("/api/pauta")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON));
+    }
+
+    public ResultActions buscarPorId(Long id) throws Exception {
+        return mockMvc.perform(MockMvcRequestBuilders.get("/api/pauta/" + id)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
     }

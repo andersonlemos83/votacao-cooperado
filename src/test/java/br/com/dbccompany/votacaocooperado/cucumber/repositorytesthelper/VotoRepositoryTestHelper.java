@@ -1,4 +1,4 @@
-package br.com.dbccompany.votacaocooperado.cucumber.stepdefs.listatodososvotos;
+package br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper;
 
 import br.com.dbccompany.votacaocooperado.domain.Voto;
 import org.springframework.data.jpa.repository.JpaRepository;

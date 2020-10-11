@@ -1,6 +1,10 @@
 package br.com.dbccompany.votacaocooperado.cucumber.stepdefs.listartodasasassembleias;
 
+import br.com.dbccompany.votacaocooperado.cucumber.contexto.AssembleiaContexto;
+import br.com.dbccompany.votacaocooperado.cucumber.datatable.AssembleiaDataTable;
+import br.com.dbccompany.votacaocooperado.cucumber.funcionalidade.AssembleiaFuncionalidade;
 import br.com.dbccompany.votacaocooperado.cucumber.stepdefs.StepDefs;
+import br.com.dbccompany.votacaocooperado.cucumber.verificador.AssembleiaVerificador;
 import cucumber.api.java.Before;
 import cucumber.api.java.pt.E;
 import cucumber.api.java.pt.Entao;

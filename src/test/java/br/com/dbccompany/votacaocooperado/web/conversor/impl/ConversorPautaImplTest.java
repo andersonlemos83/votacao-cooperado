@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.ABERTA;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
@@ -33,10 +34,10 @@ public class ConversorPautaImplTest {
     public void inicializarContexto() {
         conversorPauta = new ConversorPautaImpl();
 
+        dataCriacao = new Date();
         pauta = gerarPauta();
         pautaDto = gerarPautaDto();
         pautaConsolidadaDto = gerarPautaConsolidadaDto();
-        dataCriacao = new Date();
     }
 
     @Test
@@ -64,6 +65,7 @@ public class ConversorPautaImplTest {
 
         assertEquals(pautaConsolidadaDto.getDescricao(), pautaConsolidadaDtoRetornado.getDescricao());
         assertEquals(pautaConsolidadaDto.getDataCriacao(), pautaConsolidadaDtoRetornado.getDataCriacao());
+        assertEquals(pautaConsolidadaDto.getStatusAssembleia(), pautaConsolidadaDtoRetornado.getStatusAssembleia());
         assertEquals(pautaConsolidadaDto.getQuantidadeVotosSim(), pautaConsolidadaDtoRetornado.getQuantidadeVotosSim());
         assertEquals(pautaConsolidadaDto.getQuantidadeVotosNao(), pautaConsolidadaDtoRetornado.getQuantidadeVotosNao());
     }
@@ -83,6 +85,7 @@ public class ConversorPautaImplTest {
     private Assembleia gerarAssembleia() {
         Assembleia assembleia = new Assembleia();
         assembleia.setDataCriacao(dataCriacao);
+        assembleia.setTempoDuracao(1);
         assembleia.setVotos(gerarVotos());
         return assembleia;
     }
@@ -108,6 +111,7 @@ public class ConversorPautaImplTest {
         PautaConsolidadaDto pautaConsolidadaDto = new PautaConsolidadaDto();
         pautaConsolidadaDto.setDescricao("Votar sobre novo fundo de investimento.");
         pautaConsolidadaDto.setDataCriacao(dataCriacao);
+        pautaConsolidadaDto.setStatusAssembleia(ABERTA);
         pautaConsolidadaDto.setQuantidadeVotosSim(1);
         pautaConsolidadaDto.setQuantidadeVotosNao(0);
         return pautaConsolidadaDto;

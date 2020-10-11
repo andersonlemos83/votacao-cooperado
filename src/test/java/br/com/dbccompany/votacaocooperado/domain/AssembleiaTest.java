@@ -10,6 +10,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.ABERTA;
+import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.FECHADA;
 import static java.util.Calendar.MINUTE;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.*;
@@ -69,6 +71,20 @@ public class AssembleiaTest {
         int quantidadeVotosNao = assembleia.obterQuantidadeVotosNao();
 
         assertTrue("Deveria retornar 6", quantidadeVotosNao == 6);
+    }
+
+    @Test
+    public void aoObterStatusAssembleiaDadoQueVotacaoEstejaExpiradaDeveriaRetornarFechada() {
+        assembleia.setDataCriacao(obterDataCriacaoExpirada());
+        assembleia.setTempoDuracao(1);
+        assertEquals(FECHADA, assembleia.obterStatusAssembleia());
+    }
+
+    @Test
+    public void aoObterStatusAssembleiaDadoQueVotacaoNaoEstejaExpiradaDeveriaRetornarAberta() {
+        assembleia.setDataCriacao(new Date());
+        assembleia.setTempoDuracao(1);
+        assertEquals(ABERTA, assembleia.obterStatusAssembleia());
     }
 
     private Date obterDataCriacaoExpirada() {

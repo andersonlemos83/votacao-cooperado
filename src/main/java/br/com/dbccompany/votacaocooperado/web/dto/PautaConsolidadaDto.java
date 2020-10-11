@@ -1,5 +1,6 @@
 package br.com.dbccompany.votacaocooperado.web.dto;
 
+import br.com.dbccompany.votacaocooperado.domain.StatusAssembleia;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
@@ -9,6 +10,7 @@ public class PautaConsolidadaDto {
     private String descricao;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy'T'HH:mm:ss.SSSZ", locale = "pt-BR", timezone = "Brazil/East")
     private Date dataCriacao;
+    private StatusAssembleia statusAssembleia;
     private int quantidadeVotosSim;
     private int quantidadeVotosNao;
 
@@ -26,6 +28,14 @@ public class PautaConsolidadaDto {
 
     public void setDataCriacao(Date dataCriacao) {
         this.dataCriacao = dataCriacao;
+    }
+
+    public StatusAssembleia getStatusAssembleia() {
+        return statusAssembleia;
+    }
+
+    public void setStatusAssembleia(StatusAssembleia statusAssembleia) {
+        this.statusAssembleia = statusAssembleia;
     }
 
     public int getQuantidadeVotosSim() {
@@ -46,11 +56,12 @@ public class PautaConsolidadaDto {
 
     @Override
     public String toString() {
-        return "ConsolidadoPautaDto{" +
+        return "PautaConsolidadaDto{" +
                 "descricao='" + descricao + '\'' +
                 ", dataCriacao=" + dataCriacao +
-                ", quantidadevotosSim=" + quantidadeVotosSim +
-                ", quantidadevotosNao=" + quantidadeVotosNao +
+                ", statusAssembleia=" + statusAssembleia +
+                ", quantidadeVotosSim=" + quantidadeVotosSim +
+                ", quantidadeVotosNao=" + quantidadeVotosNao +
                 '}';
     }
 }

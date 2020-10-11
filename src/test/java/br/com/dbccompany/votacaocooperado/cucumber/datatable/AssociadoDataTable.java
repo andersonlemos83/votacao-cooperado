@@ -1,4 +1,4 @@
-package br.com.dbccompany.votacaocooperado.cucumber.stepdefs.listartodososassociados;
+package br.com.dbccompany.votacaocooperado.cucumber.datatable;
 
 public class AssociadoDataTable {
 
