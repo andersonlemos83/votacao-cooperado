@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AssociadoRepositoryTestHelper extends JpaRepository<Associado, Long> {
+
+    Associado findByNome(String nome);
+
 }

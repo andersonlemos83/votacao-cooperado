@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PautaRepositoryTestHelper extends JpaRepository<Pauta, Long> {
+
+    Pauta findByDescricao(String descricao);
+
 }
