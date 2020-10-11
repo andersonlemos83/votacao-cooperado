@@ -1,5 +1,9 @@
-package br.com.dbccompany.votacaocooperado.service.impl;
+package br.com.dbccompany.votacaocooperado.service;
 
+import br.com.dbccompany.votacaocooperado.service.impl.AssociadoServiceImplTest;
+import br.com.dbccompany.votacaocooperado.service.impl.PautaServiceImplTest;
+import br.com.dbccompany.votacaocooperado.service.impl.SessaoVotacaoServiceImplTest;
+import br.com.dbccompany.votacaocooperado.service.impl.VotoServiceImplTest;
 import br.com.dbccompany.votacaocooperado.service.validador.impl.ValidadorSessaoVotacaoImplTest;
 import br.com.dbccompany.votacaocooperado.service.validador.impl.ValidadorVotoImplTest;
 import org.junit.runner.RunWith;

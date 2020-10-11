@@ -89,14 +89,6 @@ public class SessaoVotacao implements Serializable {
         return Calendar.getInstance().after(dataCriacaoCalendar);
     }
 
-    @PrePersist
-    public void prePersist() {
-        dataCriacao = new Date();
-        if (tempoDuracao <= 0) {
-            tempoDuracao = 1;
-        }
-    }
-
     public int obterQuantidadeVotosSim() {
         Map<TipoVoto, Long> apuracao = Optional.ofNullable(votos)
                 .orElse(emptyList())
@@ -111,6 +103,27 @@ public class SessaoVotacao implements Serializable {
                 .stream()
                 .collect(groupingBy(p -> p.getTipoVoto(), counting()));
         return apuracao.getOrDefault(TipoVoto.NAO, 0l).intValue();
+    }
+
+    @PrePersist
+    public void prePersist() {
+        dataCriacao = new Date();
+        if (tempoDuracao <= 0) {
+            tempoDuracao = 1;
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SessaoVotacao that = (SessaoVotacao) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override

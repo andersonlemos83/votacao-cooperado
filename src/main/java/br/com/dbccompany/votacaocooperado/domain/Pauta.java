@@ -3,6 +3,7 @@ package br.com.dbccompany.votacaocooperado.domain;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Pauta implements Serializable {
@@ -51,6 +52,19 @@ public class Pauta implements Serializable {
 
     public SessaoVotacao obterUltimaSessaoVotacao() {
         return sessoesVotacao.stream().reduce((primeiro, segundo) -> segundo).orElse(null);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pauta pauta = (Pauta) o;
+        return Objects.equals(id, pauta.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override
