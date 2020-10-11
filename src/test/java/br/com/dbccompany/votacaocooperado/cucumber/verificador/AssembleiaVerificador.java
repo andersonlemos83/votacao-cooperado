@@ -22,8 +22,7 @@ public class AssembleiaVerificador {
     public void verificar(List<AssembleiaDataTable> esperados, ResultActions retorno) throws Exception {
         for (int i = 0; i < esperados.size(); i++) {
             Pauta pauta = pautaRepositoryTestHelper.findByDescricao(esperados.get(i).getDescricaoPauta());
-            retorno
-                    .andExpect(status().isOk())
+            retorno.andExpect(status().isOk())
                     .andExpect(jsonPath(format("$.[{0}].tempoDuracao", i)).value(esperados.get(i).getTempoDuracao()))
                     .andExpect(jsonPath(format("$.[{0}].idPauta", i)).value(pauta.getId()));
         }

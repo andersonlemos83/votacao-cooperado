@@ -2,10 +2,10 @@
 
 Funcionalidade: Buscar Pauta Consolidada Por ID
 
-  Cenario: 01 - Buscar Pauta Consolidada Por ID com suscesso
+  Cenario de Fundo:
     Dado que existam as pautas cadastradas
-      | Descricao                               |
-      | Emissão de novas cotas do fundo Musical |
+      | id | Descricao                               |
+      | 1  | Emissão de novas cotas do fundo Musical |
     E que existam os associados cadastrados
       | Nome              | cpf         |
       | Morten Harket     | 44934360000 |
@@ -33,7 +33,13 @@ Funcionalidade: Buscar Pauta Consolidada Por ID
       | Cyndi Lauper      | Emissão de novas cotas do fundo Musical | NAO       |
       | Laura Pausini     | Emissão de novas cotas do fundo Musical | NAO       |
       | Klaus Meine       | Emissão de novas cotas do fundo Musical | NAO       |
-    Quando buscar pauta consolidada por ID "Emissão de novas cotas do fundo Musical"
+
+  Cenario: 01 - Buscar Pauta Consolidada Por ID existente
+    Quando buscar pauta consolidada por ID "1"
     Entao deveria retornar a seguinte pauta consolidada
       | Descricao Pauta                         | Status Assembleia | Quantidade Votos Sim | Quantidade Votos Nao |
       | Emissão de novas cotas do fundo Musical | ABERTA            | 6                    | 4                    |
+
+  Cenario: 02 - Buscar Pauta Consolidada Por ID nao existente
+    Quando buscar pauta consolidada por ID "10"
+    Entao deveria retornar a mensagem "A pauta informada não exite"

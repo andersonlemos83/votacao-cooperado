@@ -16,16 +16,14 @@ public class PautaVerificador {
 
     public void verificar(List<PautaDataTable> esperados, ResultActions retorno) throws Exception {
         for (int i = 0; i < esperados.size(); i++) {
-            retorno
-                    .andExpect(status().isOk())
+            retorno.andExpect(status().isOk())
                     .andExpect(jsonPath(format("$.[{0}].descricao", i)).value(esperados.get(i).getDescricao()));
         }
     }
 
     public void verificarConsolidado(List<PautaConsolidadaDataTable> esperados, ResultActions retorno) throws Exception {
         for (int i = 0; i < esperados.size(); i++) {
-            retorno
-                    .andExpect(status().isOk())
+            retorno.andExpect(status().isOk())
                     .andExpect(jsonPath("$.descricao").value(esperados.get(i).getDescricaoPauta()))
                     .andExpect(jsonPath("$.statusAssembleia").value(esperados.get(i).getStatusAssembleia().name()))
                     .andExpect(jsonPath("$.quantidadeVotosSim").value(esperados.get(i).getQuantidadeVotosSim()))

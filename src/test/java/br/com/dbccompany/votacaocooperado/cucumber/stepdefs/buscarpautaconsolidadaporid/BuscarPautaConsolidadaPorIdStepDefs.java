@@ -4,8 +4,8 @@ import br.com.dbccompany.votacaocooperado.cucumber.datatable.PautaConsolidadaDat
 import br.com.dbccompany.votacaocooperado.cucumber.funcionalidade.PautaFuncionalidade;
 import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.PautaRepositoryTestHelper;
 import br.com.dbccompany.votacaocooperado.cucumber.stepdefs.StepDefs;
+import br.com.dbccompany.votacaocooperado.cucumber.verificador.MensagemVerificador;
 import br.com.dbccompany.votacaocooperado.cucumber.verificador.PautaVerificador;
-import br.com.dbccompany.votacaocooperado.domain.Pauta;
 import cucumber.api.java.Before;
 import cucumber.api.java.pt.Entao;
 import cucumber.api.java.pt.Quando;
@@ -25,6 +25,9 @@ public class BuscarPautaConsolidadaPorIdStepDefs extends StepDefs {
     @Autowired
     private PautaVerificador pautaVerificador;
 
+    @Autowired
+    private MensagemVerificador mensagemVerificador;
+
     private ResultActions retorno;
 
     @Before
@@ -33,13 +36,17 @@ public class BuscarPautaConsolidadaPorIdStepDefs extends StepDefs {
     }
 
     @Quando("^buscar pauta consolidada por ID \"([^\"]*)\"$")
-    public void buscarPautaConsolidadaPorId(String descricaoPauta) throws Exception {
-        Pauta pauta = pautaRepositoryTestHelper.findByDescricao(descricaoPauta);
-        retorno = pautaFuncionalidade.buscarPorId(pauta.getId());
+    public void buscarPautaConsolidadaPorId(Long id) throws Exception {
+        retorno = pautaFuncionalidade.buscarPorId(id);
     }
 
     @Entao("^deveria retornar a seguinte pauta consolidada$")
     public void deveriaRetornarAsSeguintesPautas(List<PautaConsolidadaDataTable> pautasConsolidadasDataTable) throws Exception {
         pautaVerificador.verificarConsolidado(pautasConsolidadasDataTable, retorno);
+    }
+
+    @Entao("^deveria retornar a mensagem \"([^\"]*)\"$")
+    public void deveriaRetornarAhMensagem(String mensagem) throws Exception {
+        mensagemVerificador.verificar(mensagem, retorno);
     }
 }
