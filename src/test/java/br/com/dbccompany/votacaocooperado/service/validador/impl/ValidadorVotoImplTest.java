@@ -1,7 +1,7 @@
 package br.com.dbccompany.votacaocooperado.service.validador.impl;
 
+import br.com.dbccompany.votacaocooperado.domain.Assembleia;
 import br.com.dbccompany.votacaocooperado.domain.Associado;
-import br.com.dbccompany.votacaocooperado.domain.SessaoVotacao;
 import br.com.dbccompany.votacaocooperado.domain.Voto;
 import br.com.dbccompany.votacaocooperado.repository.VotoRepository;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorVoto;
@@ -27,7 +27,7 @@ public class ValidadorVotoImplTest {
     public ExpectedException exception = ExpectedException.none();
 
     private Voto voto;
-    private SessaoVotacao sessaoVotacao;
+    private Assembleia assembleia;
     private Associado associado;
 
     @Before
@@ -37,17 +37,17 @@ public class ValidadorVotoImplTest {
         associado = new Associado();
         associado.setId(1l);
 
-        sessaoVotacao = new SessaoVotacao();
-        sessaoVotacao.setId(2l);
+        assembleia = new Assembleia();
+        assembleia.setId(2l);
 
         voto = new Voto();
         voto.setAssociado(associado);
-        voto.setSessaoVotacao(sessaoVotacao);
+        voto.setAssembleia(assembleia);
     }
 
     @Test
     public void aoValidarDadoQueExistaVotoDeveriaLancarAhMensagemEsperada() {
-        Mockito.when(votoRepositoryMock.findByAssociado_IdAndSessaoVotacao_Id(associado.getId(), sessaoVotacao.getId())).thenReturn(voto);
+        Mockito.when(votoRepositoryMock.findByAssociado_IdAndAssembleia_Id(associado.getId(), assembleia.getId())).thenReturn(voto);
 
         exception.expect(NegocioException.class);
         exception.expectMessage("O associado já exerceu seu direito de voto para esta pauta");
@@ -57,7 +57,7 @@ public class ValidadorVotoImplTest {
 
     @Test
     public void aoValidarDadoQueExistaVotoNaoDeveriaLancarNenhumaMensagem() {
-        Mockito.when(votoRepositoryMock.findByAssociado_IdAndSessaoVotacao_Id(associado.getId(), sessaoVotacao.getId())).thenReturn(null);
+        Mockito.when(votoRepositoryMock.findByAssociado_IdAndAssembleia_Id(associado.getId(), assembleia.getId())).thenReturn(null);
 
         validadorVoto.validar(voto);
     }

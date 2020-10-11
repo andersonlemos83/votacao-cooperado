@@ -15,8 +15,8 @@ public class VotoDto implements Serializable {
     @NotNull(message = "O id do associado é obrigatório")
     private Long idAssociado;
 
-    @NotNull(message = "O id da sessão de votação é obrigatório")
-    private Long idSessaoVotacao;
+    @NotNull(message = "O id da assembleia de votação é obrigatório")
+    private Long idAssembleia;
 
     public Long getId() {
         return id;
@@ -42,12 +42,12 @@ public class VotoDto implements Serializable {
         this.idAssociado = idAssociado;
     }
 
-    public Long getIdSessaoVotacao() {
-        return idSessaoVotacao;
+    public Long getIdAssembleia() {
+        return idAssembleia;
     }
 
-    public void setIdSessaoVotacao(Long idSessaoVotacao) {
-        this.idSessaoVotacao = idSessaoVotacao;
+    public void setIdAssembleia(Long idAssembleia) {
+        this.idAssembleia = idAssembleia;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class VotoDto implements Serializable {
                 "id=" + id +
                 ", tipoVoto=" + tipoVoto +
                 ", idAssociado=" + idAssociado +
-                ", idSessaoVotacao=" + idSessaoVotacao +
+                ", idAssembleia=" + idAssembleia +
                 '}';
     }
 }

@@ -34,20 +34,20 @@ public class VotoTest {
     }
 
     @Test
-    public void aoObterIdSessaoVotacaoDadoQueSessaoVotacaoEstejaNulaDeveriaRetornarIdSessaoVotacaoNulo() {
-        voto.setSessaoVotacao(null);
-        assertNull(voto.obterIdSessaoVotacao());
+    public void aoObterIdAssembleiaDadoQueAssembleiaEstejaNulaDeveriaRetornarIdAssembleiaNulo() {
+        voto.setAssembleia(null);
+        assertNull(voto.obterIdAssembleia());
     }
 
     @Test
-    public void aoObterIdSessaoVotacaoDadoQueSessaoVotacaoNaoEstejaNulaDeveriaRetornarIdSessaoVotacaoEsperado() {
-        SessaoVotacao sessaoVotacao = new SessaoVotacao();
-        sessaoVotacao.setId(1l);
-        voto.setSessaoVotacao(sessaoVotacao);
+    public void aoObterIdAssembleiaDadoQueAssembleiaNaoEstejaNulaDeveriaRetornarIdAssembleiaEsperado() {
+        Assembleia assembleia = new Assembleia();
+        assembleia.setId(1l);
+        voto.setAssembleia(assembleia);
 
-        Long idSessaoVotacaoRetornado = voto.obterIdSessaoVotacao();
+        Long idAssembleiaRetornado = voto.obterIdAssembleia();
 
-        assertEquals(Long.valueOf(1), idSessaoVotacaoRetornado);
+        assertEquals(Long.valueOf(1), idAssembleiaRetornado);
     }
 
     @Test

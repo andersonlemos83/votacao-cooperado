@@ -26,6 +26,6 @@ public class ValidadorVotoImpl implements ValidadorVoto {
     }
 
     private Optional<Voto> buscarVoto(Voto voto) {
-        return Optional.ofNullable(votoRepository.findByAssociado_IdAndSessaoVotacao_Id(voto.obterIdAssociado(), voto.obterIdSessaoVotacao()));
+        return Optional.ofNullable(votoRepository.findByAssociado_IdAndAssembleia_Id(voto.obterIdAssociado(), voto.obterIdAssembleia()));
     }
 }

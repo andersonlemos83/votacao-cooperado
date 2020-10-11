@@ -6,10 +6,12 @@ import java.io.Serializable;
 
 public class PautaDto implements Serializable {
 
+    private static final String MENSAGEM_DESCRICAO_DA_PAUTA_E_OBRIGATORIA = "A descrição da pauta é obrigatória";
+
     private Long id;
 
-    @NotEmpty(message = "A descrição da pauta é obrigatória")
-    @NotNull(message = "A descrição da pauta é obrigatória")
+    @NotEmpty(message = MENSAGEM_DESCRICAO_DA_PAUTA_E_OBRIGATORIA)
+    @NotNull(message = MENSAGEM_DESCRICAO_DA_PAUTA_E_OBRIGATORIA)
     private String descricao;
 
     public Long getId() {

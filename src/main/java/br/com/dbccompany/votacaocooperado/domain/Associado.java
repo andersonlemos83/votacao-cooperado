@@ -15,6 +15,9 @@ public class Associado implements Serializable {
     @Column(nullable = false)
     private String nome;
 
+    @Column(nullable = false)
+    private String cpf;
+
     @OneToMany(mappedBy = "associado", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Voto> votos;
 
@@ -39,6 +42,14 @@ public class Associado implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public List<Voto> getVotos() {
@@ -67,7 +78,7 @@ public class Associado implements Serializable {
         return "Associado{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
-                ", votos=" + votos +
+                ", cpf='" + cpf + '\'' +
                 '}';
     }
 }

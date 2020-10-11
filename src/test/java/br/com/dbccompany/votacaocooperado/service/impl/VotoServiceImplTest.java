@@ -1,10 +1,10 @@
 package br.com.dbccompany.votacaocooperado.service.impl;
 
-import br.com.dbccompany.votacaocooperado.domain.SessaoVotacao;
+import br.com.dbccompany.votacaocooperado.domain.Assembleia;
 import br.com.dbccompany.votacaocooperado.domain.Voto;
 import br.com.dbccompany.votacaocooperado.repository.VotoRepository;
 import br.com.dbccompany.votacaocooperado.service.VotoService;
-import br.com.dbccompany.votacaocooperado.service.validador.ValidadorSessaoVotacao;
+import br.com.dbccompany.votacaocooperado.service.validador.ValidadorAssembleia;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorVoto;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,28 +28,28 @@ public class VotoServiceImplTest {
     private VotoRepository votoRepositoryMock;
 
     @Mock
-    private ValidadorSessaoVotacao validadorSessaoVotacaoMock;
+    private ValidadorAssembleia validadorAssembleiaMock;
 
     @Mock
     private ValidadorVoto validadorVotoMock;
 
     private List<Voto> votosEsperados;
     private Voto votoEsperado;
-    private Long idSessaoVotacaoEsperado;
+    private Long idAssembleiEsperado;
 
     @Before
     public void inicializarContexto() {
-        votoService = new VotoServiceImpl(votoRepositoryMock, validadorSessaoVotacaoMock, validadorVotoMock);
+        votoService = new VotoServiceImpl(votoRepositoryMock, validadorAssembleiaMock, validadorVotoMock);
 
         votosEsperados = new ArrayList<>();
 
-        idSessaoVotacaoEsperado = 1l;
+        idAssembleiEsperado = 1l;
 
-        SessaoVotacao sessaoVotacao = new SessaoVotacao();
-        sessaoVotacao.setId(idSessaoVotacaoEsperado);
+        Assembleia assembleia = new Assembleia();
+        assembleia.setId(idAssembleiEsperado);
 
         votoEsperado = new Voto();
-        votoEsperado.setSessaoVotacao(sessaoVotacao);
+        votoEsperado.setAssembleia(assembleia);
     }
 
     @Test
@@ -67,7 +67,7 @@ public class VotoServiceImplTest {
 
         votoService.cadastrar(votoEsperado);
 
-        verify(validadorSessaoVotacaoMock).validar(idSessaoVotacaoEsperado);
+        verify(validadorAssembleiaMock).validar(idAssembleiEsperado);
         verify(validadorVotoMock).validar(votoEsperado);
         verify(votoRepositoryMock).save(votoEsperado);
     }

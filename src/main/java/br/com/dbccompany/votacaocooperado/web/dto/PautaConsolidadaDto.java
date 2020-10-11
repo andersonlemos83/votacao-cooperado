@@ -1,10 +1,13 @@
 package br.com.dbccompany.votacaocooperado.web.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class PautaConsolidadaDto {
 
     private String descricao;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy'T'HH:mm:ss.SSSZ", locale = "pt-BR", timezone = "Brazil/East")
     private Date dataCriacao;
     private int quantidadeVotosSim;
     private int quantidadeVotosNao;

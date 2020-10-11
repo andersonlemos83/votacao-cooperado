@@ -1,7 +1,7 @@
 package br.com.dbccompany.votacaocooperado.web.conversor.impl;
 
+import br.com.dbccompany.votacaocooperado.domain.Assembleia;
 import br.com.dbccompany.votacaocooperado.domain.Associado;
-import br.com.dbccompany.votacaocooperado.domain.SessaoVotacao;
 import br.com.dbccompany.votacaocooperado.domain.Voto;
 import br.com.dbccompany.votacaocooperado.web.conversor.ConversorVoto;
 import br.com.dbccompany.votacaocooperado.web.dto.VotoDto;
@@ -18,7 +18,7 @@ public class ConversorVotoImpl implements ConversorVoto {
         voto.setId(votoDto.getId());
         voto.setTipoVoto(votoDto.getTipoVoto());
         voto.setAssociado(new Associado(votoDto.getIdAssociado()));
-        voto.setSessaoVotacao(new SessaoVotacao(votoDto.getIdSessaoVotacao()));
+        voto.setAssembleia(new Assembleia(votoDto.getIdAssembleia()));
         return voto;
     }
 
@@ -40,7 +40,7 @@ public class ConversorVotoImpl implements ConversorVoto {
         votoDto.setId(voto.getId());
         votoDto.setTipoVoto(voto.getTipoVoto());
         votoDto.setIdAssociado(voto.obterIdAssociado());
-        votoDto.setIdSessaoVotacao(voto.obterIdSessaoVotacao());
+        votoDto.setIdAssembleia(voto.obterIdAssembleia());
         return votoDto;
     }
 }

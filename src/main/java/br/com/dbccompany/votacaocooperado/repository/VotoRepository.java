@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VotoRepository extends JpaRepository<Voto, Long> {
 
-    Voto findByAssociado_IdAndSessaoVotacao_Id(Long idAssociado, Long idSessaoVotacao);
+    Voto findByAssociado_IdAndAssembleia_Id(Long idAssociado, Long idAssembleia);
 
 }

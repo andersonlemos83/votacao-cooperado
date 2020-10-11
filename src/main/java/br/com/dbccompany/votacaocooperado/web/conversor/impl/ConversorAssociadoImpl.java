@@ -5,17 +5,17 @@ import br.com.dbccompany.votacaocooperado.web.conversor.ConversorAssociado;
 import br.com.dbccompany.votacaocooperado.web.dto.AssociadoDto;
 import org.springframework.stereotype.Component;
 
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class ConversorAssociadoImpl implements ConversorAssociado {
     @Override
-    public Associado converter(@Valid AssociadoDto associadoDto) {
+    public Associado converter(AssociadoDto associadoDto) {
         Associado associado = new Associado();
         associado.setId(associadoDto.getId());
         associado.setNome(associadoDto.getNome());
+        associado.setCpf(associadoDto.getCpf());
         return associado;
     }
 
@@ -36,6 +36,7 @@ public class ConversorAssociadoImpl implements ConversorAssociado {
         AssociadoDto associadoDto = new AssociadoDto();
         associadoDto.setId(associado.getId());
         associadoDto.setNome(associado.getNome());
+        associadoDto.setCpf(associado.getCpf());
         return associadoDto;
     }
 }

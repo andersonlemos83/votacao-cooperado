@@ -17,7 +17,7 @@ public class Pauta implements Serializable {
 
     @OneToMany(mappedBy = "pauta", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @OrderBy("dataCriacao")
-    public List<SessaoVotacao> sessoesVotacao;
+    public List<Assembleia> assembleias;
 
     public Pauta() {
     }
@@ -42,16 +42,16 @@ public class Pauta implements Serializable {
         this.descricao = descricao;
     }
 
-    public List<SessaoVotacao> getSessoesVotacao() {
-        return sessoesVotacao;
+    public List<Assembleia> getAssembleias() {
+        return assembleias;
     }
 
-    public void setSessoesVotacao(List<SessaoVotacao> sessoesVotacao) {
-        this.sessoesVotacao = sessoesVotacao;
+    public void setAssembleias(List<Assembleia> assembleias) {
+        this.assembleias = assembleias;
     }
 
-    public SessaoVotacao obterUltimaSessaoVotacao() {
-        return sessoesVotacao.stream().reduce((primeiro, segundo) -> segundo).orElse(null);
+    public Assembleia obterUltimaAssembleia() {
+        return assembleias.stream().reduce((primeiro, segundo) -> segundo).orElse(null);
     }
 
     @Override
@@ -72,7 +72,6 @@ public class Pauta implements Serializable {
         return "Pauta{" +
                 "id=" + id +
                 ", descricao='" + descricao + '\'' +
-                ", sessoesVotacao=" + sessoesVotacao +
                 '}';
     }
 }

@@ -1,7 +1,7 @@
 package br.com.dbccompany.votacaocooperado.web.conversor.impl;
 
+import br.com.dbccompany.votacaocooperado.domain.Assembleia;
 import br.com.dbccompany.votacaocooperado.domain.Pauta;
-import br.com.dbccompany.votacaocooperado.domain.SessaoVotacao;
 import br.com.dbccompany.votacaocooperado.web.conversor.ConversorPauta;
 import br.com.dbccompany.votacaocooperado.web.dto.PautaConsolidadaDto;
 import br.com.dbccompany.votacaocooperado.web.dto.PautaDto;
@@ -44,10 +44,10 @@ public class ConversorPautaImpl implements ConversorPauta {
     public PautaConsolidadaDto converterParaConsolidada(Pauta pauta) {
         PautaConsolidadaDto pautaConsolidadaDto = new PautaConsolidadaDto();
         pautaConsolidadaDto.setDescricao(pauta.getDescricao());
-        SessaoVotacao sessaoVotacao = pauta.obterUltimaSessaoVotacao();
-        pautaConsolidadaDto.setDataCriacao(sessaoVotacao.getDataCriacao());
-        pautaConsolidadaDto.setQuantidadeVotosSim(sessaoVotacao.obterQuantidadeVotosSim());
-        pautaConsolidadaDto.setQuantidadeVotosNao(sessaoVotacao.obterQuantidadeVotosNao());
+        Assembleia assembleia = pauta.obterUltimaAssembleia();
+        pautaConsolidadaDto.setDataCriacao(assembleia.getDataCriacao());
+        pautaConsolidadaDto.setQuantidadeVotosSim(assembleia.obterQuantidadeVotosSim());
+        pautaConsolidadaDto.setQuantidadeVotosNao(assembleia.obterQuantidadeVotosNao());
         return pautaConsolidadaDto;
     }
 }

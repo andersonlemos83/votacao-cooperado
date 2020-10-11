@@ -7,7 +7,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         PautaTest.class,
         VotoTest.class,
-        SessaoVotacaoTest.class
+        AssembleiaTest.class
 })
 public class AllDomainTests {
 }

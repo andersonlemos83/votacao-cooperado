@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 public class PautaTest {
 
     private Pauta pauta;
-    private SessaoVotacao sessaoVotacaoComDataMaisRecente;
+    private Assembleia assembleiaComDataMaisRecente;
 
     @Before
     public void inicializarContexto() {
@@ -23,26 +23,26 @@ public class PautaTest {
     }
 
     @Test
-    public void aoObterUltimaSessaoVotacaoDadoQueExistamTresSessoesOrdenadasDeveriaRetonarAhUltimaSessaoVotacao() {
-        pauta.setSessoesVotacao(gerarTresSessoesVotacao());
+    public void aoObterUltimaAssembleiaDadoQueExistamTresAssembleiasOrdenadasDeveriaRetonarAhUltimaAssembleia() {
+        pauta.setAssembleias(gerarTresAssembleiasOrdenadas());
 
-        SessaoVotacao ultimaSessaoVotacao = pauta.obterUltimaSessaoVotacao();
+        Assembleia ultimaAssembleia = pauta.obterUltimaAssembleia();
 
-        assertEquals(sessaoVotacaoComDataMaisRecente, ultimaSessaoVotacao);
+        assertEquals(assembleiaComDataMaisRecente, ultimaAssembleia);
     }
 
-    private List<SessaoVotacao> gerarTresSessoesVotacao() {
-        sessaoVotacaoComDataMaisRecente = gerarSessaoVotacao(1);
-        return Arrays.asList(gerarSessaoVotacao(21), gerarSessaoVotacao(11), sessaoVotacaoComDataMaisRecente);
+    private List<Assembleia> gerarTresAssembleiasOrdenadas() {
+        assembleiaComDataMaisRecente = gerarAssembleia(1);
+        return Arrays.asList(gerarAssembleia(21), gerarAssembleia(11), assembleiaComDataMaisRecente);
     }
 
-    private SessaoVotacao gerarSessaoVotacao(int minutos) {
+    private Assembleia gerarAssembleia(int minutos) {
         Calendar dataCriacaoCalendar = Calendar.getInstance();
         dataCriacaoCalendar.add(Calendar.MINUTE, -minutos);
 
-        SessaoVotacao sessaoVotacao = new SessaoVotacao();
-        sessaoVotacao.setId(Long.valueOf(minutos));
-        sessaoVotacao.setDataCriacao(dataCriacaoCalendar.getTime());
-        return sessaoVotacao;
+        Assembleia assembleia = new Assembleia();
+        assembleia.setId(Long.valueOf(minutos));
+        assembleia.setDataCriacao(dataCriacaoCalendar.getTime());
+        return assembleia;
     }
 }

@@ -19,7 +19,7 @@ public class Voto implements Serializable {
     private Associado associado;
 
     @ManyToOne
-    private SessaoVotacao sessaoVotacao;
+    private Assembleia assembleia;
 
     public Long getId() {
         return id;
@@ -45,12 +45,12 @@ public class Voto implements Serializable {
         this.associado = associado;
     }
 
-    public SessaoVotacao getSessaoVotacao() {
-        return sessaoVotacao;
+    public Assembleia getAssembleia() {
+        return assembleia;
     }
 
-    public void setSessaoVotacao(SessaoVotacao sessaoVotacao) {
-        this.sessaoVotacao = sessaoVotacao;
+    public void setAssembleia(Assembleia assembleia) {
+        this.assembleia = assembleia;
     }
 
     public Long obterIdAssociado() {
@@ -60,11 +60,11 @@ public class Voto implements Serializable {
         return associado.getId();
     }
 
-    public Long obterIdSessaoVotacao() {
-        if (sessaoVotacao == null) {
+    public Long obterIdAssembleia() {
+        if (assembleia == null) {
             return null;
         }
-        return sessaoVotacao.getId();
+        return assembleia.getId();
     }
 
     public boolean ehSim() {
@@ -94,7 +94,7 @@ public class Voto implements Serializable {
                 "id=" + id +
                 ", tipoVoto=" + tipoVoto +
                 ", associado=" + associado +
-                ", sessaoVotacao=" + sessaoVotacao +
+                ", assembleia=" + assembleia +
                 '}';
     }
 }
