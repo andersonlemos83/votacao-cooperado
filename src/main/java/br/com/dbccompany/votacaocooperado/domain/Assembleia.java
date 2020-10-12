@@ -116,7 +116,10 @@ public class Assembleia implements Serializable {
 
     @PrePersist
     public void prePersist() {
-        dataCriacao = new Date();
+        if (dataCriacao == null) {
+            dataCriacao = new Date();
+        }
+
         if (tempoDuracao <= 0) {
             tempoDuracao = 1;
         }

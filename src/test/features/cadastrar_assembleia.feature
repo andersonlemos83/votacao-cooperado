@@ -16,13 +16,13 @@ Funcionalidade: Cadastrar Assembleia
       | Descricao Pauta                         | Tempo Duracao | Data Criacao |
       | Emissão de novas cotas do fundo Musical | 5             | DATA_ATUAL   |
 
-#  Cenario: 02 - Cadastrar Assembleia Com Sucesso Sem Informar o Tempo de Duracao
-#    Dado que seja informado o tempo de duracao de "" minutos
-#    E que seja informada a pauta "2"
-#    Quando cadastrar assembleia
-#    Entao deveria cadastrar a seguinte assembleia
-#      | Descricao Pauta                       | Tempo Duracao | Data Criacao |
-#      | Criação de novo fundo de investimento | 1             | DATA_ATUAL   |
+  Cenario: 02 - Cadastrar Assembleia Com Sucesso Sem Informar o Tempo de Duracao
+    Dado que seja informado o tempo de duracao de "" minutos
+    E que seja informada a pauta "2"
+    Quando cadastrar assembleia
+    Entao deveria cadastrar a seguinte assembleia
+      | Descricao Pauta                       | Tempo Duracao | Data Criacao |
+      | Criação de novo fundo de investimento | 1             | DATA_ATUAL   |
 
   Cenario: 03 - Cadastrar Assembleia Sem Informar Pauta
     Dado que seja informado o tempo de duracao de "5" minutos

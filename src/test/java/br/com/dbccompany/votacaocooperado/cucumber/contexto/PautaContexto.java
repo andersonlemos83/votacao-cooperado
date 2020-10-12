@@ -17,7 +17,7 @@ public class PautaContexto {
     public void cadastrar(List<PautaDataTable> pautasDataTable) {
         for (PautaDataTable pautaDataTable : pautasDataTable) {
             Pauta pauta = converter(pautaDataTable);
-            pautaRepositoryTestHelper.save(pauta);
+            pautaRepositoryTestHelper.saveAndFlush(pauta);
         }
     }
 

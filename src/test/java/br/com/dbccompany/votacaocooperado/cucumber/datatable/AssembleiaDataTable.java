@@ -1,8 +1,10 @@
 package br.com.dbccompany.votacaocooperado.cucumber.datatable;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import static java.text.MessageFormat.format;
+import static java.util.Calendar.MINUTE;
 
 public class AssembleiaDataTable {
 
@@ -53,5 +55,18 @@ public class AssembleiaDataTable {
 
     public void setIdPauta(Long idPauta) {
         this.idPauta = idPauta;
+    }
+
+    public Date obterDataCriacao() {
+        if ("DATA_ATUAL".equalsIgnoreCase(dataCriacao)) {
+            return new Date();
+        }
+
+        if ("DATA_EXPIRADA_TRES_MINUTOS".equalsIgnoreCase(dataCriacao)) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(MINUTE, -5);
+            return calendar.getTime();
+        }
+        throw new RuntimeException("Data não implementada!");
     }
 }

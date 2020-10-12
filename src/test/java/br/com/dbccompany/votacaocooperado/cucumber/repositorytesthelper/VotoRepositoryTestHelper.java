@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VotoRepositoryTestHelper extends JpaRepository<Voto, Long> {
+
+    Voto findByAssociado_NomeAndAndAssembleia_Pauta_Descricao(String nomeAssociado, String descricaoPauta);
+
 }

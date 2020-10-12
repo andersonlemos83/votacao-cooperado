@@ -27,7 +27,7 @@ public class VotoContexto {
     public void cadastrar(List<VotoDataTable> votosDataTable) {
         for (VotoDataTable votoDataTable : votosDataTable) {
             Voto voto = converter(votoDataTable);
-            votoRepositoryTestHelper.save(voto);
+            votoRepositoryTestHelper.saveAndFlush(voto);
         }
     }
 

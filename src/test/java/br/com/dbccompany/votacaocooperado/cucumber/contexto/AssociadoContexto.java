@@ -17,7 +17,7 @@ public class AssociadoContexto {
     public void cadastrar(List<AssociadoDataTable> associadosDataTable) {
         for (AssociadoDataTable associadoDataTable : associadosDataTable) {
             Associado associado = converter(associadoDataTable);
-            associadoRepositoryTestHelper.save(associado);
+            associadoRepositoryTestHelper.saveAndFlush(associado);
         }
     }
 

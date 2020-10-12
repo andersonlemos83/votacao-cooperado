@@ -22,7 +22,7 @@ public class AssembleiaContexto {
     public void cadastrar(List<AssembleiaDataTable> assembleiasDataTable) {
         for (AssembleiaDataTable assembleiaDataTable : assembleiasDataTable) {
             Assembleia assembleia = converter(assembleiaDataTable);
-            assembleiaRepositoryTestHelper.save(assembleia);
+            assembleiaRepositoryTestHelper.saveAndFlush(assembleia);
         }
     }
 
@@ -31,6 +31,7 @@ public class AssembleiaContexto {
         Assembleia assembleia = new Assembleia();
         assembleia.setId(assembleiaDataTable.getId());
         assembleia.setTempoDuracao(assembleiaDataTable.getTempoDuracao());
+        assembleia.setDataCriacao(assembleiaDataTable.obterDataCriacao());
         assembleia.setPauta(pauta);
         return assembleia;
     }
