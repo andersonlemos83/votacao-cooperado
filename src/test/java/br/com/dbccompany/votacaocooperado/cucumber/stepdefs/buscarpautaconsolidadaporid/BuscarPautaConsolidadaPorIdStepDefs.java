@@ -2,7 +2,6 @@ package br.com.dbccompany.votacaocooperado.cucumber.stepdefs.buscarpautaconsolid
 
 import br.com.dbccompany.votacaocooperado.cucumber.datatable.PautaConsolidadaDataTable;
 import br.com.dbccompany.votacaocooperado.cucumber.funcionalidade.PautaFuncionalidade;
-import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.PautaRepositoryTestHelper;
 import br.com.dbccompany.votacaocooperado.cucumber.stepdefs.StepDefs;
 import br.com.dbccompany.votacaocooperado.cucumber.verificador.MensagemVerificador;
 import br.com.dbccompany.votacaocooperado.cucumber.verificador.PautaVerificador;
@@ -10,14 +9,10 @@ import cucumber.api.java.Before;
 import cucumber.api.java.pt.Entao;
 import cucumber.api.java.pt.Quando;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.List;
 
 public class BuscarPautaConsolidadaPorIdStepDefs extends StepDefs {
-
-    @Autowired
-    private PautaRepositoryTestHelper pautaRepositoryTestHelper;
 
     @Autowired
     private PautaFuncionalidade pautaFuncionalidade;
@@ -27,8 +22,6 @@ public class BuscarPautaConsolidadaPorIdStepDefs extends StepDefs {
 
     @Autowired
     private MensagemVerificador mensagemVerificador;
-
-    private ResultActions retorno;
 
     @Before
     public void inicializarContexto() {

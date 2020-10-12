@@ -8,7 +8,6 @@ import cucumber.api.java.Before;
 import cucumber.api.java.pt.Entao;
 import cucumber.api.java.pt.Quando;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.List;
 
@@ -19,8 +18,6 @@ public class ListarTodosOsVotosStepDefs extends StepDefs {
 
     @Autowired
     private VotoVerificador votoVerificador;
-
-    private ResultActions retorno;
 
     @Before
     public void inicializarContexto() {

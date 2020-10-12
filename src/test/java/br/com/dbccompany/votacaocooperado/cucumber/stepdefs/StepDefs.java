@@ -10,12 +10,15 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.ResultActions;
 
 @WebAppConfiguration
 @SpringBootTest
 @AutoConfigureMockMvc
 @ContextConfiguration(classes = VotacaoCooperadoApplication.class)
 public class StepDefs {
+
+    protected static ResultActions retorno;
 
     @Autowired
     private VotoRepositoryTestHelper votoRepositoryTestHelper;
