@@ -1,8 +1,11 @@
 package br.com.dbccompany.votacaocooperado.repository.impl;
 
 import br.com.dbccompany.votacaocooperado.repository.CpfRepository;
+import br.com.dbccompany.votacaocooperado.shared.exception.NegocioException;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -26,6 +29,9 @@ public class CpfRepositoryImplTest {
 
     @Mock
     private RestTemplate restTemplateMock;
+
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
 
     private String cpf;
 
@@ -52,6 +58,16 @@ public class CpfRepositoryImplTest {
         boolean estaValido = cpfRepository.verificarSeEstaValido(cpf);
 
         assertFalse("Deveria retornar falso", estaValido);
+    }
+
+    @Test
+    public void aoVerificarSeEstaValidoDadoQueServicoEstejaOffilineDeveriaLancarAhMensagemEsperada() {
+        Mockito.when(restTemplateMock.getForObject(URL_ESPERADA, Map.class)).thenThrow(new RuntimeException());
+
+        exception.expect(NegocioException.class);
+        exception.expectMessage("O serviço de validação do CPF está offiline");
+
+        cpfRepository.verificarSeEstaValido(cpf);
     }
 
     private HttpStatusCodeException gerarHttpStatusCodeException() {

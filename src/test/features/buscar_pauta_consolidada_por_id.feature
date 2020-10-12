@@ -12,7 +12,7 @@ Funcionalidade: Buscar Pauta Consolidada Por ID
       | Bryan Adams       | 89622735002 |
       | Agnetha Fältskog  | 01387268090 |
       | Dolores O'Riordan | 64951402076 |
-      | Simon Le Bon      | 89622735002 |
+      | Simon Le Bon      | 35341411056 |
       | Jon Bon Jovi      | 37984192057 |
       | Russell Hitchcock | 61022326074 |
       | Cyndi Lauper      | 12203726091 |

@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Entity
 public class Pauta implements Serializable {
@@ -50,8 +51,8 @@ public class Pauta implements Serializable {
         this.assembleias = assembleias;
     }
 
-    public Assembleia obterUltimaAssembleia() {
-        return assembleias.stream().reduce((primeiro, segundo) -> segundo).orElse(null);
+    public Optional<Assembleia> obterUltimaAssembleia() {
+        return assembleias.stream().reduce((primeiro, segundo) -> segundo);
     }
 
     @Override

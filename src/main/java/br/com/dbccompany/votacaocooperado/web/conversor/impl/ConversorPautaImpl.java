@@ -45,11 +45,14 @@ public class ConversorPautaImpl implements ConversorPauta {
     public PautaConsolidadaDto converterParaConsolidada(Pauta pauta) {
         PautaConsolidadaDto pautaConsolidadaDto = new PautaConsolidadaDto();
         pautaConsolidadaDto.setDescricao(pauta.getDescricao());
-        Assembleia assembleia = pauta.obterUltimaAssembleia();
-        pautaConsolidadaDto.setDataCriacao(assembleia.getDataCriacao());
-        pautaConsolidadaDto.setStatusAssembleia(assembleia.obterStatusAssembleia());
-        pautaConsolidadaDto.setQuantidadeVotosSim(assembleia.obterQuantidadeVotosSim());
-        pautaConsolidadaDto.setQuantidadeVotosNao(assembleia.obterQuantidadeVotosNao());
+        Optional<Assembleia> assembleiaOptional = pauta.obterUltimaAssembleia();
+        if (assembleiaOptional.isPresent()) {
+            Assembleia assembleia = assembleiaOptional.get();
+            pautaConsolidadaDto.setDataCriacao(assembleia.getDataCriacao());
+            pautaConsolidadaDto.setStatusAssembleia(assembleia.obterStatusAssembleia());
+            pautaConsolidadaDto.setQuantidadeVotosSim(assembleia.obterQuantidadeVotosSim());
+            pautaConsolidadaDto.setQuantidadeVotosNao(assembleia.obterQuantidadeVotosNao());
+        }
         return pautaConsolidadaDto;
     }
 }

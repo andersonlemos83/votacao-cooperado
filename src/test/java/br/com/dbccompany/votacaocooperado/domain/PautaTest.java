@@ -8,6 +8,7 @@ import org.junit.runners.JUnit4;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 
@@ -26,9 +27,9 @@ public class PautaTest {
     public void aoObterUltimaAssembleiaDadoQueExistamTresAssembleiasOrdenadasDeveriaRetonarAhUltimaAssembleia() {
         pauta.setAssembleias(gerarTresAssembleiasOrdenadas());
 
-        Assembleia ultimaAssembleia = pauta.obterUltimaAssembleia();
+        final Optional<Assembleia> assembleiaOptional = pauta.obterUltimaAssembleia();
 
-        assertEquals(assembleiaComDataMaisRecente, ultimaAssembleia);
+        assertEquals(assembleiaComDataMaisRecente, assembleiaOptional.get());
     }
 
     private List<Assembleia> gerarTresAssembleiasOrdenadas() {

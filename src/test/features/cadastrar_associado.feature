@@ -2,6 +2,11 @@
 
 Funcionalidade: Cadastrar Associado
 
+  Cenario de Fundo:
+    Dado que existam os associados cadastrados
+      | Nome        | cpf         |
+      | Klaus Meine | 78186436057 |
+
   Cenario: 01 - Cadastrar Associado Com Sucesso
     Dado que seja informado o nome "Laura Pausini"
     E que seja informado o CPF "08699056001"
@@ -27,3 +32,9 @@ Funcionalidade: Cadastrar Associado
     E que seja informado o CPF "45008224241"
     Quando cadastrar associado
     Entao deveria retornar a mensagem "O CPF do associado é inválido"
+
+  Cenario: 05 - Cadastrar Associado Com CPF Já Cadastrado
+    Dado que seja informado o nome "Laura Pausini"
+    E que seja informado o CPF "78186436057"
+    Quando cadastrar associado
+    Entao deveria retornar a mensagem "O CPF informado já está cadatrado"

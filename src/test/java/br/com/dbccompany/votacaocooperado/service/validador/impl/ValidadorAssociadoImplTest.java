@@ -1,6 +1,7 @@
 package br.com.dbccompany.votacaocooperado.service.validador.impl;
 
 import br.com.dbccompany.votacaocooperado.domain.Associado;
+import br.com.dbccompany.votacaocooperado.repository.AssociadoRepository;
 import br.com.dbccompany.votacaocooperado.repository.CpfRepository;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorAssociado;
 import br.com.dbccompany.votacaocooperado.shared.exception.NegocioException;
@@ -13,6 +14,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.Optional;
+
 @RunWith(MockitoJUnitRunner.class)
 public class ValidadorAssociadoImplTest {
 
@@ -21,6 +24,9 @@ public class ValidadorAssociadoImplTest {
     @Mock
     private CpfRepository cpfRepositoryMock;
 
+    @Mock
+    private AssociadoRepository associadoRepositoryMock;
+
     @Rule
     public ExpectedException exception = ExpectedException.none();
 
@@ -28,7 +34,7 @@ public class ValidadorAssociadoImplTest {
 
     @Before
     public void inicializarContexto() {
-        validadorAssociado = new ValidadorAssociadoImpl(cpfRepositoryMock);
+        validadorAssociado = new ValidadorAssociadoImpl(cpfRepositoryMock, associadoRepositoryMock);
 
         associado = new Associado();
         associado.setCpf("36288153044");
@@ -45,7 +51,18 @@ public class ValidadorAssociadoImplTest {
     }
 
     @Test
-    public void aoValidarDadoQueCpfSejaValidoNaoDeveriaLancarNenhumaMensagem() {
+    public void aoValidarDadoQueCpfSejaValidoIhJaEstejaCadastradoDeveriaLancarAhMensagemEsperada() {
+        Mockito.when(cpfRepositoryMock.verificarSeEstaValido(associado.getCpf())).thenReturn(true);
+        Mockito.when(associadoRepositoryMock.findByCpf(associado.getCpf())).thenReturn(Optional.ofNullable(associado));
+
+        exception.expect(NegocioException.class);
+        exception.expectMessage("O CPF informado já está cadatrado");
+
+        validadorAssociado.validar(associado);
+    }
+
+    @Test
+    public void aoValidarDadoQueCpfSejaValidoIhNaoEstejaCadastradoNaoDeveriaLancarNenhumaMensagem() {
         Mockito.when(cpfRepositoryMock.verificarSeEstaValido(associado.getCpf())).thenReturn(true);
         validadorAssociado.validar(associado);
     }

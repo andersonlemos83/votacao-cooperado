@@ -1,6 +1,7 @@
 package br.com.dbccompany.votacaocooperado.repository.impl;
 
 import br.com.dbccompany.votacaocooperado.repository.CpfRepository;
+import br.com.dbccompany.votacaocooperado.shared.exception.NegocioException;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
@@ -25,6 +26,8 @@ public class CpfRepositoryImpl implements CpfRepository {
             return true;
         } catch (HttpStatusCodeException excecao) {
             return false;
+        } catch (Exception excecao) {
+            throw new NegocioException("O serviço de validação do CPF está offiline");
         }
     }
 
