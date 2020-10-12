@@ -25,7 +25,6 @@ public class PautaResource {
     private final PautaService pautaService;
     private final ConversorPauta conversorPauta;
 
-    @Autowired
     public PautaResource(PautaService pautaService,
                          ConversorPauta conversorPauta) {
         this.pautaService = pautaService;

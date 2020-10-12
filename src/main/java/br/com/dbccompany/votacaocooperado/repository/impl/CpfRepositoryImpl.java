@@ -15,7 +15,6 @@ public class CpfRepositoryImpl implements CpfRepository {
 
     private final RestTemplate restTemplate;
 
-    @Autowired
     public CpfRepositoryImpl(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }

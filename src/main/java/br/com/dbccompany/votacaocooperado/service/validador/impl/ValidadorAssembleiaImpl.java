@@ -16,7 +16,6 @@ public class ValidadorAssembleiaImpl implements ValidadorAssembleia {
     private final AssembleiaRepository assembleiaRepository;
     private final PautaRepository pautaRepository;
 
-    @Autowired
     public ValidadorAssembleiaImpl(AssembleiaRepository assembleiaRepository,
                                    PautaRepository pautaRepository) {
         this.assembleiaRepository = assembleiaRepository;

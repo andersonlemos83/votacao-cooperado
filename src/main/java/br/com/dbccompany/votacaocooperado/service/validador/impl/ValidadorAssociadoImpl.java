@@ -12,7 +12,6 @@ public class ValidadorAssociadoImpl implements ValidadorAssociado {
 
     private final CpfRepository cpfRepository;
 
-    @Autowired
     public ValidadorAssociadoImpl(CpfRepository cpfRepository) {
         this.cpfRepository = cpfRepository;
     }

@@ -14,7 +14,6 @@ public class PautaServiceImpl implements PautaService {
 
     private final PautaRepository pautaRepository;
 
-    @Autowired
     public PautaServiceImpl(PautaRepository pautaRepository) {
         this.pautaRepository = pautaRepository;
     }

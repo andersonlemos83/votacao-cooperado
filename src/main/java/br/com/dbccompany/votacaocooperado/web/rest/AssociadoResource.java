@@ -24,7 +24,6 @@ public class AssociadoResource {
     private final AssociadoService associadoService;
     private final ConversorAssociado conversorAssociado;
 
-    @Autowired
     public AssociadoResource(AssociadoService associadoService,
                              ConversorAssociado conversorAssociado) {
         this.associadoService = associadoService;

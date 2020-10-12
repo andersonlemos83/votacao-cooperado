@@ -15,7 +15,6 @@ public class AssociadoServiceImpl implements AssociadoService {
     private final ValidadorAssociado validadorAssociado;
     private final AssociadoRepository associadoRepository;
 
-    @Autowired
     public AssociadoServiceImpl(ValidadorAssociado validadorAssociado,
                                 AssociadoRepository associadoRepository) {
         this.associadoRepository = associadoRepository;

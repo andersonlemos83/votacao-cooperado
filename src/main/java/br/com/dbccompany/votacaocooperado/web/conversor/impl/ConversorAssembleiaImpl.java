@@ -19,7 +19,6 @@ public class ConversorAssembleiaImpl implements ConversorAssembleia {
 
     private final ConversorVoto conversorVoto;
 
-    @Autowired
     public ConversorAssembleiaImpl(ConversorVoto conversorVoto) {
         this.conversorVoto = conversorVoto;
     }

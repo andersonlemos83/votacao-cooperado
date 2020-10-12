@@ -17,7 +17,6 @@ public class VotoServiceImpl implements VotoService {
     private final ValidadorAssembleia validadorAssembleia;
     private final ValidadorVoto validadorVoto;
 
-    @Autowired
     public VotoServiceImpl(VotoRepository votoRepository,
                            ValidadorAssembleia validadorAssembleia,
                            ValidadorVoto validadorVoto) {

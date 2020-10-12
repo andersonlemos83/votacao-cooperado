@@ -15,7 +15,6 @@ public class AssembleiaServiceImpl implements AssembleiaService {
     private final ValidadorAssembleia validadorAssembleia;
     private final AssembleiaRepository assembleiaRepository;
 
-    @Autowired
     public AssembleiaServiceImpl(ValidadorAssembleia validadorAssembleia,
                                  AssembleiaRepository assembleiaRepository) {
         this.validadorAssembleia = validadorAssembleia;

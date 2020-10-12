@@ -67,6 +67,6 @@ public class AssembleiaDataTable {
             calendar.add(MINUTE, -5);
             return calendar.getTime();
         }
-        throw new RuntimeException("Data não implementada!");
+        return null;
     }
 }

@@ -24,7 +24,6 @@ public class AssembleiaResource {
     private final AssembleiaService assembleiaService;
     private final ConversorAssembleia conversorAssembleia;
 
-    @Autowired
     public AssembleiaResource(AssembleiaService assembleiaService,
                               ConversorAssembleia conversorAssembleia) {
         this.assembleiaService = assembleiaService;

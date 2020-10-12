@@ -24,7 +24,6 @@ public class VotoResource {
     private final VotoService votoService;
     private final ConversorVoto conversorVoto;
 
-    @Autowired
     public VotoResource(VotoService votoService,
                         ConversorVoto conversorVoto) {
         this.votoService = votoService;
