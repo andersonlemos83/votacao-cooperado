@@ -35,8 +35,8 @@ public class CadastrarPautaStepDefs extends StepDefs {
         retorno = pautaFuncionalidade.cadastrar(pautaDataTable);
     }
 
-    @Entao("^deveria retornar a seguinte pauta \"([^\"]*)\"$")
-    public void deveriaRetornarAhSeguintePauta(String descricao) throws Exception {
+    @Entao("^deveria cadastrar a seguinte pauta \"([^\"]*)\"$")
+    public void deveriaCadastrarAhSeguintePauta(String descricao) throws Exception {
         pautaVerificador.verificar(descricao, retorno);
     }
 }

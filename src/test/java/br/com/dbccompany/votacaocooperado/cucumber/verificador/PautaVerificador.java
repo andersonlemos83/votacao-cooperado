@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.List;
-import java.util.Optional;
 
 import static java.text.MessageFormat.format;
 import static org.junit.Assert.assertEquals;
@@ -41,7 +40,7 @@ public class PautaVerificador {
 
     public void verificar(String descricao, ResultActions retorno) throws Exception {
         retorno.andExpect(status().isCreated());
-        Optional<Pauta> pautaOptional = pautaRepositoryTestHelper.findAll().stream().findFirst();
-        assertEquals(descricao, pautaOptional.orElse(new Pauta()).getDescricao());
+        Pauta pauta = pautaRepositoryTestHelper.findAll().stream().findFirst().orElse(new Pauta());
+        assertEquals(descricao, pauta.getDescricao());
     }
 }

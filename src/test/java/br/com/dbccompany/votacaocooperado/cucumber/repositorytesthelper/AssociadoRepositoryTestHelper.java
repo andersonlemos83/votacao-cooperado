@@ -9,4 +9,6 @@ public interface AssociadoRepositoryTestHelper extends JpaRepository<Associado, 
 
     Associado findByNome(String nome);
 
+    Associado findByCpf(String cpf);
+
 }
