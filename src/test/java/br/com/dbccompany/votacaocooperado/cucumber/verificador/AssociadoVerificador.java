@@ -31,9 +31,13 @@ public class AssociadoVerificador {
 
     public void verificar(AssociadoDataTable associadoDataTable, ResultActions retorno) throws Exception {
         retorno.andExpect(status().isCreated());
-        Optional<Associado> associadoOptional = Optional.ofNullable(associadoRepositoryTestHelper.findByCpf(associadoDataTable.getCpf()));
-        Associado associado = associadoOptional.orElse(new Associado());
+        Associado associado = consultarAssociado(associadoDataTable);
         assertEquals(associadoDataTable.getNome(), associado.getNome());
         assertEquals(associadoDataTable.getCpf(), associado.getCpf());
+    }
+
+    private Associado consultarAssociado(AssociadoDataTable associadoDataTable) {
+        Optional<Associado> associadoOptional = Optional.ofNullable(associadoRepositoryTestHelper.findByCpf(associadoDataTable.getCpf()));
+        return associadoOptional.orElse(new Associado());
     }
 }

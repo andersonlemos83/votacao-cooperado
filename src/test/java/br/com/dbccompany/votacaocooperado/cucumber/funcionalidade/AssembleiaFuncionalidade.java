@@ -12,17 +12,19 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 @Component
 public class AssembleiaFuncionalidade {
 
+    private static final String API_ASSEMBLEIA = "/api/assembleia";
+
     @Autowired
     private MockMvc mockMvc;
 
     public ResultActions listarTodas() throws Exception {
-        return mockMvc.perform(MockMvcRequestBuilders.get("/api/assembleia")
+        return mockMvc.perform(MockMvcRequestBuilders.get(API_ASSEMBLEIA)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
     }
 
     public ResultActions cadastrar(AssembleiaDataTable assembleiaDataTable) throws Exception {
-        return mockMvc.perform(MockMvcRequestBuilders.post("/api/assembleia")
+        return mockMvc.perform(MockMvcRequestBuilders.post(API_ASSEMBLEIA)
                 .content(new ObjectMapper().writeValueAsString(assembleiaDataTable))
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .accept(MediaType.APPLICATION_JSON_UTF8));

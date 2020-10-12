@@ -21,9 +21,7 @@ public class CpfRepositoryImpl implements CpfRepository {
     @Override
     public boolean verificarSeEstaValido(String cpf) {
         try {
-            Map<String, String> atributos = restTemplate.getForObject(gerarUrl(cpf), Map.class);
-            // Descomentar caso deseje saber se está habilitado para votação
-            //return "ABLE_TO_VOTE".equalsIgnoreCase(atributos.get("status"));
+            restTemplate.getForObject(gerarUrl(cpf), Map.class);
             return true;
         } catch (HttpStatusCodeException excecao) {
             return false;

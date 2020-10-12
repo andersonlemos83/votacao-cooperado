@@ -44,10 +44,14 @@ public class VotoVerificador {
 
     public void verificar(VotoDataTable votoDataTable, ResultActions retorno) throws Exception {
         retorno.andExpect(status().isCreated());
-        Optional<Voto> votoOptional = Optional.ofNullable(votoRepositoryTestHelper.findByAssociado_NomeAndAndAssembleia_Pauta_Descricao(votoDataTable.getNomeAssociado(), votoDataTable.getDescricaoPauta()));
-        Voto voto = votoOptional.orElse(new Voto());
+        Voto voto = consultarVoto(votoDataTable);
         assertEquals(votoDataTable.getDescricaoPauta(), voto.getAssembleia().getPauta().getDescricao());
         assertEquals(votoDataTable.getNomeAssociado(), voto.getAssociado().getNome());
         assertEquals(votoDataTable.getTipoVoto(), voto.getTipoVoto());
+    }
+
+    private Voto consultarVoto(VotoDataTable votoDataTable) {
+        Optional<Voto> votoOptional = Optional.ofNullable(votoRepositoryTestHelper.findByAssociado_NomeAndAndAssembleia_Pauta_Descricao(votoDataTable.getNomeAssociado(), votoDataTable.getDescricaoPauta()));
+        return votoOptional.orElse(new Voto());
     }
 }

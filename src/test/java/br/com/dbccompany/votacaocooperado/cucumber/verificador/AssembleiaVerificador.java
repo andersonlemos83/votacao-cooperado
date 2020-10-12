@@ -38,11 +38,15 @@ public class AssembleiaVerificador {
 
     public void verificar(AssembleiaDataTable assembleiaDataTable, ResultActions retorno) throws Exception {
         retorno.andExpect(status().isCreated());
-        Optional<Assembleia> assembleiaOptional = Optional.ofNullable(assembleiaRepositoryTestHelper.findByPauta_Descricao(assembleiaDataTable.getDescricaoPauta()));
-        Assembleia assembleia = assembleiaOptional.orElse(new Assembleia());
+        Assembleia assembleia = consultarAssembleia(assembleiaDataTable);
         assertEquals(assembleiaDataTable.getDescricaoPauta(), assembleia.getPauta().getDescricao());
         assertEquals(assembleiaDataTable.getTempoDuracao(), assembleia.getTempoDuracao());
         assertData(assembleiaDataTable.getDataCriacao(), assembleia.getDataCriacao());
+    }
+
+    private Assembleia consultarAssembleia(AssembleiaDataTable assembleiaDataTable) {
+        Optional<Assembleia> assembleiaOptional = Optional.ofNullable(assembleiaRepositoryTestHelper.findByPauta_Descricao(assembleiaDataTable.getDescricaoPauta()));
+        return assembleiaOptional.orElse(new Assembleia());
     }
 
     private void assertData(String dataEsperada, Date dataRetornada) {

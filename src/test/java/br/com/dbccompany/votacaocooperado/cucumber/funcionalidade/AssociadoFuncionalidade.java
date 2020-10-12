@@ -12,17 +12,19 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 @Component
 public class AssociadoFuncionalidade {
 
+    private static final String API_ASSOCIADO = "/api/associado";
+
     @Autowired
     private MockMvc mockMvc;
 
     public ResultActions listarTodas() throws Exception {
-        return mockMvc.perform(MockMvcRequestBuilders.get("/api/associado")
+        return mockMvc.perform(MockMvcRequestBuilders.get(API_ASSOCIADO)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
     }
 
     public ResultActions cadastrar(AssociadoDataTable associadoDataTable) throws Exception {
-        return mockMvc.perform(MockMvcRequestBuilders.post("/api/associado")
+        return mockMvc.perform(MockMvcRequestBuilders.post(API_ASSOCIADO)
                 .content(new ObjectMapper().writeValueAsString(associadoDataTable))
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .accept(MediaType.APPLICATION_JSON_UTF8));

@@ -12,23 +12,25 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 @Component
 public class PautaFuncionalidade {
 
+    private static final String API_PAUTA = "/api/pauta";
+
     @Autowired
     private MockMvc mockMvc;
 
     public ResultActions listarTodas() throws Exception {
-        return mockMvc.perform(MockMvcRequestBuilders.get("/api/pauta")
+        return mockMvc.perform(MockMvcRequestBuilders.get(API_PAUTA)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
     }
 
     public ResultActions buscarPorId(Long id) throws Exception {
-        return mockMvc.perform(MockMvcRequestBuilders.get("/api/pauta/" + id)
+        return mockMvc.perform(MockMvcRequestBuilders.get(API_PAUTA + "/" + id)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
     }
 
     public ResultActions cadastrar(PautaDataTable pautaDataTable) throws Exception {
-        return mockMvc.perform(MockMvcRequestBuilders.post("/api/pauta")
+        return mockMvc.perform(MockMvcRequestBuilders.post(API_PAUTA)
                 .content(new ObjectMapper().writeValueAsString(pautaDataTable))
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .accept(MediaType.APPLICATION_JSON_UTF8));
