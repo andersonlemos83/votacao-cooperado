@@ -1,11 +1,16 @@
 package br.com.dbccompany.votacaocooperado.cucumber.datatable;
 
+import java.util.Date;
+
+import static java.text.MessageFormat.format;
+
 public class AssembleiaDataTable {
 
     private Long id;
     private String dataCriacao;
     private int tempoDuracao;
     private String descricaoPauta;
+    private Long idPauta;
 
     public Long getId() {
         return id;
@@ -16,6 +21,9 @@ public class AssembleiaDataTable {
     }
 
     public String getDataCriacao() {
+        if ("DATA_ATUAL".equalsIgnoreCase(dataCriacao)) {
+            return format("{0,date,dd/MM/yyyy HH}", new Date());
+        }
         return dataCriacao;
     }
 
@@ -37,5 +45,13 @@ public class AssembleiaDataTable {
 
     public void setDescricaoPauta(String descricaoPauta) {
         this.descricaoPauta = descricaoPauta;
+    }
+
+    public Long getIdPauta() {
+        return idPauta;
+    }
+
+    public void setIdPauta(Long idPauta) {
+        this.idPauta = idPauta;
     }
 }

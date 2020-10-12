@@ -3,6 +3,7 @@ package br.com.dbccompany.votacaocooperado.service.impl;
 import br.com.dbccompany.votacaocooperado.domain.Assembleia;
 import br.com.dbccompany.votacaocooperado.repository.AssembleiaRepository;
 import br.com.dbccompany.votacaocooperado.service.AssembleiaService;
+import br.com.dbccompany.votacaocooperado.service.validador.ValidadorAssembleia;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +23,9 @@ public class AssembleiaServiceImplTest {
     private AssembleiaService assembleiaService;
 
     @Mock
+    private ValidadorAssembleia validadorAssembleiaMock;
+
+    @Mock
     private AssembleiaRepository assembleiaRepositoryMock;
 
     private List<Assembleia> assembleiasEsperadas;
@@ -29,7 +33,7 @@ public class AssembleiaServiceImplTest {
 
     @Before
     public void inicializarContexto() {
-        assembleiaService = new AssembleiaServiceImpl(assembleiaRepositoryMock);
+        assembleiaService = new AssembleiaServiceImpl(validadorAssembleiaMock, assembleiaRepositoryMock);
 
         assembleiasEsperadas = new ArrayList<>();
         assembleiaEsperada = new Assembleia();
@@ -50,6 +54,7 @@ public class AssembleiaServiceImplTest {
 
         assembleiaService.cadastrar(assembleiaEsperada);
 
+        verify(validadorAssembleiaMock).validar(assembleiaEsperada);
         verify(assembleiaRepositoryMock).save(assembleiaEsperada);
     }
 

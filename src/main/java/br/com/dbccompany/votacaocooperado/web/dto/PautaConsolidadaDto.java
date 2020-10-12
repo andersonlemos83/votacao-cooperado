@@ -8,7 +8,7 @@ import java.util.Date;
 public class PautaConsolidadaDto {
 
     private String descricao;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy'T'HH:mm:ss.SSSZ", locale = "pt-BR", timezone = "Brazil/East")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss", locale = "pt-BR", timezone = "Brazil/East")
     private Date dataCriacao;
     private StatusAssembleia statusAssembleia;
     private int quantidadeVotosSim;

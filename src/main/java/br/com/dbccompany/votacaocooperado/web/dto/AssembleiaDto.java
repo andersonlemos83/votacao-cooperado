@@ -10,10 +10,10 @@ import java.util.List;
 public class AssembleiaDto implements Serializable {
 
     private Long id;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy'T'HH:mm:ss.SSSZ", locale = "pt-BR", timezone = "Brazil/East")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss", locale = "pt-BR", timezone = "Brazil/East")
     private Date dataCriacao;
     private int tempoDuracao;
-    @NotNull(message = "O id da pauta é obrigatório")
+    @NotNull(message = "O ID da pauta é obrigatório")
     private Long idPauta;
     private List<VotoDto> votos;
 

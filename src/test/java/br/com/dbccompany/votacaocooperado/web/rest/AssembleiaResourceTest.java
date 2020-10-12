@@ -113,6 +113,6 @@ public class AssembleiaResourceTest {
     }
 
     private String converter(Date data) {
-        return MessageFormat.format("{0,date,dd-MM-yyyy'T'HH:mm:ss.SSSZ}", data);
+        return MessageFormat.format("{0,date,dd/MM/yyyy HH:mm:ss}", data);
     }
 }

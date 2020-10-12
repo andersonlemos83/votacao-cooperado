@@ -34,8 +34,12 @@ public class StepDefs {
 
     public void inicializarContexto() {
         votoRepositoryTestHelper.deleteAll();
+        votoRepositoryTestHelper.flush();
         assembleiaRepositoryTestHelper.deleteAll();
+        assembleiaRepositoryTestHelper.flush();
         associadoRepositoryTestHelper.deleteAll();
+        associadoRepositoryTestHelper.findAll();
         pautaRepositoryTestHelper.deleteAll();
+        pautaRepositoryTestHelper.flush();
     }
 }
