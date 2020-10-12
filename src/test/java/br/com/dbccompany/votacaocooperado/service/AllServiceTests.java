@@ -5,6 +5,7 @@ import br.com.dbccompany.votacaocooperado.service.impl.AssociadoServiceImplTest;
 import br.com.dbccompany.votacaocooperado.service.impl.PautaServiceImplTest;
 import br.com.dbccompany.votacaocooperado.service.impl.VotoServiceImplTest;
 import br.com.dbccompany.votacaocooperado.service.validador.impl.ValidadorAssembleiaImplTest;
+import br.com.dbccompany.votacaocooperado.service.validador.impl.ValidadorAssociadoImplTest;
 import br.com.dbccompany.votacaocooperado.service.validador.impl.ValidadorVotoImplTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -16,7 +17,8 @@ import org.junit.runners.Suite;
         AssembleiaServiceImplTest.class,
         VotoServiceImplTest.class,
         ValidadorAssembleiaImplTest.class,
-        ValidadorVotoImplTest.class
+        ValidadorVotoImplTest.class,
+        ValidadorAssociadoImplTest.class
 })
 public class AllServiceTests {
 }

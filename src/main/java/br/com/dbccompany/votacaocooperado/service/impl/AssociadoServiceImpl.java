@@ -3,6 +3,7 @@ package br.com.dbccompany.votacaocooperado.service.impl;
 import br.com.dbccompany.votacaocooperado.domain.Associado;
 import br.com.dbccompany.votacaocooperado.repository.AssociadoRepository;
 import br.com.dbccompany.votacaocooperado.service.AssociadoService;
+import br.com.dbccompany.votacaocooperado.service.validador.ValidadorAssociado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +12,14 @@ import java.util.List;
 @Service
 public class AssociadoServiceImpl implements AssociadoService {
 
+    private final ValidadorAssociado validadorAssociado;
     private final AssociadoRepository associadoRepository;
 
     @Autowired
-    public AssociadoServiceImpl(AssociadoRepository associadoRepository) {
+    public AssociadoServiceImpl(ValidadorAssociado validadorAssociado,
+                                AssociadoRepository associadoRepository) {
         this.associadoRepository = associadoRepository;
+        this.validadorAssociado = validadorAssociado;
     }
 
     @Override
@@ -25,6 +29,7 @@ public class AssociadoServiceImpl implements AssociadoService {
 
     @Override
     public Associado cadastrar(Associado associado) {
+        validadorAssociado.validar(associado);
         return associadoRepository.save(associado);
     }
 }

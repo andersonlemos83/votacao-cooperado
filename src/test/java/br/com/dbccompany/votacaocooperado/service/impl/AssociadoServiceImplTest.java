@@ -3,6 +3,7 @@ package br.com.dbccompany.votacaocooperado.service.impl;
 import br.com.dbccompany.votacaocooperado.domain.Associado;
 import br.com.dbccompany.votacaocooperado.repository.AssociadoRepository;
 import br.com.dbccompany.votacaocooperado.service.AssociadoService;
+import br.com.dbccompany.votacaocooperado.service.validador.ValidadorAssociado;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,12 +25,15 @@ public class AssociadoServiceImplTest {
     @Mock
     private AssociadoRepository associadoRepositoryMock;
 
+    @Mock
+    private ValidadorAssociado validadorAssociadoMock;
+
     private List<Associado> associadosEsperados;
     private Associado associadoEsperado;
 
     @Before
     public void inicializarContexto() {
-        associadoService = new AssociadoServiceImpl(associadoRepositoryMock);
+        associadoService = new AssociadoServiceImpl(validadorAssociadoMock, associadoRepositoryMock);
 
         associadosEsperados = new ArrayList<>();
         associadoEsperado = new Associado();
@@ -45,11 +49,12 @@ public class AssociadoServiceImplTest {
     }
 
     @Test
-    public void aoCadastrarDeveriaRealizarCadastroDoAssociadoEsperado() {
+    public void aoCadastrarDeveriaRealizarValidacoesIhCadastroDoAssociadoEsperado() {
         Mockito.when(associadoRepositoryMock.save(associadoEsperado)).thenReturn(associadoEsperado);
 
         associadoService.cadastrar(associadoEsperado);
 
+        verify(validadorAssociadoMock).validar(associadoEsperado);
         verify(associadoRepositoryMock).save(associadoEsperado);
     }
 
