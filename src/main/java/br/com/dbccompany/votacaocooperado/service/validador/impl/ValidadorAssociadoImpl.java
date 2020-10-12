@@ -4,7 +4,6 @@ import br.com.dbccompany.votacaocooperado.domain.Associado;
 import br.com.dbccompany.votacaocooperado.repository.CpfRepository;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorAssociado;
 import br.com.dbccompany.votacaocooperado.shared.exception.NegocioException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service

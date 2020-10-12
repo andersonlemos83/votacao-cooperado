@@ -8,9 +8,15 @@ import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.VotoRepo
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.ResultActions;
+
+import java.util.List;
+import java.util.Map;
+
+import static java.text.MessageFormat.format;
 
 @WebAppConfiguration
 @SpringBootTest
@@ -32,14 +38,22 @@ public class StepDefs {
     @Autowired
     private PautaRepositoryTestHelper pautaRepositoryTestHelper;
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
     public void inicializarContexto() {
         votoRepositoryTestHelper.deleteAll();
-        votoRepositoryTestHelper.flush();
         assembleiaRepositoryTestHelper.deleteAll();
-        assembleiaRepositoryTestHelper.flush();
         associadoRepositoryTestHelper.deleteAll();
-        associadoRepositoryTestHelper.findAll();
         pautaRepositoryTestHelper.deleteAll();
-        pautaRepositoryTestHelper.flush();
+        resetarSequeces();
+    }
+
+    private void resetarSequeces() {
+        List<Map<String, Object>> sequences = jdbcTemplate.queryForList("SELECT * FROM INFORMATION_SCHEMA.SEQUENCES");
+        for (Map<String, Object> sequence : sequences) {
+            String sequence_name = (String) sequence.get("SEQUENCE_NAME");
+            jdbcTemplate.execute(format("ALTER SEQUENCE {0} RESTART WITH 1", sequence_name));
+        }
     }
 }

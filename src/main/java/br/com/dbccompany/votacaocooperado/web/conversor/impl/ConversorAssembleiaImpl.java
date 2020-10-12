@@ -5,7 +5,6 @@ import br.com.dbccompany.votacaocooperado.domain.Pauta;
 import br.com.dbccompany.votacaocooperado.web.conversor.ConversorAssembleia;
 import br.com.dbccompany.votacaocooperado.web.conversor.ConversorVoto;
 import br.com.dbccompany.votacaocooperado.web.dto.AssembleiaDto;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

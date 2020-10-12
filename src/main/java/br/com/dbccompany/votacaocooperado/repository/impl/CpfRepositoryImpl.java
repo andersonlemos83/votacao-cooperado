@@ -1,7 +1,6 @@
 package br.com.dbccompany.votacaocooperado.repository.impl;
 
 import br.com.dbccompany.votacaocooperado.repository.CpfRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;

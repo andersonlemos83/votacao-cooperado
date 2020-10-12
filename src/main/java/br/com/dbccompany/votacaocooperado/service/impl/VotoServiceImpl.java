@@ -5,7 +5,6 @@ import br.com.dbccompany.votacaocooperado.repository.VotoRepository;
 import br.com.dbccompany.votacaocooperado.service.VotoService;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorAssembleia;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorVoto;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
