@@ -1,9 +1,8 @@
 # Sobre o projeto votacao-cooperado
 
-Este projeto foi concebido como parte de uma avaliação técnica de backend para ingresso a empresa DBC Company.
+Este projeto foi concebido como parte de uma avaliação técnica de backend para tentativa de ingresso na empresa DBC Company.
 
-**1. Apresentação**
-
+**1. Domínio**
 No cooperativismo, cada associado possui um voto e as decisões são tomadas em assembleias, por votação. 
 
 **2. Features Implementadas**
@@ -13,4 +12,13 @@ No cooperativismo, cada associado possui um voto e as decisões são tomadas em 
 - Contabilizar os votos e dar o resultado da votação na pauta.
 
 **3. Features Bonus**
-1 Integração com sistemas externos;
+- Bônus 1 - Foi integrado com o sistema externo de validação de CPF;
+- Bônus 3 - Foi versionado em um repositório privado no Github (este!) onde foram realizados commits regulares e auto explicativos.
+
+**4. Informações Técnicas**
+- Liguagem Java 8
+- Ecossitema do Spring Boot 2.3.4
+- Banco H2
+  - Arquivo: Ambientes de desenvolvimento e produção
+  - Memória: Ambientes de testes
+
