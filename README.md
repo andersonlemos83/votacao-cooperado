@@ -3,19 +3,20 @@
 Este projeto foi concebido como parte de uma avaliação técnica de backend para tentativa de ingresso na empresa DBC Company.
 
 **1. Domínio**
+
 No cooperativismo, cada associado possui um voto e as decisões são tomadas em assembleias, por votação. 
 
-**2. Features Implementadas**
+**2. Features implementadas**
 - Cadastrar uma nova pauta;
 - Abrir uma sessão de votação em uma pauta (a sessão de votação deve ficar aberta por um tempo determinado na chamada de abertura ou 1 minuto por default);
 - Receber votos dos associados em pautas (os votos são apenas 'Sim'/'Não'. Cada associado é identificado por um id único e pode votar apenas uma vez por pauta);
 - Contabilizar os votos e dar o resultado da votação na pauta.
 
-**3. Features Bônus**
+**3. Features bônus**
 - Bônus 1 - Foi integrado com o sistema externo de validação de CPF;
 - Bônus 3 - Foi versionado em um repositório privado no Github (este!) onde foram realizados commits regulares e auto explicativos.
 
-**4. Informações Técnicas**
+**4. Informações técnicas**
 - Linguagem Java 8
 - Ecossistema do Spring Boot 2.3.4
 - Banco H2
@@ -25,9 +26,15 @@ No cooperativismo, cada associado possui um voto e as decisões são tomadas em 
 - Documentação da API e seus serviços com Swagger (springdoc-openapi-ui)
 
 **5. Sobre os testes**
+
 Com o intuito de organizar melhor os testes do projeto, foram agrupados os testes três grandes suites:
-- CucumberTest: Esta suite agrupa todos os testes aceitação e integração baseados em features BDD. Ela atingiu 89% de linha cobertas segundo coverage. 
-- UnitTests: Esta suite agrupa todos os testes de unidade do projeto. Ela atingiu 86% de linha cobertas segundo coverage.
-- AllTests: Esta suite agrupa todos os testes implementados. Consiste na união do CucumberTest com UnitTests. Ela atingiu 92% de linha cobertas segundo coverage.
+- CucumberTest: Esta suite agrupa todos os testes aceitação e integração baseados em features BDD. Ela atingiu **89%** de linha cobertas segundo coverage. 
+- UnitTests: Esta suite agrupa todos os testes de unidade do projeto. Ela atingiu **86%** de linha cobertas segundo coverage.
+- AllTests: Esta suite agrupa todos os testes implementados. Consiste na união do CucumberTest com UnitTests. Ela atingiu **92%** de linha cobertas segundo coverage.
 
 OBS: Alguns testes da feature Cadastrar Associado podem apresentar intermitência devido a lentidão de resposta da API de validação de CPF.
+
+**6. URL's de serviços**
+- API: http://localhost:8081
+- Swagger UI: http://localhost:8081/swagger-ui.html
+
