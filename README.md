@@ -65,7 +65,7 @@ O usuário tem total liberdade para utilizar a API e seus serviços na ordem que
 Gostaria de utilizar este espaço para debater um pouco mais sobre as features que ficaram de fora desta implementação: 
 - Bônus 2 (Mensageria e filas): Tive um breve vislumbre de integração entre Abache Kafka e a API votacao-cooperado. No entanto, devido ao tempo disponível e ao meu modesto conhecimento sobre o tema, não consegui avançar com a solução; 
 - Bônus 3 (Performance): 
-  - Como melhorar: Para melhorar a performance a API, eu optaria por executá-la dentro de um container Docker escalado em N hosts em um orquestrador de containers, com Load Balance, Health Check e Pool de conexões; 
+  - Como melhorar: Para melhorar a performance da API, eu optaria por executá-la dentro de um container Docker escalado em N hosts em um orquestrador de containers, com Load Balance, Health Check e Pool de conexões; 
   - Como testar: Para testar a performance da API, eu optaria por criar um plano de teste simulando N requisições, utilizando o Apache JMeter, e analisaria os resultado através de um ouvinte. 
 - Hospedagem: Assim como a API de validação de CPF, poderia ter apresentado a API votacao-cooperado utilizando o próprio Heroku.
 
