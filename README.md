@@ -71,4 +71,4 @@ Gostaria de utilizar este espaço para debater um pouco mais sobre as features q
 
 **10. That's all folks!**
 
-Caro avaliador, se você chegou até este ponto, eu espero causado uma boa impressão.
+Caro avaliador, se você chegou até este ponto, eu espero ter causado uma boa impressão.
