@@ -13,6 +13,10 @@ import static java.text.MessageFormat.format;
 @Repository
 public class CpfRepositoryImpl implements CpfRepository {
 
+    // ATENÇÃO - Em um ambiente real, essa informação
+    // seria recuperada de um servidor de configuração.
+    private static final String URL_API_VALIDACAO_CPF = "https://user-info.herokuapp.com/users";
+
     private final RestTemplate restTemplate;
 
     public CpfRepositoryImpl(RestTemplate restTemplate) {
@@ -27,12 +31,11 @@ public class CpfRepositoryImpl implements CpfRepository {
         } catch (HttpStatusCodeException excecao) {
             return false;
         } catch (Exception excecao) {
-            throw new NegocioException("O serviço de validação do CPF está offiline");
+            throw new NegocioException("O serviço de validação do CPF está offline");
         }
     }
 
     private String gerarUrl(String cpf) {
-        String urlBase = "https://user-info.herokuapp.com/users";
-        return format("{0}/{1}", urlBase, cpf);
+        return format("{0}/{1}", URL_API_VALIDACAO_CPF, cpf);
     }
 }

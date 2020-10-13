@@ -65,7 +65,7 @@ public class CpfRepositoryImplTest {
         Mockito.when(restTemplateMock.getForObject(URL_ESPERADA, Map.class)).thenThrow(new RuntimeException());
 
         exception.expect(NegocioException.class);
-        exception.expectMessage("O serviço de validação do CPF está offiline");
+        exception.expectMessage("O serviço de validação do CPF está offline");
 
         cpfRepository.verificarSeEstaValido(cpf);
     }
