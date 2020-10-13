@@ -44,11 +44,18 @@ Apesar da documentação da API ser gerada via Swagger, segue uma breve listagem
 - Listar todas as Pautas: GET - /api/pauta
 - Cadastrar uma nova Pauta: POST - /api/pauta
 - Buscar Pauta Consolidada por ID: GET - /api/pauta/{id}
-- Listar todos os Associados: GET - /api/associado
-- Cadastrar um novo Associado: POST - /api/associado
 - Listar todas as Assembleias: GET - /api/assembleia
 - Cadastrar uma nova Assembleia: POST - /api/assembleia
+- Listar todos os Associados: GET - /api/associado
+- Cadastrar um novo Associado: POST - /api/associado
 - Listar todos os Votos: GET - /api/voto
 - Cadastrar um novo Voto: POST - /api/voto
 
 **8. Sugestão de uso**
+
+O usuário tem total liberdade para utilizar a API e seus serviços na ordem que desejar. No entanto, apenas como sugestão, segue um breve roteiro: 
+1. Criar uma nova pauta; 
+2. Criar uma nova assembĺeia relacionando a pauta do item 1; 
+3. Criar um novo associado; 
+4. Criar um novo voto relacionando com a assembleia criada no item 2 e com o associado criado no item 3; 
+5. Consultar o consolidado da pauta criada no item 1.
