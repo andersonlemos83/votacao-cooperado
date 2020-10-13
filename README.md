@@ -4,7 +4,7 @@ Este projeto foi concebido como parte de uma avaliação técnica de backend par
 
 **1. Domínio**
 
-No cooperativismo, cada associado possui um voto e as decisões são tomadas em assembleias, por votação. 
+No cooperativismo, cada associado possui um voto e as decisões são tomadas em assembleias por votação. 
 
 **2. Features implementadas**
 - Cadastrar uma nova pauta;
@@ -27,7 +27,7 @@ No cooperativismo, cada associado possui um voto e as decisões são tomadas em 
 
 **5. Sobre os testes**
 
-Com o intuito de organizar melhor os testes do projeto, foram agrupados os testes três grandes suites:
+Com o intuito de organizar melhor os testes do projeto, foram agrupados os testes em três grandes suites:
 - CucumberTest: Esta suite agrupa todos os testes aceitação e integração baseados em features BDD. Ela atingiu **89%** de linha cobertas segundo coverage. 
 - UnitTests: Esta suite agrupa todos os testes de unidade do projeto. Ela atingiu **86%** de linha cobertas segundo coverage.
 - AllTests: Esta suite agrupa todos os testes implementados. Consiste na união do CucumberTest com UnitTests. Ela atingiu **92%** de linha cobertas segundo coverage.
