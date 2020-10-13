@@ -26,6 +26,7 @@ No cooperativismo, cada associado possui um voto e as decisões são tomadas em 
   - Memória: Ambientes de testes
 - Testes com JUnit, Mockto e Cucumber
 - Documentação da API e seus serviços com Swagger (springdoc-openapi-ui)
+- Integração Contínua com Travis CI
 
 **5. Sobre os testes**
 
@@ -65,11 +66,12 @@ O usuário tem total liberdade para utilizar a API e seus serviços na ordem que
 **9. Trabalhos futuros**
 
 Gostaria de utilizar este espaço para debater um pouco mais sobre as features que ficaram de fora desta implementação: 
-- Bônus 2 (Mensageria e filas): Tive um breve vislumbre de integração entre Abache Kafka e a API votacao-cooperado. No entanto, devido ao tempo disponível e ao meu modesto conhecimento sobre o tema, não consegui avançar com a solução; 
+- Bônus 2 (Mensageria e filas): Tive um breve vislumbre de integração entre Apache Kafka e o projeto Votação Cooperado API. No entanto, devido ao tempo disponível e ao meu modesto conhecimento sobre o tema, não consegui avançar com a solução; 
 - Bônus 3 (Performance): 
   - Como melhorar: Para melhorar a performance da API, eu optaria por executá-la dentro de um container Docker escalado em vários hosts em um orquestrador de containers, com Load Balance, Health Check e Pool de conexões; 
   - Como testar: Para testar a performance da API, eu optaria por criar um plano de teste simulando várias requisições, utilizando o Apache JMeter, e analisaria os resultado através de um ouvinte. 
-- Hospedagem: Assim como a API de validação de CPF, poderia ter apresentado a API votacao-cooperado utilizando o próprio Heroku.
+- Hospedagem: Assim como a API de validação de CPF, poderia ter apresentado o projeto Votação Cooperado API utilizando o próprio Heroku.
+- Nome do projeto: O nome do projeto e seu repositório acabou ficando votacao-cooperado, quando o correto deveria ser votacao-cooperado-api. Preferi não fazer nenhuma alteração para não atrapalhar a entrega.
 
 **10. That's all folks!**
 
