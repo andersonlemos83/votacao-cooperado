@@ -11,14 +11,23 @@ No cooperativismo, cada associado possui um voto e as decisões são tomadas em 
 - Receber votos dos associados em pautas (os votos são apenas 'Sim'/'Não'. Cada associado é identificado por um id único e pode votar apenas uma vez por pauta);
 - Contabilizar os votos e dar o resultado da votação na pauta.
 
-**3. Features Bonus**
+**3. Features Bônus**
 - Bônus 1 - Foi integrado com o sistema externo de validação de CPF;
 - Bônus 3 - Foi versionado em um repositório privado no Github (este!) onde foram realizados commits regulares e auto explicativos.
 
 **4. Informações Técnicas**
-- Liguagem Java 8
-- Ecossitema do Spring Boot 2.3.4
+- Linguagem Java 8
+- Ecossistema do Spring Boot 2.3.4
 - Banco H2
   - Arquivo: Ambientes de desenvolvimento e produção
   - Memória: Ambientes de testes
+- Testes com JUnit, Mockto e Cucumber
+- Documentação da API e seus serviços com Swagger (springdoc-openapi-ui)
 
+**5. Sobre os testes**
+Com o intuito de organizar melhor os testes do projeto, foram agrupados os testes três grandes suites:
+- CucumberTest: Esta suite agrupa todos os testes aceitação e integração baseados em features BDD. Ela atingiu 89% de linha cobertas segundo coverage. 
+- UnitTests: Esta suite agrupa todos os testes de unidade do projeto. Ela atingiu 86% de linha cobertas segundo coverage.
+- AllTests: Esta suite agrupa todos os testes implementados. Consiste na união do CucumberTest com UnitTests. Ela atingiu 92% de linha cobertas segundo coverage.
+
+OBS: Alguns testes da feature Cadastrar Associado podem apresentar intermitência devido a lentidão de resposta da API de validação de CPF.
