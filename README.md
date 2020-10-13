@@ -34,7 +34,21 @@ Com o intuito de organizar melhor os testes do projeto, foram agrupados os teste
 
 OBS: Alguns testes da feature Cadastrar Associado podem apresentar intermitência devido a lentidão de resposta da API de validação de CPF.
 
-**6. URL's de serviços**
+**6. URL's**
 - API: http://localhost:8081
 - Swagger UI: http://localhost:8081/swagger-ui.html
 
+**7. Lista de serviços**
+
+Apesar da documentação da API ser gerada via Swagger, segue uma breve listagem dos serviços disponíveis:
+- Listar todas as Pautas: GET - /api/pauta
+- Cadastrar uma nova Pauta: POST - /api/pauta
+- Buscar Pauta Consolidada por ID: GET - /api/pauta/{id}
+- Listar todos os Associados: GET - /api/associado
+- Cadastrar um novo Associado: POST - /api/associado
+- Listar todas as Assembleias: GET - /api/assembleia
+- Cadastrar uma nova Assembleia: POST - /api/assembleia
+- Listar todos os Votos: GET - /api/voto
+- Cadastrar um novo Voto: POST - /api/voto
+
+**8. Sugestão de uso**
