@@ -13,8 +13,8 @@ No cooperativismo, cada associado possui um voto e as decisões são tomadas em 
 - Contabilizar os votos e dar o resultado da votação na pauta.
 
 **3. Features bônus**
-- Bônus 1 - Foi integrado com o sistema externo de validação de CPF;
-- Bônus 3 - Foi versionado em um repositório privado no Github (este!) onde foram realizados commits regulares e auto explicativos.
+- Bônus 1: Foi integrado com o sistema externo de validação de CPF;
+- Bônus 3: Foi versionado em um repositório privado no Github (este!) onde foram realizados commits regulares e auto explicativos.
 
 **4. Informações técnicas**
 - Linguagem Java 8
@@ -59,3 +59,12 @@ O usuário tem total liberdade para utilizar a API e seus serviços na ordem que
 3. Criar um novo associado; 
 4. Criar um novo voto relacionando com a assembleia criada no item 2 e com o associado criado no item 3; 
 5. Consultar o consolidado da pauta criada no item 1.
+
+**9. Trabalhos futuros(!?)**
+
+Gostaria de utilizar este espaço para debater um pouco mais sobre as features que ficaram de fora desta implementação: 
+- Bônus 2 (Mensageria e filas): Tive um breve vislumbre de integração entre Abache Kafka e a API votacao-cooperado. No entanto, devido ao tempo disponível e ao meu modesto conhecimento sobre o tema, não consegui avançar com a solução; 
+- Bônus 3 (Performance): 
+  - Como melhorar: Para melhorar a performance a API, eu optaria por executá-la dentro de um container Docker escalado em N hosts em um orquestrador de containers, com Load Balance e Health Check; 
+  - Como testar: Para testar a performance da API, eu optaria por criar um plano de teste simulando N requisições, utilizando o Apache JMeter, e analisaria os resultado através de um ouvinte. 
+- Hospedagem: Assim como a API de validação de CPF, poderia ter apresentado a API votacao-cooperado utilizando o próprio Heroku.
