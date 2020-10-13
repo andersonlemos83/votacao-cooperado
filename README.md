@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/andersonlemos83/votacao-cooperado.svg?branch=master)](https://travis-ci.org/andersonlemos83/votacao-cooperado)
+
 # Sobre o projeto votacao-cooperado
 
 Este projeto foi concebido como parte de uma avaliação técnica de backend para tentativa de ingresso na empresa DBC Company.
