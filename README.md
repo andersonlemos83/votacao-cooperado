@@ -14,9 +14,9 @@ No cooperativismo, cada associado possui um voto e as decisões são tomadas em 
 - Receber votos dos associados em pautas (os votos são apenas 'Sim'/'Não'. Cada associado é identificado por um id único e pode votar apenas uma vez por pauta);
 - Contabilizar os votos e dar o resultado da votação na pauta.
 
-**3. Features bônus**
+**3. Features bônus implementadas**
 - Bônus 1: Foi integrado com o sistema externo de validação de CPF;
-- Bônus 3: Foi versionado em um repositório privado no Github (este!) onde foram realizados commits regulares e auto explicativos.
+- Bônus 3: Foi versionado em um repositório no Github (este!) onde foram realizados commits regulares e auto explicativos.
 
 **4. Informações técnicas**
 - Linguagem Java 8
