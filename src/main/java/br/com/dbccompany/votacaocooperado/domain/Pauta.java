@@ -2,6 +2,7 @@ package br.com.dbccompany.votacaocooperado.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -55,8 +56,20 @@ public class Pauta implements Serializable {
         return assembleias.stream().reduce((primeiro, segundo) -> segundo);
     }
 
-    public Assembleia obterUltimaAssembleia2() {
-        return assembleias.stream().reduce((primeiro, segundo) -> segundo).get();
+    public Date getDataCriacao() {
+        return obterUltimaAssembleia().orElse(new Assembleia()).getDataCriacao();
+    }
+
+    public StatusAssembleia getStatusAssembleia() {
+        return obterUltimaAssembleia().orElse(new Assembleia()).obterStatusAssembleia();
+    }
+
+    public int getQuantidadeVotosSim() {
+        return obterUltimaAssembleia().orElse(new Assembleia()).obterQuantidadeVotosSim();
+    }
+
+    public int getQuantidadeVotosNao() {
+        return obterUltimaAssembleia().orElse(new Assembleia()).obterQuantidadeVotosNao();
     }
 
     @Override

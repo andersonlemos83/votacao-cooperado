@@ -1,15 +1,10 @@
 package br.com.dbccompany.votacaocooperado.web.rest;
 
-import br.com.dbccompany.votacaocooperado.domain.Assembleia;
 import br.com.dbccompany.votacaocooperado.domain.Pauta;
 import br.com.dbccompany.votacaocooperado.service.PautaService;
-import br.com.dbccompany.votacaocooperado.web.conversor.ConversorPauta;
 import br.com.dbccompany.votacaocooperado.web.dto.PautaConsolidadaDto;
 import br.com.dbccompany.votacaocooperado.web.dto.PautaDto;
-import org.modelmapper.Condition;
-import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -18,8 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 @RestController
@@ -30,14 +23,11 @@ public class PautaResource {
     private static final Logger log = LoggerFactory.getLogger(PautaResource.class);
 
     private final PautaService pautaService;
-    private final ConversorPauta conversorPauta;
     private final ModelMapper modelMapper;
 
     public PautaResource(PautaService pautaService,
-                         ConversorPauta conversorPauta,
                          ModelMapper modelMapper) {
         this.pautaService = pautaService;
-        this.conversorPauta = conversorPauta;
         this.modelMapper = modelMapper;
     }
 
@@ -65,24 +55,7 @@ public class PautaResource {
     public ResponseEntity<PautaConsolidadaDto> buscarPorId(@PathVariable Long id) {
         log.info("Requisição Rest para buscar pauta por id: {}", id);
         Pauta pautaRetornada = pautaService.buscarPorId(id);
-//
-//        final TypeMap<Pauta, PautaConsolidadaDto> typeMap = modelMapper.createTypeMap(Pauta.class, PautaConsolidadaDto.class);
-//
-//        final PautaConsolidadaDto map = typeMap.addMappings(mapper -> {
-//            mapper.map(src -> src.obterUltimaAssembleia2().obterQuantidadeVotosSim(), PautaConsolidadaDto::setQuantidadeVotosSim);
-////            mapper.map(origem -> origem.getDescricao(), PautaConsolidadaDto::setDescricao);
-////            mapper.map(src -> src.obterUltimaAssembleia().get().getDataCriacao(), PautaConsolidadaDto::setDataCriacao);
-////            mapper.map(src -> src.obterUltimaAssembleia().get().getDataCriacao(), PautaConsolidadaDto::setDataCriacao);
-////            mapper.map(src -> src.obterUltimaAssembleia().get().obterStatusAssembleia(), PautaConsolidadaDto::setStatusAssembleia);
-////            mapper.map(src -> src.obterUltimaAssembleia().get().obterQuantidadeVotosSim(), PautaConsolidadaDto::setQuantidadeVotosSim);
-////            mapper.map(src -> src.obterUltimaAssembleia().get().obterQuantidadeVotosNao(), PautaConsolidadaDto::setQuantidadeVotosNao);
-//        }).map(pautaRetornada);
-
-        PautaConsolidadaDto consolidadoPautaDto = conversorPauta.converterParaConsolidada(pautaRetornada);
+        PautaConsolidadaDto consolidadoPautaDto = modelMapper.map(pautaRetornada, PautaConsolidadaDto.class);
         return ResponseEntity.ok().body(consolidadoPautaDto);
-    }
-
-    private <S, D> Converter<S, D> converterWithDestinationSupplier(Supplier<? extends D> supplier ) {
-        return ctx -> ctx.getMappingEngine().map(ctx.create(ctx.getSource(), supplier.get()));
     }
 }

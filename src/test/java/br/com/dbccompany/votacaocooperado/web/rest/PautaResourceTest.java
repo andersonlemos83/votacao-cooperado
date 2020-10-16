@@ -6,7 +6,6 @@ import br.com.dbccompany.votacaocooperado.builder.PautaConsolidadoDtoBuilder;
 import br.com.dbccompany.votacaocooperado.builder.PautaDtoBuilder;
 import br.com.dbccompany.votacaocooperado.domain.Pauta;
 import br.com.dbccompany.votacaocooperado.service.PautaService;
-import br.com.dbccompany.votacaocooperado.web.conversor.ConversorPauta;
 import br.com.dbccompany.votacaocooperado.web.dto.PautaConsolidadaDto;
 import br.com.dbccompany.votacaocooperado.web.dto.PautaDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -46,9 +45,6 @@ public class PautaResourceTest {
 
     @MockBean
     private PautaService pautaServiceMock;
-
-    @MockBean
-    private ConversorPauta conversorPautaMock;
 
     @MockBean
     private ModelMapper modelMapperMock;
@@ -97,7 +93,7 @@ public class PautaResourceTest {
     @Test
     public void aoBuscarPorIdDeveriaRetornarAhPautaConsolidadaEsperada() throws Exception {
         BDDMockito.given(pautaServiceMock.buscarPorId(any(Long.class))).willReturn(pauta);
-        BDDMockito.given(conversorPautaMock.converterParaConsolidada(any(Pauta.class))).willReturn(pautaConsolidadaDto);
+        BDDMockito.given(modelMapperMock.map(any(Pauta.class), eq(PautaConsolidadaDto.class))).willReturn(pautaConsolidadaDto);
 
         ResultActions resultActions = buscarPorId();
 
