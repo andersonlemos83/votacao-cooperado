@@ -1,5 +1,7 @@
 package br.com.dbccompany.votacaocooperado.service.impl;
 
+import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
+import br.com.dbccompany.votacaocooperado.builder.VotoBuilder;
 import br.com.dbccompany.votacaocooperado.domain.Assembleia;
 import br.com.dbccompany.votacaocooperado.domain.Voto;
 import br.com.dbccompany.votacaocooperado.repository.VotoRepository;
@@ -45,11 +47,8 @@ public class VotoServiceImplTest {
 
         idAssembleiEsperado = 1l;
 
-        Assembleia assembleia = new Assembleia();
-        assembleia.setId(idAssembleiEsperado);
-
-        votoEsperado = new Voto();
-        votoEsperado.setAssembleia(assembleia);
+        Assembleia assembleia = AssembleiaBuilder.umaAssembleia().comId(idAssembleiEsperado).build();
+        votoEsperado = VotoBuilder.umVotoQualquer().comAssembleia(assembleia).build();
     }
 
     @Test

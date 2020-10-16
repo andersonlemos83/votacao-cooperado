@@ -1,7 +1,7 @@
 package br.com.dbccompany.votacaocooperado.service.validador.impl;
 
+import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
 import br.com.dbccompany.votacaocooperado.domain.Assembleia;
-import br.com.dbccompany.votacaocooperado.domain.Pauta;
 import br.com.dbccompany.votacaocooperado.repository.AssembleiaRepository;
 import br.com.dbccompany.votacaocooperado.repository.PautaRepository;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorAssembleia;
@@ -19,7 +19,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
 
+import static br.com.dbccompany.votacaocooperado.builder.PautaBuilder.umaPautaQualquer;
 import static java.util.Calendar.MINUTE;
+import static java.util.Optional.ofNullable;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ValidadorAssembleiaImplTest {
@@ -44,14 +46,16 @@ public class ValidadorAssembleiaImplTest {
         validadorAssembleia = new ValidadorAssembleiaImpl(assembleiaRepositoryMock, pautaRepositoryMock);
 
         idAssembleia = 1l;
-        assembleia = new Assembleia();
-        assembleia.setPauta(new Pauta(5l));
-        assembleiaOptional = Optional.ofNullable(assembleia);
+        assembleia = AssembleiaBuilder.umaAssembleiaQualquer()
+                .comId(idAssembleia)
+                .comPauta(umaPautaQualquer().build())
+                .build();
+        assembleiaOptional = ofNullable(assembleia);
     }
 
     @Test
     public void aoValidarDadoQueNaoExistaAssembleiaDeveriaLancarAhMensagemEsperada() {
-        Mockito.when(assembleiaRepositoryMock.findById(idAssembleia)).thenReturn(Optional.ofNullable(null));
+        Mockito.when(assembleiaRepositoryMock.findById(idAssembleia)).thenReturn(ofNullable(null));
 
         exception.expect(NegocioException.class);
         exception.expectMessage("A assembleia informada não existe");
@@ -82,7 +86,7 @@ public class ValidadorAssembleiaImplTest {
 
     @Test
     public void aoValidarDadoQueNaoExistaPautaDeveriaLancarAhMensagemEsperada() {
-        Mockito.when(pautaRepositoryMock.findById(Mockito.any(Long.class))).thenReturn(Optional.ofNullable(null));
+        Mockito.when(pautaRepositoryMock.findById(Mockito.any(Long.class))).thenReturn(ofNullable(null));
 
         exception.expect(NegocioException.class);
         exception.expectMessage("A pauta informada não existe");
@@ -92,7 +96,7 @@ public class ValidadorAssembleiaImplTest {
 
     @Test
     public void aoValidarDadoQueExistaPautaNaoDeveriaLancarNenhumaMensagem() {
-        Mockito.when(pautaRepositoryMock.findById(Mockito.any(Long.class))).thenReturn((Optional.ofNullable(new Pauta())));
+        Mockito.when(pautaRepositoryMock.findById(Mockito.any(Long.class))).thenReturn((ofNullable(umaPautaQualquer().build())));
 
         validadorAssembleia.validar(assembleia);
     }

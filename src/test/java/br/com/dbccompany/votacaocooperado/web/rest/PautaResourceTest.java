@@ -1,16 +1,20 @@
 package br.com.dbccompany.votacaocooperado.web.rest;
 
 import br.com.dbccompany.votacaocooperado.VotacaoCooperadoApplication;
+import br.com.dbccompany.votacaocooperado.builder.PautaBuilder;
+import br.com.dbccompany.votacaocooperado.builder.PautaConsolidadoDtoBuilder;
+import br.com.dbccompany.votacaocooperado.builder.PautaDtoBuilder;
 import br.com.dbccompany.votacaocooperado.domain.Pauta;
 import br.com.dbccompany.votacaocooperado.service.PautaService;
 import br.com.dbccompany.votacaocooperado.web.conversor.ConversorPauta;
 import br.com.dbccompany.votacaocooperado.web.dto.PautaConsolidadaDto;
 import br.com.dbccompany.votacaocooperado.web.dto.PautaDto;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
-import org.mockito.Mockito;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,9 +28,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
-import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.ABERTA;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Matchers.eq;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -34,6 +38,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = VotacaoCooperadoApplication.class)
 @AutoConfigureMockMvc
 public class PautaResourceTest {
+
+    private static final String API_PAUTA = "/api/pauta";
 
     @Autowired
     protected MockMvc mvc;
@@ -44,6 +50,9 @@ public class PautaResourceTest {
     @MockBean
     private ConversorPauta conversorPautaMock;
 
+    @MockBean
+    private ModelMapper modelMapperMock;
+
     private PautaDto pautaDto;
     private Pauta pauta;
     private PautaConsolidadaDto pautaConsolidadaDto;
@@ -51,16 +60,19 @@ public class PautaResourceTest {
 
     @Before
     public void inicializarContexto() {
-        pautaDto = gerarPautaDto();
-        pauta = gerarPauta();
+        pautaDto = PautaDtoBuilder.umaPautaQualquer().build();
+        pauta = PautaBuilder.umaPautaQualquer().build();
         dataCriacao = new Date();
-        pautaConsolidadaDto = gerarPautaConsolidadaDto();
+        pautaConsolidadaDto = PautaConsolidadoDtoBuilder
+                .umaPautaConsolidadaQualquer()
+                .comDataCriacao(dataCriacao)
+                .build();
     }
 
     @Test
     public void aoListarTodosDeveriaRetornarAsPautasEsperadas() throws Exception {
         BDDMockito.given(pautaServiceMock.listarTodos()).willReturn(Arrays.asList(pauta));
-        BDDMockito.given(conversorPautaMock.converter(Mockito.any(List.class))).willReturn(Arrays.asList(pautaDto));
+        BDDMockito.given(modelMapperMock.map(pauta, PautaDto.class)).willReturn(pautaDto);
 
         ResultActions resultActions = listarTodos();
 
@@ -71,9 +83,9 @@ public class PautaResourceTest {
 
     @Test
     public void aoCadastrarDeveriaRetornarAhPautaEsperada() throws Exception {
-        BDDMockito.given(conversorPautaMock.converter(Mockito.any(PautaDto.class))).willReturn(pauta);
-        BDDMockito.given(pautaServiceMock.cadastrar(Mockito.any(Pauta.class))).willReturn(pauta);
-        BDDMockito.given(conversorPautaMock.converter(Mockito.any(Pauta.class))).willReturn(pautaDto);
+        BDDMockito.given(modelMapperMock.map(any(PautaDto.class), eq(Pauta.class))).willReturn(pauta);
+        BDDMockito.given(pautaServiceMock.cadastrar(any(Pauta.class))).willReturn(pauta);
+        BDDMockito.given(modelMapperMock.map(any(Pauta.class), eq(PautaDto.class))).willReturn(pautaDto);
 
         ResultActions resultActions = cadastrarPauta();
 
@@ -84,8 +96,8 @@ public class PautaResourceTest {
 
     @Test
     public void aoBuscarPorIdDeveriaRetornarAhPautaConsolidadaEsperada() throws Exception {
-        BDDMockito.given(pautaServiceMock.buscarPorId(Mockito.any(Long.class))).willReturn(pauta);
-        BDDMockito.given(conversorPautaMock.converterParaConsolidada(Mockito.any(Pauta.class))).willReturn(pautaConsolidadaDto);
+        BDDMockito.given(pautaServiceMock.buscarPorId(any(Long.class))).willReturn(pauta);
+        BDDMockito.given(conversorPautaMock.converterParaConsolidada(any(Pauta.class))).willReturn(pautaConsolidadaDto);
 
         ResultActions resultActions = buscarPorId();
 
@@ -98,45 +110,23 @@ public class PautaResourceTest {
                 .andExpect(jsonPath("$.quantidadeVotosNao").value(pautaConsolidadaDto.getQuantidadeVotosNao()));
     }
 
-    private ResultActions cadastrarPauta() throws Exception {
-        return mvc.perform(MockMvcRequestBuilders.post("/api/pauta")
-                .content("{\"descricao\":\"Votar sobre novo fundo de investimento.\"}")
+    private ResultActions listarTodos() throws Exception {
+        return mvc.perform(MockMvcRequestBuilders.get(API_PAUTA)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
     }
 
-    private ResultActions listarTodos() throws Exception {
-        return mvc.perform(MockMvcRequestBuilders.get("/api/pauta")
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON));
+    private ResultActions cadastrarPauta() throws Exception {
+        return mvc.perform(MockMvcRequestBuilders.post(API_PAUTA)
+                .content(new ObjectMapper().writeValueAsString(pautaDto))
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .accept(MediaType.APPLICATION_JSON_UTF8));
     }
 
     private ResultActions buscarPorId() throws Exception {
-        return mvc.perform(MockMvcRequestBuilders.get("/api/pauta/1")
+        return mvc.perform(MockMvcRequestBuilders.get(API_PAUTA + "/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
-    }
-
-    private PautaDto gerarPautaDto() {
-        PautaDto pautaDto = new PautaDto();
-        pautaDto.setDescricao("Votar sobre novo fundo de investimento.");
-        return pautaDto;
-    }
-
-    private Pauta gerarPauta() {
-        Pauta pauta = new Pauta();
-        pauta.setDescricao("Votar sobre novo fundo de investimento.");
-        return pauta;
-    }
-
-    private PautaConsolidadaDto gerarPautaConsolidadaDto() {
-        PautaConsolidadaDto pautaConsolidadaDto = new PautaConsolidadaDto();
-        pautaConsolidadaDto.setDescricao("Votar sobre novo fundo de investimento.");
-        pautaConsolidadaDto.setDataCriacao(dataCriacao);
-        pautaConsolidadaDto.setStatusAssembleia(ABERTA);
-        pautaConsolidadaDto.setQuantidadeVotosSim(1);
-        pautaConsolidadaDto.setQuantidadeVotosNao(3);
-        return pautaConsolidadaDto;
     }
 
     private String converter(Date data) {

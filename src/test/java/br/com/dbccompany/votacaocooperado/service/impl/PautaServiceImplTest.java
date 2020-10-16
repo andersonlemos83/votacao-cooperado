@@ -1,5 +1,6 @@
 package br.com.dbccompany.votacaocooperado.service.impl;
 
+import br.com.dbccompany.votacaocooperado.builder.PautaBuilder;
 import br.com.dbccompany.votacaocooperado.domain.Pauta;
 import br.com.dbccompany.votacaocooperado.repository.PautaRepository;
 import br.com.dbccompany.votacaocooperado.service.PautaService;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.Optional.ofNullable;
 import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.verify;
 
@@ -41,9 +43,9 @@ public class PautaServiceImplTest {
         pautaService = new PautaServiceImpl(pautaRepositoryMock);
 
         pautasEsperadas = new ArrayList<>();
-        pautaEsperada = new Pauta();
+        pautaEsperada = PautaBuilder.umaPautaQualquer().build();
         idEsperado = 1l;
-        pautaOptionalEsperada = Optional.ofNullable(pautaEsperada);
+        pautaOptionalEsperada = ofNullable(pautaEsperada);
     }
 
     @Test
@@ -84,7 +86,7 @@ public class PautaServiceImplTest {
 
     @Test
     public void aoBuscarPorIdDadoQueNaoExistaPautaDeveriaLancarAhMensagemEsperada() {
-        Mockito.when(pautaRepositoryMock.findById(idEsperado)).thenReturn(Optional.ofNullable(null));
+        Mockito.when(pautaRepositoryMock.findById(idEsperado)).thenReturn(ofNullable(null));
 
         exception.expect(NegocioException.class);
         exception.expectMessage("A pauta informada não exite");

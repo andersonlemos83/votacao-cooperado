@@ -1,5 +1,7 @@
 package br.com.dbccompany.votacaocooperado.domain;
 
+import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
+import br.com.dbccompany.votacaocooperado.builder.PautaBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +12,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static br.com.dbccompany.votacaocooperado.builder.VotoBuilder.umVotoQualquerNao;
+import static br.com.dbccompany.votacaocooperado.builder.VotoBuilder.umVotoQualquerSim;
 import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.ABERTA;
 import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.FECHADA;
 import static java.util.Calendar.MINUTE;
@@ -23,7 +27,7 @@ public class AssembleiaTest {
 
     @Before
     public void inicializarContexto() {
-        assembleia = new Assembleia();
+        assembleia = AssembleiaBuilder.umaAssembleiaQualquer().build();
     }
 
     @Test
@@ -34,7 +38,7 @@ public class AssembleiaTest {
 
     @Test
     public void aoObterIdPautaDadoQuePautaNaoEstejaNulaDeveriaRetornarIdPautaEsperado() {
-        assembleia.setPauta(new Pauta(1l));
+        assembleia.setPauta(PautaBuilder.umaPautaQualquer().build());
 
         Long idPautaRetornado = assembleia.obterIdPauta();
 
@@ -94,19 +98,9 @@ public class AssembleiaTest {
     }
 
     private List<Voto> gerarListaComQuatroVotosSimIhSeisVotosNao() {
-        return Arrays.asList(gerarVotoSim(), gerarVotoSim(), gerarVotoSim(), gerarVotoSim(), gerarVotoNao(),
-                gerarVotoNao(), gerarVotoNao(), gerarVotoNao(), gerarVotoNao(), gerarVotoNao());
-    }
-
-    private Voto gerarVotoSim() {
-        Voto voto = new Voto();
-        voto.setTipoVoto(TipoVoto.SIM);
-        return voto;
-    }
-
-    private Voto gerarVotoNao() {
-        Voto voto = new Voto();
-        voto.setTipoVoto(TipoVoto.NAO);
-        return voto;
+        return Arrays.asList(umVotoQualquerSim().build(), umVotoQualquerSim().build(), umVotoQualquerSim().build(),
+                umVotoQualquerSim().build(), umVotoQualquerNao().build(), umVotoQualquerNao().build(),
+                umVotoQualquerNao().build(), umVotoQualquerNao().build(), umVotoQualquerNao().build(),
+                umVotoQualquerNao().build());
     }
 }

@@ -1,16 +1,18 @@
 package br.com.dbccompany.votacaocooperado.web.rest;
 
 import br.com.dbccompany.votacaocooperado.VotacaoCooperadoApplication;
+import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
+import br.com.dbccompany.votacaocooperado.builder.AssembleiaDtoBuilder;
 import br.com.dbccompany.votacaocooperado.domain.Assembleia;
-import br.com.dbccompany.votacaocooperado.domain.Pauta;
 import br.com.dbccompany.votacaocooperado.service.AssembleiaService;
-import br.com.dbccompany.votacaocooperado.web.conversor.ConversorAssembleia;
 import br.com.dbccompany.votacaocooperado.web.dto.AssembleiaDto;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
 import org.mockito.Mockito;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,8 +26,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -34,6 +37,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class AssembleiaResourceTest {
 
+    private static final String API_ASSEMBLEIA = "/api/assembleia";
+
     @Autowired
     protected MockMvc mvc;
 
@@ -41,7 +46,7 @@ public class AssembleiaResourceTest {
     private AssembleiaService assembleiaServiceMock;
 
     @MockBean
-    private ConversorAssembleia conversorAssembleiaMock;
+    private ModelMapper modelMapperMock;
 
     private AssembleiaDto assembleiaDto;
     private Assembleia assembleia;
@@ -50,14 +55,14 @@ public class AssembleiaResourceTest {
     @Before
     public void inicializarContexto() {
         dataCriacao = new Date();
-        assembleiaDto = gerarAssembleiaDto();
-        assembleia = gerarAssembleia();
+        assembleiaDto = AssembleiaDtoBuilder.umaAssembleiaQualquer().comDataCriacao(dataCriacao).build();
+        assembleia = AssembleiaBuilder.umaAssembleiaQualquer().comDataCriacao(dataCriacao).build();
     }
 
     @Test
     public void aoListarTodosDeveriaRetornarAsAssembleiasEsperadas() throws Exception {
         BDDMockito.given(assembleiaServiceMock.listarTodos()).willReturn(Arrays.asList(assembleia));
-        BDDMockito.given(conversorAssembleiaMock.converter(Mockito.any(List.class))).willReturn(Arrays.asList(assembleiaDto));
+        BDDMockito.given(modelMapperMock.map(assembleia, AssembleiaDto.class)).willReturn(assembleiaDto);
 
         ResultActions resultActions = listarTodos();
 
@@ -70,9 +75,9 @@ public class AssembleiaResourceTest {
 
     @Test
     public void aoCadastrarDeveriaRetornarAhAssembleiaEsperada() throws Exception {
-        BDDMockito.given(conversorAssembleiaMock.converter(Mockito.any(AssembleiaDto.class))).willReturn(assembleia);
+        BDDMockito.given(modelMapperMock.map(any(AssembleiaDto.class), eq(Assembleia.class))).willReturn(assembleia);
         BDDMockito.given(assembleiaServiceMock.cadastrar(Mockito.any(Assembleia.class))).willReturn(assembleia);
-        BDDMockito.given(conversorAssembleiaMock.converter(Mockito.any(Assembleia.class))).willReturn(assembleiaDto);
+        BDDMockito.given(modelMapperMock.map(any(Assembleia.class), eq(AssembleiaDto.class))).willReturn(assembleiaDto);
 
         ResultActions resultActions = cadastrarAssembleia();
 
@@ -84,32 +89,16 @@ public class AssembleiaResourceTest {
     }
 
     private ResultActions cadastrarAssembleia() throws Exception {
-        return mvc.perform(MockMvcRequestBuilders.post("/api/assembleia")
-                .content("{\"tempoDuracao\":\"2\",\"idPauta\":\"1\"}")
+        return mvc.perform(MockMvcRequestBuilders.post(API_ASSEMBLEIA)
+                .content(new ObjectMapper().writeValueAsString(assembleiaDto))
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .accept(MediaType.APPLICATION_JSON_UTF8));
     }
 
     private ResultActions listarTodos() throws Exception {
-        return mvc.perform(MockMvcRequestBuilders.get("/api/assembleia")
+        return mvc.perform(MockMvcRequestBuilders.get(API_ASSEMBLEIA)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
-    }
-
-    private AssembleiaDto gerarAssembleiaDto() {
-        AssembleiaDto assembleiaDto = new AssembleiaDto();
-        assembleiaDto.setDataCriacao(dataCriacao);
-        assembleiaDto.setTempoDuracao(2);
-        assembleiaDto.setIdPauta(1l);
-        return assembleiaDto;
-    }
-
-    private Assembleia gerarAssembleia() {
-        Assembleia assembleia = new Assembleia();
-        assembleia.setDataCriacao(dataCriacao);
-        assembleia.setTempoDuracao(2);
-        assembleia.setPauta(new Pauta(1l));
-        return assembleia;
     }
 
     private String converter(Date data) {

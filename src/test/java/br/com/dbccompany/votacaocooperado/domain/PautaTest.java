@@ -1,5 +1,7 @@
 package br.com.dbccompany.votacaocooperado.domain;
 
+import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
+import br.com.dbccompany.votacaocooperado.builder.PautaBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +22,7 @@ public class PautaTest {
 
     @Before
     public void inicializarContexto() {
-        pauta = new Pauta();
+        pauta = PautaBuilder.umaPautaQualquer().build();
     }
 
     @Test
@@ -40,10 +42,9 @@ public class PautaTest {
     private Assembleia gerarAssembleia(int minutos) {
         Calendar dataCriacaoCalendar = Calendar.getInstance();
         dataCriacaoCalendar.add(Calendar.MINUTE, -minutos);
-
-        Assembleia assembleia = new Assembleia();
-        assembleia.setId(Long.valueOf(minutos));
-        assembleia.setDataCriacao(dataCriacaoCalendar.getTime());
-        return assembleia;
+        return AssembleiaBuilder.umaAssembleiaQualquer()
+                .comId(Long.valueOf(minutos))
+                .comDataCriacao(dataCriacaoCalendar.getTime())
+                .build();
     }
 }

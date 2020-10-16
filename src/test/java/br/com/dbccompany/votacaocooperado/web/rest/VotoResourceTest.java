@@ -1,18 +1,18 @@
 package br.com.dbccompany.votacaocooperado.web.rest;
 
 import br.com.dbccompany.votacaocooperado.VotacaoCooperadoApplication;
-import br.com.dbccompany.votacaocooperado.domain.Assembleia;
-import br.com.dbccompany.votacaocooperado.domain.Associado;
-import br.com.dbccompany.votacaocooperado.domain.TipoVoto;
+import br.com.dbccompany.votacaocooperado.builder.VotoBuilder;
+import br.com.dbccompany.votacaocooperado.builder.VotoDtoBuilder;
 import br.com.dbccompany.votacaocooperado.domain.Voto;
 import br.com.dbccompany.votacaocooperado.service.VotoService;
-import br.com.dbccompany.votacaocooperado.web.conversor.ConversorVoto;
 import br.com.dbccompany.votacaocooperado.web.dto.VotoDto;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
 import org.mockito.Mockito;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,8 +24,9 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.Arrays;
-import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -34,6 +35,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class VotoResourceTest {
 
+    private static final String API_VOTO = "/api/voto";
+
     @Autowired
     protected MockMvc mvc;
 
@@ -41,21 +44,21 @@ public class VotoResourceTest {
     private VotoService votoServiceMock;
 
     @MockBean
-    private ConversorVoto conversorVotoMock;
+    private ModelMapper modelMapperMock;
 
     private VotoDto votoDto;
     private Voto voto;
 
     @Before
     public void inicializarContexto() {
-        votoDto = gerarVotoDto();
-        voto = gerarVoto();
+        votoDto = VotoDtoBuilder.umVotoQualquer().build();
+        voto = VotoBuilder.umVotoQualquer().build();
     }
 
     @Test
     public void aoListarTodosDeveriaRetornarAsVotosEsperadas() throws Exception {
         BDDMockito.given(votoServiceMock.listarTodos()).willReturn(Arrays.asList(voto));
-        BDDMockito.given(conversorVotoMock.converter(Mockito.any(List.class))).willReturn(Arrays.asList(votoDto));
+        BDDMockito.given(modelMapperMock.map(voto, VotoDto.class)).willReturn(votoDto);
 
         ResultActions resultActions = listarTodos();
 
@@ -68,9 +71,9 @@ public class VotoResourceTest {
 
     @Test
     public void aoCadastrarDeveriaRetornarAhVotoEsperada() throws Exception {
-        BDDMockito.given(conversorVotoMock.converter(Mockito.any(VotoDto.class))).willReturn(voto);
+        BDDMockito.given(modelMapperMock.map(any(VotoDto.class), eq(Voto.class))).willReturn(voto);
         BDDMockito.given(votoServiceMock.cadastrar(Mockito.any(Voto.class))).willReturn(voto);
-        BDDMockito.given(conversorVotoMock.converter(Mockito.any(Voto.class))).willReturn(votoDto);
+        BDDMockito.given(modelMapperMock.map(any(Voto.class), eq(VotoDto.class))).willReturn(votoDto);
 
         ResultActions resultActions = cadastrarVoto();
 
@@ -82,31 +85,15 @@ public class VotoResourceTest {
     }
 
     private ResultActions cadastrarVoto() throws Exception {
-        return mvc.perform(MockMvcRequestBuilders.post("/api/voto")
-                .content("{\"tipoVoto\":\"SIM\",\"idAssociado\":\"1\",\"idAssembleia\":\"2\"}")
+        return mvc.perform(MockMvcRequestBuilders.post(API_VOTO)
+                .content(new ObjectMapper().writeValueAsString(votoDto))
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .accept(MediaType.APPLICATION_JSON_UTF8));
     }
 
     private ResultActions listarTodos() throws Exception {
-        return mvc.perform(MockMvcRequestBuilders.get("/api/voto")
+        return mvc.perform(MockMvcRequestBuilders.get(API_VOTO)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
-    }
-
-    private VotoDto gerarVotoDto() {
-        VotoDto votoDto = new VotoDto();
-        votoDto.setTipoVoto(TipoVoto.SIM);
-        votoDto.setIdAssociado(1l);
-        votoDto.setIdAssembleia(2l);
-        return votoDto;
-    }
-
-    private Voto gerarVoto() {
-        Voto voto = new Voto();
-        voto.setTipoVoto(TipoVoto.SIM);
-        voto.setAssociado(new Associado(1l));
-        voto.setAssembleia(new Assembleia(2l));
-        return voto;
     }
 }

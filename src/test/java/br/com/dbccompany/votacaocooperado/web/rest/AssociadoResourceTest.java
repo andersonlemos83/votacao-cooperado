@@ -1,15 +1,17 @@
 package br.com.dbccompany.votacaocooperado.web.rest;
 
 import br.com.dbccompany.votacaocooperado.VotacaoCooperadoApplication;
+import br.com.dbccompany.votacaocooperado.builder.AssociadoBuilder;
+import br.com.dbccompany.votacaocooperado.builder.AssociadoDtoBuilder;
 import br.com.dbccompany.votacaocooperado.domain.Associado;
 import br.com.dbccompany.votacaocooperado.service.AssociadoService;
-import br.com.dbccompany.votacaocooperado.web.conversor.ConversorAssociado;
 import br.com.dbccompany.votacaocooperado.web.dto.AssociadoDto;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
-import org.mockito.Mockito;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,8 +23,9 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.Arrays;
-import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -31,6 +34,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class AssociadoResourceTest {
 
+    private static final String API_ASSOCIADO = "/api/associado";
+
     @Autowired
     protected MockMvc mvc;
 
@@ -38,21 +43,21 @@ public class AssociadoResourceTest {
     private AssociadoService associadoServiceMock;
 
     @MockBean
-    private ConversorAssociado conversorAssociadoMock;
+    private ModelMapper modelMapperMock;
 
     private AssociadoDto associadoDto;
     private Associado associado;
 
     @Before
     public void inicializarContexto() {
-        associadoDto = gerarAssociadoDto();
-        associado = gerarAssociado();
+        associadoDto = AssociadoDtoBuilder.umAssociadoQualquer().build();
+        associado = AssociadoBuilder.umAssociadoQualquer().build();
     }
 
     @Test
     public void aoListarTodosDeveriaRetornarAsAssociadosEsperadas() throws Exception {
         BDDMockito.given(associadoServiceMock.listarTodos()).willReturn(Arrays.asList(associado));
-        BDDMockito.given(conversorAssociadoMock.converter(Mockito.any(List.class))).willReturn(Arrays.asList(associadoDto));
+        BDDMockito.given(modelMapperMock.map(associado, AssociadoDto.class)).willReturn(associadoDto);
 
         ResultActions resultActions = listarTodos();
 
@@ -64,9 +69,9 @@ public class AssociadoResourceTest {
 
     @Test
     public void aoCadastrarDeveriaRetornarAhAssociadoEsperada() throws Exception {
-        BDDMockito.given(conversorAssociadoMock.converter(Mockito.any(AssociadoDto.class))).willReturn(associado);
-        BDDMockito.given(associadoServiceMock.cadastrar(Mockito.any(Associado.class))).willReturn(associado);
-        BDDMockito.given(conversorAssociadoMock.converter(Mockito.any(Associado.class))).willReturn(associadoDto);
+        BDDMockito.given(modelMapperMock.map(any(AssociadoDto.class), eq(Associado.class))).willReturn(associado);
+        BDDMockito.given(associadoServiceMock.cadastrar(any(Associado.class))).willReturn(associado);
+        BDDMockito.given(modelMapperMock.map(any(Associado.class), eq(AssociadoDto.class))).willReturn(associadoDto);
 
         ResultActions resultActions = cadastrarAssociado();
 
@@ -77,29 +82,15 @@ public class AssociadoResourceTest {
     }
 
     private ResultActions cadastrarAssociado() throws Exception {
-        return mvc.perform(MockMvcRequestBuilders.post("/api/associado")
-                .content("{\"nome\":\"Anderson\",\"cpf\":\"05551876044\"}")
+        return mvc.perform(MockMvcRequestBuilders.post(API_ASSOCIADO)
+                .content(new ObjectMapper().writeValueAsString(associadoDto))
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .accept(MediaType.APPLICATION_JSON_UTF8));
     }
 
     private ResultActions listarTodos() throws Exception {
-        return mvc.perform(MockMvcRequestBuilders.get("/api/associado")
+        return mvc.perform(MockMvcRequestBuilders.get(API_ASSOCIADO)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
-    }
-
-    private AssociadoDto gerarAssociadoDto() {
-        AssociadoDto associadoDto = new AssociadoDto();
-        associadoDto.setNome("Anderson");
-        associadoDto.setCpf("05551876044");
-        return associadoDto;
-    }
-
-    private Associado gerarAssociado() {
-        Associado associado = new Associado();
-        associado.setNome("Anderson");
-        associado.setCpf("05551876044");
-        return associado;
     }
 }

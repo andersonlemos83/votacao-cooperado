@@ -55,6 +55,10 @@ public class Pauta implements Serializable {
         return assembleias.stream().reduce((primeiro, segundo) -> segundo);
     }
 
+    public Assembleia obterUltimaAssembleia2() {
+        return assembleias.stream().reduce((primeiro, segundo) -> segundo).get();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

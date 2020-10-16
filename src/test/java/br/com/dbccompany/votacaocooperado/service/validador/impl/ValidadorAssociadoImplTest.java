@@ -1,5 +1,6 @@
 package br.com.dbccompany.votacaocooperado.service.validador.impl;
 
+import br.com.dbccompany.votacaocooperado.builder.AssociadoBuilder;
 import br.com.dbccompany.votacaocooperado.domain.Associado;
 import br.com.dbccompany.votacaocooperado.repository.AssociadoRepository;
 import br.com.dbccompany.votacaocooperado.repository.CpfRepository;
@@ -14,7 +15,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.Optional;
+import static java.util.Optional.ofNullable;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ValidadorAssociadoImplTest {
@@ -36,8 +37,7 @@ public class ValidadorAssociadoImplTest {
     public void inicializarContexto() {
         validadorAssociado = new ValidadorAssociadoImpl(cpfRepositoryMock, associadoRepositoryMock);
 
-        associado = new Associado();
-        associado.setCpf("36288153044");
+        associado = AssociadoBuilder.umAssociadoQualquer().build();
     }
 
     @Test
@@ -53,7 +53,7 @@ public class ValidadorAssociadoImplTest {
     @Test
     public void aoValidarDadoQueCpfSejaValidoIhJaEstejaCadastradoDeveriaLancarAhMensagemEsperada() {
         Mockito.when(cpfRepositoryMock.verificarSeEstaValido(associado.getCpf())).thenReturn(true);
-        Mockito.when(associadoRepositoryMock.findByCpf(associado.getCpf())).thenReturn(Optional.ofNullable(associado));
+        Mockito.when(associadoRepositoryMock.findByCpf(associado.getCpf())).thenReturn(ofNullable(associado));
 
         exception.expect(NegocioException.class);
         exception.expectMessage("O CPF informado já está cadatrado");
