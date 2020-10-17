@@ -1,6 +1,7 @@
 package br.com.dbccompany.votacaocooperado.cucumber.stepdefs;
 
 import br.com.dbccompany.votacaocooperado.VotacaoCooperadoApplication;
+import br.com.dbccompany.votacaocooperado.config.VotacaoCooperadoConfigTest;
 import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.AssembleiaRepositoryTestHelper;
 import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.AssociadoRepositoryTestHelper;
 import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.PautaRepositoryTestHelper;
@@ -21,7 +22,7 @@ import static java.text.MessageFormat.format;
 @WebAppConfiguration
 @SpringBootTest
 @AutoConfigureMockMvc
-@ContextConfiguration(classes = VotacaoCooperadoApplication.class)
+@ContextConfiguration(classes = {VotacaoCooperadoApplication.class, VotacaoCooperadoConfigTest.class})
 public class StepDefs {
 
     protected static ResultActions retorno;
