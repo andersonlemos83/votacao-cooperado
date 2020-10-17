@@ -1,14 +1,12 @@
 package br.com.dbccompany.votacaocooperado.service.validador.impl;
 
 import br.com.dbccompany.votacaocooperado.domain.Assembleia;
-import br.com.dbccompany.votacaocooperado.domain.Pauta;
 import br.com.dbccompany.votacaocooperado.repository.AssembleiaRepository;
 import br.com.dbccompany.votacaocooperado.repository.PautaRepository;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorAssembleia;
 import br.com.dbccompany.votacaocooperado.shared.exception.NegocioException;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -39,7 +37,6 @@ public class ValidadorAssembleiaImpl implements ValidadorAssembleia {
 
     @Override
     public void validar(Assembleia assembleia) {
-        List<Pauta> all = pautaRepository.findAll();
         pautaRepository.findById(assembleia.obterIdPauta())
                 .orElseThrow(() -> new NegocioException("A pauta informada não existe"));
     }

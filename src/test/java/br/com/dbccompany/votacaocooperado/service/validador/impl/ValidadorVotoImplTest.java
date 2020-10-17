@@ -1,5 +1,8 @@
 package br.com.dbccompany.votacaocooperado.service.validador.impl;
 
+import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
+import br.com.dbccompany.votacaocooperado.builder.AssociadoBuilder;
+import br.com.dbccompany.votacaocooperado.builder.VotoBuilder;
 import br.com.dbccompany.votacaocooperado.domain.Assembleia;
 import br.com.dbccompany.votacaocooperado.domain.Associado;
 import br.com.dbccompany.votacaocooperado.domain.Voto;
@@ -34,15 +37,9 @@ public class ValidadorVotoImplTest {
     public void inicializarContexto() {
         validadorVoto = new ValidadorVotoImpl(votoRepositoryMock);
 
-        associado = new Associado();
-        associado.setId(1l);
-
-        assembleia = new Assembleia();
-        assembleia.setId(2l);
-
-        voto = new Voto();
-        voto.setAssociado(associado);
-        voto.setAssembleia(assembleia);
+        associado = AssociadoBuilder.umAssociadoQualquer().build();
+        assembleia = AssembleiaBuilder.umaAssembleiaQualquer().build();
+        voto = VotoBuilder.umVotoQualquer().comAssociado(associado).comAssembleia(assembleia).build();
     }
 
     @Test

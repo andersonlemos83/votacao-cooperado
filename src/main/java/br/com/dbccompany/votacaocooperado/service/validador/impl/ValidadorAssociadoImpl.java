@@ -30,7 +30,7 @@ public class ValidadorAssociadoImpl implements ValidadorAssociado {
 
         Optional<Associado> associadoOptional = associadoRepository.findByCpf(associado.getCpf());
         if (associadoOptional.isPresent()) {
-            throw new NegocioException("O CPF informado já está cadatrado");
+            throw new NegocioException("O CPF informado já está cadastrado");
         }
     }
 }

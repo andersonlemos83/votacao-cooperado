@@ -37,4 +37,10 @@ Funcionalidade: Cadastrar Associado
     Dado que seja informado o nome "Laura Pausini"
     E que seja informado o CPF "78186436057"
     Quando cadastrar associado
-    Entao deveria retornar a mensagem "O CPF informado já está cadatrado"
+    Entao deveria retornar a mensagem "O CPF informado já está cadastrado"
+
+  Cenario: 06 - Cadastrar Associado Com Servico de Validacao de CPF Offline
+    Dado que seja informado o nome "Russell Hitchcock"
+    E que seja informado o CPF "61022326074"
+    Quando cadastrar associado
+    Entao deveria retornar a mensagem "O serviço de validação do CPF está offline"

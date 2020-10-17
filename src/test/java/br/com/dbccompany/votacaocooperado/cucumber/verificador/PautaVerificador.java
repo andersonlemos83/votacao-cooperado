@@ -22,19 +22,22 @@ public class PautaVerificador {
     private PautaRepositoryTestHelper pautaRepositoryTestHelper;
 
     public void verificar(List<PautaDataTable> esperados, ResultActions retorno) throws Exception {
+        retorno.andExpect(status().isOk());
+
         for (int i = 0; i < esperados.size(); i++) {
-            retorno.andExpect(status().isOk())
-                    .andExpect(jsonPath(format("$.[{0}].descricao", i)).value(esperados.get(i).getDescricao()));
+            retorno.andExpect(jsonPath(format("$.[{0}].descricao", i)).value(esperados.get(i).getDescricao()));
         }
     }
 
     public void verificarConsolidado(List<PautaConsolidadaDataTable> esperados, ResultActions retorno) throws Exception {
+        retorno.andExpect(status().isOk());
+
         for (int i = 0; i < esperados.size(); i++) {
-            retorno.andExpect(status().isOk())
-                    .andExpect(jsonPath("$.descricao").value(esperados.get(i).getDescricaoPauta()))
-                    .andExpect(jsonPath("$.statusAssembleia").value(esperados.get(i).getStatusAssembleia().name()))
-                    .andExpect(jsonPath("$.quantidadeVotosSim").value(esperados.get(i).getQuantidadeVotosSim()))
-                    .andExpect(jsonPath("$.quantidadeVotosNao").value(esperados.get(i).getQuantidadeVotosNao()));
+            final PautaConsolidadaDataTable esperado = esperados.get(i);
+            retorno.andExpect(jsonPath("$.descricao").value(esperado.getDescricaoPauta()))
+                    .andExpect(jsonPath("$.statusAssembleia").value(esperado.getStatusAssembleia().name()))
+                    .andExpect(jsonPath("$.quantidadeVotosSim").value(esperado.getQuantidadeVotosSim()))
+                    .andExpect(jsonPath("$.quantidadeVotosNao").value(esperado.getQuantidadeVotosNao()));
         }
     }
 

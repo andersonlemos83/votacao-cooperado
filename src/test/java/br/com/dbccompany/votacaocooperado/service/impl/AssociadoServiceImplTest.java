@@ -1,5 +1,6 @@
 package br.com.dbccompany.votacaocooperado.service.impl;
 
+import br.com.dbccompany.votacaocooperado.builder.AssociadoBuilder;
 import br.com.dbccompany.votacaocooperado.domain.Associado;
 import br.com.dbccompany.votacaocooperado.repository.AssociadoRepository;
 import br.com.dbccompany.votacaocooperado.service.AssociadoService;
@@ -36,7 +37,7 @@ public class AssociadoServiceImplTest {
         associadoService = new AssociadoServiceImpl(validadorAssociadoMock, associadoRepositoryMock);
 
         associadosEsperados = new ArrayList<>();
-        associadoEsperado = new Associado();
+        associadoEsperado = AssociadoBuilder.umAssociadoQualquer().build();
     }
 
     @Test

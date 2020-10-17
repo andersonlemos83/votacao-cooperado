@@ -1,10 +1,10 @@
 package br.com.dbccompany.votacaocooperado.cucumber.datatable;
 
-import java.util.Calendar;
+import br.com.dbccompany.votacaocooperado.builder.DataHoraBuilder;
+
 import java.util.Date;
 
 import static java.text.MessageFormat.format;
-import static java.util.Calendar.MINUTE;
 
 public class AssembleiaDataTable {
 
@@ -24,7 +24,7 @@ public class AssembleiaDataTable {
 
     public String getDataCriacao() {
         if ("DATA_ATUAL".equalsIgnoreCase(dataCriacao)) {
-            return format("{0,date,dd/MM/yyyy HH}", new Date());
+            return format("{0,date,dd/MM/yyyy HH:mm}", new Date());
         }
         return dataCriacao;
     }
@@ -59,13 +59,11 @@ public class AssembleiaDataTable {
 
     public Date obterDataCriacao() {
         if ("DATA_ATUAL".equalsIgnoreCase(dataCriacao)) {
-            return new Date();
+            return DataHoraBuilder.umaData().build();
         }
 
         if ("DATA_EXPIRADA_TRES_MINUTOS".equalsIgnoreCase(dataCriacao)) {
-            Calendar calendar = Calendar.getInstance();
-            calendar.add(MINUTE, -5);
-            return calendar.getTime();
+            return DataHoraBuilder.umaData().nMinutosAtras(3).build();
         }
         return null;
     }

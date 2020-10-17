@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.test.web.servlet.ResultActions;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import static br.com.dbccompany.votacaocooperado.util.AssertUtil.assertData;
 import static java.text.MessageFormat.format;
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -28,10 +28,12 @@ public class AssembleiaVerificador {
     private AssembleiaRepositoryTestHelper assembleiaRepositoryTestHelper;
 
     public void verificar(List<AssembleiaDataTable> esperados, ResultActions retorno) throws Exception {
+        retorno.andExpect(status().isOk());
+
         for (int i = 0; i < esperados.size(); i++) {
-            Pauta pauta = pautaRepositoryTestHelper.findByDescricao(esperados.get(i).getDescricaoPauta());
-            retorno.andExpect(status().isOk())
-                    .andExpect(jsonPath(format("$.[{0}].tempoDuracao", i)).value(esperados.get(i).getTempoDuracao()))
+            final AssembleiaDataTable esperado = esperados.get(i);
+            Pauta pauta = pautaRepositoryTestHelper.findByDescricao(esperado.getDescricaoPauta());
+            retorno.andExpect(jsonPath(format("$.[{0}].tempoDuracao", i)).value(esperado.getTempoDuracao()))
                     .andExpect(jsonPath(format("$.[{0}].idPauta", i)).value(pauta.getId()));
         }
     }
@@ -47,10 +49,5 @@ public class AssembleiaVerificador {
     private Assembleia consultarAssembleia(AssembleiaDataTable assembleiaDataTable) {
         Optional<Assembleia> assembleiaOptional = Optional.ofNullable(assembleiaRepositoryTestHelper.findByPauta_Descricao(assembleiaDataTable.getDescricaoPauta()));
         return assembleiaOptional.orElse(new Assembleia());
-    }
-
-    private void assertData(String dataEsperada, Date dataRetornada) {
-        String dataRetornadaFormatada = format("{0,date,dd/MM/yyyy HH}", dataRetornada);
-        assertEquals(dataEsperada, dataRetornadaFormatada);
     }
 }

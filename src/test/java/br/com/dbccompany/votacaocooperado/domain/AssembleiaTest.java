@@ -1,18 +1,22 @@
 package br.com.dbccompany.votacaocooperado.domain;
 
+import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
+import br.com.dbccompany.votacaocooperado.builder.DataHoraBuilder;
+import br.com.dbccompany.votacaocooperado.builder.PautaBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static br.com.dbccompany.votacaocooperado.builder.VotoBuilder.umVotoQualquerNao;
+import static br.com.dbccompany.votacaocooperado.builder.VotoBuilder.umVotoQualquerSim;
 import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.ABERTA;
 import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.FECHADA;
-import static java.util.Calendar.MINUTE;
+import static br.com.dbccompany.votacaocooperado.util.AssertUtil.assertData;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.*;
 
@@ -23,7 +27,7 @@ public class AssembleiaTest {
 
     @Before
     public void inicializarContexto() {
-        assembleia = new Assembleia();
+        assembleia = AssembleiaBuilder.umaAssembleiaQualquer().build();
     }
 
     @Test
@@ -34,7 +38,7 @@ public class AssembleiaTest {
 
     @Test
     public void aoObterIdPautaDadoQuePautaNaoEstejaNulaDeveriaRetornarIdPautaEsperado() {
-        assembleia.setPauta(new Pauta(1l));
+        assembleia.setPauta(PautaBuilder.umaPautaQualquer().build());
 
         Long idPautaRetornado = assembleia.obterIdPauta();
 
@@ -87,26 +91,36 @@ public class AssembleiaTest {
         assertEquals(ABERTA, assembleia.obterStatusAssembleia());
     }
 
+    @Test
+    public void aoChamarMetodoPrePersistDadoQueDataCriacaoIhTempoDuracaoEstejamInvalidosDeveriaConfigurarValoresPadrao() {
+        assembleia.setDataCriacao(null);
+        assembleia.setTempoDuracao(0);
+
+        assembleia.prePersist();
+
+        assertData(new Date(), assembleia.getDataCriacao());
+        assertEquals(1, assembleia.getTempoDuracao());
+    }
+
+    @Test
+    public void aoChamarMetodoPrePersistDadoQueDataCriacaoIhTempoDuracaoEstejamValidosDeveriaManterOsValoresAtuais() {
+        assembleia.setDataCriacao(obterDataCriacaoExpirada());
+        assembleia.setTempoDuracao(15);
+
+        assembleia.prePersist();
+
+        assertData(obterDataCriacaoExpirada(), assembleia.getDataCriacao());
+        assertEquals(15, assembleia.getTempoDuracao());
+    }
+
     private Date obterDataCriacaoExpirada() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(MINUTE, -30);
-        return calendar.getTime();
+        return DataHoraBuilder.umaData().nMinutosAtras(30).build();
     }
 
     private List<Voto> gerarListaComQuatroVotosSimIhSeisVotosNao() {
-        return Arrays.asList(gerarVotoSim(), gerarVotoSim(), gerarVotoSim(), gerarVotoSim(), gerarVotoNao(),
-                gerarVotoNao(), gerarVotoNao(), gerarVotoNao(), gerarVotoNao(), gerarVotoNao());
-    }
-
-    private Voto gerarVotoSim() {
-        Voto voto = new Voto();
-        voto.setTipoVoto(TipoVoto.SIM);
-        return voto;
-    }
-
-    private Voto gerarVotoNao() {
-        Voto voto = new Voto();
-        voto.setTipoVoto(TipoVoto.NAO);
-        return voto;
+        return Arrays.asList(umVotoQualquerSim().build(), umVotoQualquerSim().build(), umVotoQualquerSim().build(),
+                umVotoQualquerSim().build(), umVotoQualquerNao().build(), umVotoQualquerNao().build(),
+                umVotoQualquerNao().build(), umVotoQualquerNao().build(), umVotoQualquerNao().build(),
+                umVotoQualquerNao().build());
     }
 }

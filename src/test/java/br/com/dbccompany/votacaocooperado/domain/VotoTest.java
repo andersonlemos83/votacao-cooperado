@@ -1,5 +1,8 @@
 package br.com.dbccompany.votacaocooperado.domain;
 
+import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
+import br.com.dbccompany.votacaocooperado.builder.AssociadoBuilder;
+import br.com.dbccompany.votacaocooperado.builder.VotoBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +18,7 @@ public class VotoTest {
 
     @Before
     public void inicializarContexto() {
-        voto = new Voto();
+        voto = VotoBuilder.umVotoQualquer().build();
     }
 
     @Test
@@ -26,7 +29,7 @@ public class VotoTest {
 
     @Test
     public void aoObterIdAssociadoDadoQueAssociadoNaoEstejaNuloDeveriaRetornarIdAssociadoEsperado() {
-        voto.setAssociado(new Associado(1l));
+        voto.setAssociado(AssociadoBuilder.umAssociadoQualquer().build());
 
         Long idAssociadoRetornado = voto.obterIdAssociado();
 
@@ -41,9 +44,7 @@ public class VotoTest {
 
     @Test
     public void aoObterIdAssembleiaDadoQueAssembleiaNaoEstejaNulaDeveriaRetornarIdAssembleiaEsperado() {
-        Assembleia assembleia = new Assembleia();
-        assembleia.setId(1l);
-        voto.setAssembleia(assembleia);
+        voto.setAssembleia(AssembleiaBuilder.umaAssembleiaQualquer().build());
 
         Long idAssembleiaRetornado = voto.obterIdAssembleia();
 
