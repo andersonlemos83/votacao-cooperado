@@ -1,5 +1,6 @@
 package br.com.dbccompany.votacaocooperado.cucumber.contexto;
 
+import br.com.dbccompany.votacaocooperado.builder.AssociadoBuilder;
 import br.com.dbccompany.votacaocooperado.cucumber.datatable.AssociadoDataTable;
 import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.AssociadoRepositoryTestHelper;
 import br.com.dbccompany.votacaocooperado.domain.Associado;
@@ -15,17 +16,13 @@ public class AssociadoContexto {
     private AssociadoRepositoryTestHelper associadoRepositoryTestHelper;
 
     public void cadastrar(List<AssociadoDataTable> associadosDataTable) {
-        for (AssociadoDataTable associadoDataTable : associadosDataTable) {
-            Associado associado = converter(associadoDataTable);
+        associadosDataTable.forEach(associadoDataTable -> {
+            Associado associado = AssociadoBuilder.umAssociado()
+                    .comId(associadoDataTable.getId())
+                    .comNome(associadoDataTable.getNome())
+                    .comCpf(associadoDataTable.getCpf())
+                    .build();
             associadoRepositoryTestHelper.saveAndFlush(associado);
-        }
-    }
-
-    private Associado converter(AssociadoDataTable associadoDataTable) {
-        Associado associado = new Associado();
-        associado.setId(associadoDataTable.getId());
-        associado.setNome(associadoDataTable.getNome());
-        associado.setCpf(associadoDataTable.getCpf());
-        return associado;
+        });
     }
 }

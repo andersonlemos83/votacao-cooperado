@@ -1,5 +1,6 @@
 package br.com.dbccompany.votacaocooperado.cucumber.contexto;
 
+import br.com.dbccompany.votacaocooperado.builder.VotoBuilder;
 import br.com.dbccompany.votacaocooperado.cucumber.datatable.VotoDataTable;
 import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.AssembleiaRepositoryTestHelper;
 import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.AssociadoRepositoryTestHelper;
@@ -25,21 +26,20 @@ public class VotoContexto {
     private AssembleiaRepositoryTestHelper assembleiaRepositoryTestHelper;
 
     public void cadastrar(List<VotoDataTable> votosDataTable) {
-        for (VotoDataTable votoDataTable : votosDataTable) {
+        votosDataTable.forEach(votoDataTable -> {
             Voto voto = converter(votoDataTable);
             votoRepositoryTestHelper.saveAndFlush(voto);
-        }
+        });
     }
 
     private Voto converter(VotoDataTable votoDataTable) {
         Associado associado = associadoRepositoryTestHelper.findByNome(votoDataTable.getNomeAssociado());
         Assembleia assembleia = assembleiaRepositoryTestHelper.findByPauta_Descricao(votoDataTable.getDescricaoPauta());
-
-        Voto voto = new Voto();
-        voto.setId(votoDataTable.getId());
-        voto.setTipoVoto(votoDataTable.getTipoVoto());
-        voto.setAssociado(associado);
-        voto.setAssembleia(assembleia);
-        return voto;
+        return VotoBuilder.umVoto()
+                .comId(votoDataTable.getId())
+                .comTipoVoto(votoDataTable.getTipoVoto())
+                .comAssociado(associado)
+                .comAssembleia(assembleia)
+                .build();
     }
 }

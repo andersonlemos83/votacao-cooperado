@@ -56,7 +56,7 @@ public class ValidadorAssociadoImplTest {
         Mockito.when(associadoRepositoryMock.findByCpf(associado.getCpf())).thenReturn(ofNullable(associado));
 
         exception.expect(NegocioException.class);
-        exception.expectMessage("O CPF informado já está cadatrado");
+        exception.expectMessage("O CPF informado já está cadastrado");
 
         validadorAssociado.validar(associado);
     }

@@ -32,11 +32,13 @@ public class VotoVerificador {
     private VotoRepositoryTestHelper votoRepositoryTestHelper;
 
     public void verificar(List<VotoDataTable> esperados, ResultActions retorno) throws Exception {
+        retorno.andExpect(status().isOk());
+
         for (int i = 0; i < esperados.size(); i++) {
-            Associado associado = associadoRepositoryTestHelper.findByNome(esperados.get(i).getNomeAssociado());
-            Assembleia assembleia = assembleiaRepositoryTestHelper.findByPauta_Descricao(esperados.get(i).getDescricaoPauta());
-            retorno.andExpect(status().isOk())
-                    .andExpect(jsonPath(format("$.[{0}].tipoVoto", i)).value(esperados.get(i).getTipoVoto().name()))
+            final VotoDataTable esperado = esperados.get(i);
+            Associado associado = associadoRepositoryTestHelper.findByNome(esperado.getNomeAssociado());
+            Assembleia assembleia = assembleiaRepositoryTestHelper.findByPauta_Descricao(esperado.getDescricaoPauta());
+            retorno.andExpect(jsonPath(format("$.[{0}].tipoVoto", i)).value(esperado.getTipoVoto().name()))
                     .andExpect(jsonPath(format("$.[{0}].idAssociado", i)).value(associado.getId()))
                     .andExpect(jsonPath(format("$.[{0}].idAssembleia", i)).value(assembleia.getId()));
         }

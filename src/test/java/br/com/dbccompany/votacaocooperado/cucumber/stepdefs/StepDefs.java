@@ -52,9 +52,9 @@ public class StepDefs {
 
     private void resetarSequeces() {
         List<Map<String, Object>> sequences = jdbcTemplate.queryForList("SELECT * FROM INFORMATION_SCHEMA.SEQUENCES");
-        for (Map<String, Object> sequence : sequences) {
+        sequences.forEach(sequence -> {
             String sequence_name = (String) sequence.get("SEQUENCE_NAME");
             jdbcTemplate.execute(format("ALTER SEQUENCE {0} RESTART WITH 1", sequence_name));
-        }
+        });
     }
 }

@@ -1,5 +1,6 @@
 package br.com.dbccompany.votacaocooperado.cucumber.contexto;
 
+import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
 import br.com.dbccompany.votacaocooperado.cucumber.datatable.AssembleiaDataTable;
 import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.AssembleiaRepositoryTestHelper;
 import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.PautaRepositoryTestHelper;
@@ -20,19 +21,19 @@ public class AssembleiaContexto {
     private PautaRepositoryTestHelper pautaRepositoryTestHelper;
 
     public void cadastrar(List<AssembleiaDataTable> assembleiasDataTable) {
-        for (AssembleiaDataTable assembleiaDataTable : assembleiasDataTable) {
+        assembleiasDataTable.forEach(assembleiaDataTable -> {
             Assembleia assembleia = converter(assembleiaDataTable);
             assembleiaRepositoryTestHelper.saveAndFlush(assembleia);
-        }
+        });
     }
 
     private Assembleia converter(AssembleiaDataTable assembleiaDataTable) {
         Pauta pauta = pautaRepositoryTestHelper.findByDescricao(assembleiaDataTable.getDescricaoPauta());
-        Assembleia assembleia = new Assembleia();
-        assembleia.setId(assembleiaDataTable.getId());
-        assembleia.setTempoDuracao(assembleiaDataTable.getTempoDuracao());
-        assembleia.setDataCriacao(assembleiaDataTable.obterDataCriacao());
-        assembleia.setPauta(pauta);
-        return assembleia;
+        return AssembleiaBuilder.umaAssembleia()
+                .comId(assembleiaDataTable.getId())
+                .comTempoDuracao(assembleiaDataTable.getTempoDuracao())
+                .comDataCriacao(assembleiaDataTable.obterDataCriacao())
+                .comPauta(pauta)
+                .build();
     }
 }
