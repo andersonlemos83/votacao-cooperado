@@ -2,15 +2,16 @@ package br.com.dbccompany.votacaocooperado.domain;
 
 import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
 import br.com.dbccompany.votacaocooperado.builder.PautaBuilder;
+import br.com.dbccompany.votacaocooperado.builder.VotoBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 public class PautaTest {
 
     private Pauta pauta;
-    private Assembleia assembleiaComDataMaisRecente;
+    private Assembleia assembleiaAtual;
 
     @Before
     public void inicializarContexto() {
@@ -26,25 +27,55 @@ public class PautaTest {
     }
 
     @Test
-    public void aoObterUltimaAssembleiaDadoQueExistamTresAssembleiasOrdenadasDeveriaRetonarAhUltimaAssembleia() {
+    public void aoChamarMetodoGetDataCriacaoDadoQueExistamTresAssembleiasOrdenadasDeveriaRetonarAhDataCriacaoDaAssembleiaMaisRecente() {
         pauta.setAssembleias(gerarTresAssembleiasOrdenadas());
+        assertEquals(assembleiaAtual.getDataCriacao(), pauta.getDataCriacao());
+    }
 
-        final Optional<Assembleia> assembleiaOptional = pauta.obterUltimaAssembleia();
+    @Test
+    public void aoChamarMetodoGetStatusAssembleiaDadoQueExistamTresAssembleiasOrdenadasDeveriaRetonarOhStatusDaAssembleiaMaisRecente() {
+        pauta.setAssembleias(gerarTresAssembleiasOrdenadas());
+        assertEquals(assembleiaAtual.obterStatusAssembleia(), pauta.getStatusAssembleia());
+    }
 
-        assertEquals(assembleiaComDataMaisRecente, assembleiaOptional.get());
+    @Test
+    public void aoChamarMetodoGetQuantidadeVotosSimDadoQueExistamTresAssembleiasOrdenadasDeveriaRetonarAhQuantidadeVotosSimDaAssembleiaMaisRecente() {
+        pauta.setAssembleias(gerarTresAssembleiasOrdenadas());
+        assertEquals(assembleiaAtual.obterQuantidadeVotosSim(), pauta.getQuantidadeVotosSim());
+    }
+
+    @Test
+    public void aoChamarMetodoGetQuantidadeVotosNaoDadoQueExistamTresAssembleiasOrdenadasDeveriaRetonarAhQuantidadeVotosNaoDaAssembleiaMaisRecente() {
+        pauta.setAssembleias(gerarTresAssembleiasOrdenadas());
+        assertEquals(assembleiaAtual.obterQuantidadeVotosNao(), pauta.getQuantidadeVotosNao());
     }
 
     private List<Assembleia> gerarTresAssembleiasOrdenadas() {
-        assembleiaComDataMaisRecente = gerarAssembleia(1);
-        return Arrays.asList(gerarAssembleia(21), gerarAssembleia(11), assembleiaComDataMaisRecente);
+        Assembleia assembleiaCinquentaMinutosAtras = gerarAssembleia(50, 5, 5);
+        Assembleia assembleiaSeisMinutosAtras = gerarAssembleia(6, 3, 7);
+        assembleiaAtual = gerarAssembleia(0, 7, 3);
+        return Arrays.asList(assembleiaCinquentaMinutosAtras, assembleiaSeisMinutosAtras, assembleiaAtual);
     }
 
-    private Assembleia gerarAssembleia(int minutos) {
+    private Assembleia gerarAssembleia(int minutos, int quantidadeVotosSim, int quantidadeVotosNao) {
         Calendar dataCriacaoCalendar = Calendar.getInstance();
         dataCriacaoCalendar.add(Calendar.MINUTE, -minutos);
         return AssembleiaBuilder.umaAssembleiaQualquer()
                 .comId(Long.valueOf(minutos))
                 .comDataCriacao(dataCriacaoCalendar.getTime())
+                .comTempoDuracao(5)
+                .comVotos(gerarVotos(quantidadeVotosSim, quantidadeVotosNao))
                 .build();
+    }
+
+    private List<Voto> gerarVotos(int quantidadeVotosSim, int quantidadeVotosNao) {
+        List<Voto> votos = new ArrayList<>();
+        for (int i = 0; i < quantidadeVotosSim; i++) {
+            votos.add(VotoBuilder.umVotoQualquerSim().build());
+        }
+        for (int i = 0; i < quantidadeVotosNao; i++) {
+            votos.add(VotoBuilder.umVotoQualquerNao().build());
+        }
+        return votos;
     }
 }

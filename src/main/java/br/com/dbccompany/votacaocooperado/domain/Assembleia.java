@@ -6,6 +6,7 @@ import java.util.*;
 
 import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.ABERTA;
 import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.FECHADA;
+import static java.lang.Boolean.TRUE;
 import static java.util.Calendar.MINUTE;
 import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.counting;
@@ -92,19 +93,19 @@ public class Assembleia implements Serializable {
     }
 
     public int obterQuantidadeVotosSim() {
-        Map<TipoVoto, Long> apuracao = Optional.ofNullable(votos)
+        Map<Boolean, Long> apuracao = Optional.ofNullable(votos)
                 .orElse(emptyList())
                 .stream()
-                .collect(groupingBy(p -> p.getTipoVoto(), counting()));
-        return apuracao.getOrDefault(TipoVoto.SIM, 0l).intValue();
+                .collect(groupingBy(p -> p.ehSim(), counting()));
+        return apuracao.getOrDefault(TRUE, 0l).intValue();
     }
 
     public int obterQuantidadeVotosNao() {
-        Map<TipoVoto, Long> apuracao = Optional.ofNullable(votos)
+        Map<Boolean, Long> apuracao = Optional.ofNullable(votos)
                 .orElse(emptyList())
                 .stream()
-                .collect(groupingBy(p -> p.getTipoVoto(), counting()));
-        return apuracao.getOrDefault(TipoVoto.NAO, 0l).intValue();
+                .collect(groupingBy(p -> p.ehNao(), counting()));
+        return apuracao.getOrDefault(TRUE, 0l).intValue();
     }
 
     public StatusAssembleia obterStatusAssembleia() {

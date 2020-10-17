@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.test.web.servlet.ResultActions;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import static br.com.dbccompany.votacaocooperado.util.AssertUtil.assertData;
 import static java.text.MessageFormat.format;
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -47,10 +47,5 @@ public class AssembleiaVerificador {
     private Assembleia consultarAssembleia(AssembleiaDataTable assembleiaDataTable) {
         Optional<Assembleia> assembleiaOptional = Optional.ofNullable(assembleiaRepositoryTestHelper.findByPauta_Descricao(assembleiaDataTable.getDescricaoPauta()));
         return assembleiaOptional.orElse(new Assembleia());
-    }
-
-    private void assertData(String dataEsperada, Date dataRetornada) {
-        String dataRetornadaFormatada = format("{0,date,dd/MM/yyyy HH}", dataRetornada);
-        assertEquals(dataEsperada, dataRetornadaFormatada);
     }
 }

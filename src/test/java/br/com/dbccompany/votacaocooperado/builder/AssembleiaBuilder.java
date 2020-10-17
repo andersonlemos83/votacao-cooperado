@@ -2,8 +2,10 @@ package br.com.dbccompany.votacaocooperado.builder;
 
 import br.com.dbccompany.votacaocooperado.domain.Assembleia;
 import br.com.dbccompany.votacaocooperado.domain.Pauta;
+import br.com.dbccompany.votacaocooperado.domain.Voto;
 
 import java.util.Date;
+import java.util.List;
 
 public final class AssembleiaBuilder {
 
@@ -38,6 +40,11 @@ public final class AssembleiaBuilder {
 
     public AssembleiaBuilder comPauta(Pauta pauta) {
         assembleia.setPauta(pauta);
+        return this;
+    }
+
+    public AssembleiaBuilder comVotos(List<Voto> votos) {
+        assembleia.setVotos(votos);
         return this;
     }
 

@@ -16,6 +16,7 @@ import static br.com.dbccompany.votacaocooperado.builder.VotoBuilder.umVotoQualq
 import static br.com.dbccompany.votacaocooperado.builder.VotoBuilder.umVotoQualquerSim;
 import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.ABERTA;
 import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.FECHADA;
+import static br.com.dbccompany.votacaocooperado.util.AssertUtil.assertData;
 import static java.util.Calendar.MINUTE;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.*;
@@ -89,6 +90,28 @@ public class AssembleiaTest {
         assembleia.setDataCriacao(new Date());
         assembleia.setTempoDuracao(1);
         assertEquals(ABERTA, assembleia.obterStatusAssembleia());
+    }
+
+    @Test
+    public void aoChamarMetodoPrePersistDadoQueDataCriacaoIhTempoDuracaoEstejamInvalidosDeveriaConfigurarValoresPadrao() {
+        assembleia.setDataCriacao(null);
+        assembleia.setTempoDuracao(0);
+
+        assembleia.prePersist();
+
+        assertData(new Date(), assembleia.getDataCriacao());
+        assertEquals(1, assembleia.getTempoDuracao());
+    }
+
+    @Test
+    public void aoChamarMetodoPrePersistDadoQueDataCriacaoIhTempoDuracaoEstejamValidosDeveriaManterOsValoresAtuais() {
+        assembleia.setDataCriacao(obterDataCriacaoExpirada());
+        assembleia.setTempoDuracao(15);
+
+        assembleia.prePersist();
+
+        assertData(obterDataCriacaoExpirada(), assembleia.getDataCriacao());
+        assertEquals(15, assembleia.getTempoDuracao());
     }
 
     private Date obterDataCriacaoExpirada() {
