@@ -1,6 +1,7 @@
 package br.com.dbccompany.votacaocooperado.service.validador.impl;
 
 import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
+import br.com.dbccompany.votacaocooperado.builder.DataHoraBuilder;
 import br.com.dbccompany.votacaocooperado.domain.Assembleia;
 import br.com.dbccompany.votacaocooperado.repository.AssembleiaRepository;
 import br.com.dbccompany.votacaocooperado.repository.PautaRepository;
@@ -15,12 +16,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
 
 import static br.com.dbccompany.votacaocooperado.builder.PautaBuilder.umaPautaQualquer;
-import static java.util.Calendar.MINUTE;
 import static java.util.Optional.ofNullable;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -102,8 +101,6 @@ public class ValidadorAssembleiaImplTest {
     }
 
     private Date obterDataCriacaoExpirada() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(MINUTE, -30);
-        return calendar.getTime();
+        return DataHoraBuilder.umaData().nMinutosAtras(30).build();
     }
 }

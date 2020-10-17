@@ -1,6 +1,7 @@
 package br.com.dbccompany.votacaocooperado.domain;
 
 import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
+import br.com.dbccompany.votacaocooperado.builder.DataHoraBuilder;
 import br.com.dbccompany.votacaocooperado.builder.PautaBuilder;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +17,6 @@ import static br.com.dbccompany.votacaocooperado.builder.VotoBuilder.umVotoQualq
 import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.ABERTA;
 import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.FECHADA;
 import static br.com.dbccompany.votacaocooperado.util.AssertUtil.assertData;
-import static java.util.Calendar.MINUTE;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.*;
 
@@ -115,9 +114,7 @@ public class AssembleiaTest {
     }
 
     private Date obterDataCriacaoExpirada() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(MINUTE, -30);
-        return calendar.getTime();
+        return DataHoraBuilder.umaData().nMinutosAtras(30).build();
     }
 
     private List<Voto> gerarListaComQuatroVotosSimIhSeisVotosNao() {

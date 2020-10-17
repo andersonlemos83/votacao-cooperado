@@ -1,6 +1,7 @@
 package br.com.dbccompany.votacaocooperado.domain;
 
 import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
+import br.com.dbccompany.votacaocooperado.builder.DataHoraBuilder;
 import br.com.dbccompany.votacaocooperado.builder.PautaBuilder;
 import br.com.dbccompany.votacaocooperado.builder.VotoBuilder;
 import org.junit.Before;
@@ -10,7 +11,6 @@ import org.junit.runners.JUnit4;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -58,11 +58,9 @@ public class PautaTest {
     }
 
     private Assembleia gerarAssembleia(int minutos, int quantidadeVotosSim, int quantidadeVotosNao) {
-        Calendar dataCriacaoCalendar = Calendar.getInstance();
-        dataCriacaoCalendar.add(Calendar.MINUTE, -minutos);
         return AssembleiaBuilder.umaAssembleiaQualquer()
                 .comId(Long.valueOf(minutos))
-                .comDataCriacao(dataCriacaoCalendar.getTime())
+                .comDataCriacao(DataHoraBuilder.umaData().nMinutosAtras(minutos).build())
                 .comTempoDuracao(5)
                 .comVotos(gerarVotos(quantidadeVotosSim, quantidadeVotosNao))
                 .build();

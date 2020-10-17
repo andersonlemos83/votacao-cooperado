@@ -43,7 +43,7 @@ public class AssembleiaResource {
     @PostMapping
     public ResponseEntity<AssembleiaDto> cadastrar(@Valid @RequestBody AssembleiaDto assembleiaDto) {
         log.info("Requisição Rest para cadastrar assembleia: {}", assembleiaDto);
-        Assembleia assembleiaEntidade = modelMapper.map(assembleiaDto, Assembleia.class) ;
+        Assembleia assembleiaEntidade = modelMapper.map(assembleiaDto, Assembleia.class);
         Assembleia assembleiaCadastrada = assembleiaService.cadastrar(assembleiaEntidade);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
