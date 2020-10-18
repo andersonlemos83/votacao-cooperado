@@ -2,6 +2,7 @@ package br.com.dbccompany.votacaocooperado.web.errors;
 
 import br.com.dbccompany.votacaocooperado.shared.exception.NegocioException;
 import br.com.dbccompany.votacaocooperado.web.dto.ResponseDto;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
         List<String> errors = ex.getBindingResult()
                 .getFieldErrors()
                 .stream()
-                .map(x -> x.getDefaultMessage())
+                .map(DefaultMessageSourceResolvable::getDefaultMessage)
                 .collect(Collectors.toList());
         String replace = errors.toString().replace("[", "").replace("]", "");
         ResponseDto responseDto = new ResponseDto(status.value(), replace);

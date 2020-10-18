@@ -96,7 +96,7 @@ public class Assembleia implements Serializable {
         Map<Boolean, Long> apuracao = Optional.ofNullable(votos)
                 .orElse(emptyList())
                 .stream()
-                .collect(groupingBy(p -> p.ehSim(), counting()));
+                .collect(groupingBy(Voto::ehSim, counting()));
         return apuracao.getOrDefault(TRUE, 0l).intValue();
     }
 
@@ -104,7 +104,7 @@ public class Assembleia implements Serializable {
         Map<Boolean, Long> apuracao = Optional.ofNullable(votos)
                 .orElse(emptyList())
                 .stream()
-                .collect(groupingBy(p -> p.ehNao(), counting()));
+                .collect(groupingBy(Voto::ehNao, counting()));
         return apuracao.getOrDefault(TRUE, 0l).intValue();
     }
 

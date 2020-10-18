@@ -4,6 +4,15 @@
 
 Este projeto foi concebido como parte de uma avaliação técnica de backend para tentativa de ingresso na empresa DBC Company.
 
+**Notas da versão 0.0.2-SNAPSHOT**
+- Substitui os conversores por mappers;
+- Adiciona builders para o ambiente de testes;
+- Substitui várias iterações com "for" por "forEach";
+- Adiciona versionamento por URI para os endpoints da API;
+- Cria novos casos de testes para features Cucumber;
+- Cria novos testes de unidade;
+- Configura o plugin Maven surefire para execução de testes no Travis CI;  
+
 **1. Domínio**
 
 No cooperativismo, cada associado possui um voto e as decisões são tomadas em assembleias por votação. 
@@ -16,7 +25,9 @@ No cooperativismo, cada associado possui um voto e as decisões são tomadas em 
 
 **3. Features bônus implementadas**
 - Bônus 1: Foi integrado com o sistema externo de validação de CPF;
-- Bônus 3: Foi versionado em um repositório no Github (este!) onde foram realizados commits regulares e auto explicativos.
+- Bônus 4: Foi versionada a API utilizando a estratégia por URL, mais especificamente, por path ou URI. Assim, foram acrescentados a todos os endpoins da API o préfixo de URI "/v1" que define o seu primeiro contrato. Foi optado por esta estratégia de versionamento por julgar ser a mais difundida e a mais simples de ser adotada. No entanto, não descartamos a adoção futura de uma abordagem mista com a estratégia de Headers customizados, onde a estratégia por URI marcaria as grandes alterações de contrato da API e a estratégia de Headers marcaria pequenos ajustes no contrato da API.  
+
+Foi versionado em um repositório no Github (este!) onde foram realizados commits regulares e auto explicativos.
 
 **4. Informações técnicas**
 - Linguagem Java 8
@@ -25,15 +36,16 @@ No cooperativismo, cada associado possui um voto e as decisões são tomadas em 
   - Arquivo: Ambientes de desenvolvimento e produção
   - Memória: Ambientes de testes
 - Testes com JUnit, Mockto e Cucumber
+- Conversão de entidades em DTO e vice-versa com Model Mapper
 - Documentação da API e seus serviços com Swagger (springdoc-openapi-ui)
 - Integração Contínua com Travis CI
 
 **5. Sobre os testes**
 
 Com o intuito de organizar melhor os testes do projeto, foram agrupados os testes em três grandes suites:
-- CucumberTest: Esta suite agrupa todos os testes aceitação e integração baseados em features BDD. Ela atingiu **89%** de linha cobertas segundo coverage. 
-- UnitTests: Esta suite agrupa todos os testes de unidade do projeto. Ela atingiu **86%** de linha cobertas segundo coverage.
-- AllTests: Esta suite agrupa todos os testes implementados. Consiste na união do CucumberTest com UnitTests. Ela atingiu **92%** de linha cobertas segundo coverage.
+- CucumberTest: Esta suite agrupa todos os testes aceitação e integração baseados em features BDD. Ela atingiu **85%** de linha cobertas segundo coverage. 
+- UnitTests: Esta suite agrupa todos os testes de unidade do projeto. Ela atingiu **81%** de linha cobertas segundo coverage.
+- AllTests: Esta suite agrupa todos os testes implementados. Consiste na união do CucumberTest com UnitTests. Ela atingiu **88%** de linha cobertas segundo coverage.
 
 OBS: Alguns testes da feature Cadastrar Associado podem apresentar intermitência devido a lentidão de resposta da API de validação de CPF.
 
