@@ -78,6 +78,13 @@ public class AssembleiaTest {
     }
 
     @Test
+    public void aoObterStatusAssembleiaDadoQueDataCriacaoEstejaNulaDeveriaRetornarFechada() {
+        assembleia.setDataCriacao(null);
+        assembleia.setTempoDuracao(1);
+        assertEquals(FECHADA, assembleia.obterStatusAssembleia());
+    }
+
+    @Test
     public void aoObterStatusAssembleiaDadoQueVotacaoEstejaExpiradaDeveriaRetornarFechada() {
         assembleia.setDataCriacao(obterDataCriacaoExpirada());
         assembleia.setTempoDuracao(1);

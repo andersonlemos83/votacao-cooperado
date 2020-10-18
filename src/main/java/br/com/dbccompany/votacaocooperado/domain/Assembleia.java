@@ -109,7 +109,7 @@ public class Assembleia implements Serializable {
     }
 
     public StatusAssembleia obterStatusAssembleia() {
-        if (estaFechada()) {
+        if (dataCriacao == null || estaFechada()) {
             return FECHADA;
         }
         return ABERTA;

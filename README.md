@@ -9,9 +9,10 @@ Este projeto foi concebido como parte de uma avaliação técnica de backend par
 - Adiciona builders para o ambiente de testes;
 - Substitui várias iterações com "for" por "forEach";
 - Adiciona versionamento por URI para os endpoints da API;
-- Cria novos casos de testes para features Cucumber;
-- Cria novos testes de unidade;
-- Configura o plugin Maven surefire para execução de testes no Travis CI;  
+- Implementa novos casos de testes para features Cucumber;
+- Implementa novos testes de unidade;
+- Configura o plugin Maven surefire para execução de testes no Travis CI;
+- Remove trechos de código morto e realiza vários pequenos refatoramentos. 
 
 **1. Domínio**
 
@@ -26,8 +27,6 @@ No cooperativismo, cada associado possui um voto e as decisões são tomadas em 
 **3. Features bônus implementadas**
 - Bônus 1: Foi integrado com o sistema externo de validação de CPF;
 - Bônus 4: Foi versionada a API utilizando a estratégia por URL, mais especificamente, por path ou URI. Assim, foram acrescentados a todos os endpoins da API o préfixo de URI "/v1" que define o seu primeiro contrato. Foi optado por esta estratégia de versionamento por julgar ser a mais difundida e a mais simples de ser adotada. No entanto, não descartamos a adoção futura de uma abordagem mista com a estratégia de Headers customizados, onde a estratégia por URI marcaria as grandes alterações de contrato da API e a estratégia de Headers marcaria pequenos ajustes no contrato da API.  
-
-Foi versionado em um repositório no Github (este!) onde foram realizados commits regulares e auto explicativos.
 
 **4. Informações técnicas**
 - Linguagem Java 8
