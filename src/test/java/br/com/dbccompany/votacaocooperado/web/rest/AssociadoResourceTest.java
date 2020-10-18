@@ -24,6 +24,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.Arrays;
 
+import static br.com.dbccompany.votacaocooperado.util.ConstanteUtil.URI_V1_API_ASSOCIADOS;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -33,8 +34,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = VotacaoCooperadoApplication.class)
 @AutoConfigureMockMvc
 public class AssociadoResourceTest {
-
-    private static final String API_ASSOCIADO = "/api/associado";
 
     @Autowired
     protected MockMvc mvc;
@@ -82,14 +81,14 @@ public class AssociadoResourceTest {
     }
 
     private ResultActions cadastrarAssociado() throws Exception {
-        return mvc.perform(MockMvcRequestBuilders.post(API_ASSOCIADO)
+        return mvc.perform(MockMvcRequestBuilders.post(URI_V1_API_ASSOCIADOS)
                 .content(new ObjectMapper().writeValueAsString(associadoDto))
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .accept(MediaType.APPLICATION_JSON_UTF8));
     }
 
     private ResultActions listarTodos() throws Exception {
-        return mvc.perform(MockMvcRequestBuilders.get(API_ASSOCIADO)
+        return mvc.perform(MockMvcRequestBuilders.get(URI_V1_API_ASSOCIADOS)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
     }

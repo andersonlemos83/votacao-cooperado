@@ -28,6 +28,7 @@ import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Date;
 
+import static br.com.dbccompany.votacaocooperado.util.ConstanteUtil.URI_V1_API_PAUTAS;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Matchers.eq;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -37,8 +38,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = VotacaoCooperadoApplication.class)
 @AutoConfigureMockMvc
 public class PautaResourceTest {
-
-    private static final String API_PAUTA = "/api/pauta";
 
     @Autowired
     protected MockMvc mvc;
@@ -107,20 +106,20 @@ public class PautaResourceTest {
     }
 
     private ResultActions listarTodos() throws Exception {
-        return mvc.perform(MockMvcRequestBuilders.get(API_PAUTA)
+        return mvc.perform(MockMvcRequestBuilders.get(URI_V1_API_PAUTAS)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
     }
 
     private ResultActions cadastrarPauta() throws Exception {
-        return mvc.perform(MockMvcRequestBuilders.post(API_PAUTA)
+        return mvc.perform(MockMvcRequestBuilders.post(URI_V1_API_PAUTAS)
                 .content(new ObjectMapper().writeValueAsString(pautaDto))
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .accept(MediaType.APPLICATION_JSON_UTF8));
     }
 
     private ResultActions buscarPorId() throws Exception {
-        return mvc.perform(MockMvcRequestBuilders.get(API_PAUTA + "/1")
+        return mvc.perform(MockMvcRequestBuilders.get(URI_V1_API_PAUTAS + "/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
     }

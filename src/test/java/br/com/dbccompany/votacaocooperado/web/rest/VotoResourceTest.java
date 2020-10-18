@@ -25,6 +25,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.Arrays;
 
+import static br.com.dbccompany.votacaocooperado.util.ConstanteUtil.URI_V1_API_VOTOS;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -34,8 +35,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = VotacaoCooperadoApplication.class)
 @AutoConfigureMockMvc
 public class VotoResourceTest {
-
-    private static final String API_VOTO = "/api/voto";
 
     @Autowired
     protected MockMvc mvc;
@@ -85,14 +84,14 @@ public class VotoResourceTest {
     }
 
     private ResultActions cadastrarVoto() throws Exception {
-        return mvc.perform(MockMvcRequestBuilders.post(API_VOTO)
+        return mvc.perform(MockMvcRequestBuilders.post(URI_V1_API_VOTOS)
                 .content(new ObjectMapper().writeValueAsString(votoDto))
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .accept(MediaType.APPLICATION_JSON_UTF8));
     }
 
     private ResultActions listarTodos() throws Exception {
-        return mvc.perform(MockMvcRequestBuilders.get(API_VOTO)
+        return mvc.perform(MockMvcRequestBuilders.get(URI_V1_API_VOTOS)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
     }

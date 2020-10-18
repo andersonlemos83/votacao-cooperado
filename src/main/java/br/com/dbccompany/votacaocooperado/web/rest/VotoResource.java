@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/voto")
+@RequestMapping("/v1/api/votos")
 @CrossOrigin(origins = "*")
 public class VotoResource {
 

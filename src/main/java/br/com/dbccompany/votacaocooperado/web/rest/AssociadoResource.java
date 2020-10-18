@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/associado")
+@RequestMapping("/v1/api/associados")
 @CrossOrigin(origins = "*")
 public class AssociadoResource {
 

@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/pauta")
+@RequestMapping("/v1/api/pautas")
 @CrossOrigin(origins = "*")
 public class PautaResource {
 

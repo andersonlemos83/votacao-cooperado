@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/assembleia")
+@RequestMapping("/v1/api/assembleias")
 @CrossOrigin(origins = "*")
 public class AssembleiaResource {
 

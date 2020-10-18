@@ -44,15 +44,15 @@ OBS: Alguns testes da feature Cadastrar Associado podem apresentar intermitênci
 **7. Lista de serviços**
 
 Apesar da documentação da API ser gerada via Swagger, segue uma breve listagem dos serviços disponíveis:
-- Listar todas as Pautas: GET - /api/pauta
-- Cadastrar uma nova Pauta: POST - /api/pauta
-- Buscar Pauta Consolidada por ID: GET - /api/pauta/{id}
-- Listar todas as Assembleias: GET - /api/assembleia
-- Cadastrar uma nova Assembleia: POST - /api/assembleia
-- Listar todos os Associados: GET - /api/associado
-- Cadastrar um novo Associado: POST - /api/associado
-- Listar todos os Votos: GET - /api/voto
-- Cadastrar um novo Voto: POST - /api/voto
+- Listar todas as Pautas: GET - /v1/api/pautas
+- Cadastrar uma nova Pauta: POST - /v1/api/pautas
+- Buscar Pauta Consolidada por ID: GET - /v1/api/pautas/{id}
+- Listar todas as Assembleias: GET - /v1/api/assembleias
+- Cadastrar uma nova Assembleia: POST - /v1/api/assembleias
+- Listar todos os Associados: GET - /v1/api/associados
+- Cadastrar um novo Associado: POST - /v1/api/associados
+- Listar todos os Votos: GET - /v1/api/votos
+- Cadastrar um novo Voto: POST - /v1/api/votos
 
 **8. Sugestão de uso**
 

@@ -9,22 +9,22 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static br.com.dbccompany.votacaocooperado.util.ConstanteUtil.URI_V1_API_VOTOS;
+
 @Component
 public class VotoFuncionalidade {
-
-    private static final String API_VOTO = "/api/voto";
 
     @Autowired
     private MockMvc mockMvc;
 
     public ResultActions listarTodas() throws Exception {
-        return mockMvc.perform(MockMvcRequestBuilders.get(API_VOTO)
+        return mockMvc.perform(MockMvcRequestBuilders.get(URI_V1_API_VOTOS)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
     }
 
     public ResultActions cadastrar(VotoDataTable votoDataTable) throws Exception {
-        return mockMvc.perform(MockMvcRequestBuilders.post(API_VOTO)
+        return mockMvc.perform(MockMvcRequestBuilders.post(URI_V1_API_VOTOS)
                 .content(new ObjectMapper().writeValueAsString(votoDataTable))
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .accept(MediaType.APPLICATION_JSON_UTF8));

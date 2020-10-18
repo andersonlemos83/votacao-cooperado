@@ -9,22 +9,22 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static br.com.dbccompany.votacaocooperado.util.ConstanteUtil.URI_V1_API_ASSEMBLEIAS;
+
 @Component
 public class AssembleiaFuncionalidade {
-
-    private static final String API_ASSEMBLEIA = "/api/assembleia";
 
     @Autowired
     private MockMvc mockMvc;
 
     public ResultActions listarTodas() throws Exception {
-        return mockMvc.perform(MockMvcRequestBuilders.get(API_ASSEMBLEIA)
+        return mockMvc.perform(MockMvcRequestBuilders.get(URI_V1_API_ASSEMBLEIAS)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
     }
 
     public ResultActions cadastrar(AssembleiaDataTable assembleiaDataTable) throws Exception {
-        return mockMvc.perform(MockMvcRequestBuilders.post(API_ASSEMBLEIA)
+        return mockMvc.perform(MockMvcRequestBuilders.post(URI_V1_API_ASSEMBLEIAS)
                 .content(new ObjectMapper().writeValueAsString(assembleiaDataTable))
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .accept(MediaType.APPLICATION_JSON_UTF8));

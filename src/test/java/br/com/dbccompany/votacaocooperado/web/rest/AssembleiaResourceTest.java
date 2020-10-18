@@ -27,6 +27,7 @@ import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Date;
 
+import static br.com.dbccompany.votacaocooperado.util.ConstanteUtil.URI_V1_API_ASSEMBLEIAS;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -36,8 +37,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = VotacaoCooperadoApplication.class)
 @AutoConfigureMockMvc
 public class AssembleiaResourceTest {
-
-    private static final String API_ASSEMBLEIA = "/api/assembleia";
 
     @Autowired
     protected MockMvc mvc;
@@ -89,14 +88,14 @@ public class AssembleiaResourceTest {
     }
 
     private ResultActions cadastrarAssembleia() throws Exception {
-        return mvc.perform(MockMvcRequestBuilders.post(API_ASSEMBLEIA)
+        return mvc.perform(MockMvcRequestBuilders.post(URI_V1_API_ASSEMBLEIAS)
                 .content(new ObjectMapper().writeValueAsString(assembleiaDto))
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .accept(MediaType.APPLICATION_JSON_UTF8));
     }
 
     private ResultActions listarTodos() throws Exception {
-        return mvc.perform(MockMvcRequestBuilders.get(API_ASSEMBLEIA)
+        return mvc.perform(MockMvcRequestBuilders.get(URI_V1_API_ASSEMBLEIAS)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
     }
