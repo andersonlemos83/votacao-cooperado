@@ -38,6 +38,7 @@ No cooperativismo, cada associado possui um voto e as decisões são tomadas em 
 - Conversão de entidades em DTO e vice-versa com Model Mapper
 - Documentação da API e seus serviços com Swagger (springdoc-openapi-ui)
 - Integração Contínua com Travis CI
+- Análise de cobertura de testes com Codecov
 
 **5. Sobre os testes**
 
