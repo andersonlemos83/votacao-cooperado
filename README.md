@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/andersonlemos83/votacao-cooperado.svg?branch=main)](https://travis-ci.org/andersonlemos83/votacao-cooperado)
+[![Build Status](https://travis-ci.org/andersonlemos83/votacao-cooperado.svg?branch=main)](https://travis-ci.org/andersonlemos83/votacao-cooperado) [![codecov](https://codecov.io/gh/andersonlemos83/votacao-cooperado/branch/main/graph/badge.svg?token=BYOJWGTKMR)](https://codecov.io/gh/andersonlemos83/votacao-cooperado)
 
 # Sobre o projeto Votação Cooperado API
 
