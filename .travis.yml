@@ -1,6 +1,11 @@
 language: java
+
 jdk:
   - openjdk8
+
 before_install:
   - chmod +x mvnw
   - export TZ=America/Maceio
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
