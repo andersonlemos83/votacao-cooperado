@@ -31,10 +31,11 @@ No cooperativismo, cada associado possui um voto e as decisões são tomadas em 
 **4. Informações técnicas**
 - Linguagem Java 8
 - Ecossistema do Spring Boot 2.3.4
+- Gerenciamento de dependências com o Maven 3.3.9
 - Banco H2
   - Arquivo: Ambientes de desenvolvimento e produção
   - Memória: Ambientes de testes
-- Testes com JUnit, Mockto e Cucumber
+- Testes com JUnit, Mockito e Cucumber
 - Conversão de entidades em DTO e vice-versa com Model Mapper
 - Documentação da API e seus serviços com Swagger (springdoc-openapi-ui)
 - Integração Contínua com Travis CI
@@ -87,4 +88,4 @@ Gostaria de utilizar este espaço para debater um pouco mais sobre as features q
 
 **10. That's all folks!**
 
-Caro avaliador, se você chegou até este ponto, eu espero ter causado uma boa impressão.
+Caro avaliador, obrigado pela oportunidade.
