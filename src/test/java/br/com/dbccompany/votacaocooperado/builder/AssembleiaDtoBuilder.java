@@ -6,7 +6,7 @@ import java.util.Date;
 
 public final class AssembleiaDtoBuilder {
 
-    private AssembleiaDto assembleiaDto = new AssembleiaDto();
+    private final AssembleiaDto assembleiaDto = new AssembleiaDto();
 
     public static AssembleiaDtoBuilder umaAssembleia() {
         return new AssembleiaDtoBuilder();
@@ -14,10 +14,10 @@ public final class AssembleiaDtoBuilder {
 
     public static AssembleiaDtoBuilder umaAssembleiaQualquer() {
         return umaAssembleia()
-                .comId(1l)
+                .comId(1L)
                 .comDataCriacao(new Date())
                 .comTempoDuracao(1)
-                .comPauta(1l);
+                .comPauta(1L);
     }
 
     public AssembleiaDtoBuilder comId(Long id) {

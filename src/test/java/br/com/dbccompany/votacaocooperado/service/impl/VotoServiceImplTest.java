@@ -45,7 +45,7 @@ public class VotoServiceImplTest {
 
         votosEsperados = new ArrayList<>();
 
-        idAssembleiEsperado = 1l;
+        idAssembleiEsperado = 1L;
 
         Assembleia assembleia = AssembleiaBuilder.umaAssembleia().comId(idAssembleiEsperado).build();
         votoEsperado = VotoBuilder.umVotoQualquer().comAssembleia(assembleia).build();

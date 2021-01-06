@@ -9,7 +9,7 @@ import java.util.List;
 
 public final class AssembleiaBuilder {
 
-    private Assembleia assembleia = new Assembleia();
+    private final Assembleia assembleia = new Assembleia();
 
     public static AssembleiaBuilder umaAssembleia() {
         return new AssembleiaBuilder();
@@ -17,7 +17,7 @@ public final class AssembleiaBuilder {
 
     public static AssembleiaBuilder umaAssembleiaQualquer() {
         return umaAssembleia()
-                .comId(1l)
+                .comId(1L)
                 .comDataCriacao(new Date())
                 .comTempoDuracao(1)
                 .comPauta(PautaBuilder.umaPautaQualquer().build());

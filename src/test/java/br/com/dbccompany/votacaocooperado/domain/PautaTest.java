@@ -59,7 +59,7 @@ public class PautaTest {
 
     private Assembleia gerarAssembleia(int minutos, int quantidadeVotosSim, int quantidadeVotosNao) {
         return AssembleiaBuilder.umaAssembleiaQualquer()
-                .comId(Long.valueOf(minutos))
+                .comId((long) minutos)
                 .comDataCriacao(DataHoraBuilder.umaData().nMinutosAtras(minutos).build())
                 .comTempoDuracao(5)
                 .comVotos(gerarVotos(quantidadeVotosSim, quantidadeVotosNao))

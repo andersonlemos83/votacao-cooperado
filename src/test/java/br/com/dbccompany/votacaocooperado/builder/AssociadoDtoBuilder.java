@@ -4,14 +4,14 @@ import br.com.dbccompany.votacaocooperado.web.dto.AssociadoDto;
 
 public final class AssociadoDtoBuilder {
 
-    private AssociadoDto associadoDto = new AssociadoDto();
+    private final AssociadoDto associadoDto = new AssociadoDto();
 
     public static AssociadoDtoBuilder umAssociado() {
         return new AssociadoDtoBuilder();
     }
 
     public static AssociadoDtoBuilder umAssociadoQualquer() {
-        return umAssociado().comId(1l).comNome("Klaus Meine").comCpf("78186436057");
+        return umAssociado().comId(1L).comNome("Klaus Meine").comCpf("78186436057");
     }
 
     public AssociadoDtoBuilder comId(Long id) {

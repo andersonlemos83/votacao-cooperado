@@ -44,7 +44,7 @@ public class ValidadorAssembleiaImplTest {
     public void inicializarContexto() {
         validadorAssembleia = new ValidadorAssembleiaImpl(assembleiaRepositoryMock, pautaRepositoryMock);
 
-        idAssembleia = 1l;
+        idAssembleia = 1L;
         assembleia = AssembleiaBuilder.umaAssembleiaQualquer()
                 .comId(idAssembleia)
                 .comPauta(umaPautaQualquer().build())
@@ -54,7 +54,7 @@ public class ValidadorAssembleiaImplTest {
 
     @Test
     public void aoValidarDadoQueNaoExistaAssembleiaDeveriaLancarAhMensagemEsperada() {
-        Mockito.when(assembleiaRepositoryMock.findById(idAssembleia)).thenReturn(ofNullable(null));
+        Mockito.when(assembleiaRepositoryMock.findById(idAssembleia)).thenReturn(Optional.empty());
 
         exception.expect(NegocioException.class);
         exception.expectMessage("A assembleia informada não existe");
@@ -85,7 +85,7 @@ public class ValidadorAssembleiaImplTest {
 
     @Test
     public void aoValidarDadoQueNaoExistaPautaDeveriaLancarAhMensagemEsperada() {
-        Mockito.when(pautaRepositoryMock.findById(Mockito.any(Long.class))).thenReturn(ofNullable(null));
+        Mockito.when(pautaRepositoryMock.findById(Mockito.any(Long.class))).thenReturn(Optional.empty());
 
         exception.expect(NegocioException.class);
         exception.expectMessage("A pauta informada não existe");

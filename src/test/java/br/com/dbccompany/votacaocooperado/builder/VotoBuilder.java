@@ -10,7 +10,7 @@ import static br.com.dbccompany.votacaocooperado.domain.TipoVoto.SIM;
 
 public final class VotoBuilder {
 
-    private Voto voto = new Voto();
+    private final Voto voto = new Voto();
 
     public static VotoBuilder umVoto() {
         return new VotoBuilder();
@@ -18,7 +18,7 @@ public final class VotoBuilder {
 
     public static VotoBuilder umVotoQualquer() {
         return umVoto()
-                .comId(1l)
+                .comId(1L)
                 .comTipoVoto(SIM)
                 .comAssociado(AssociadoBuilder.umAssociadoQualquer().build())
                 .comAssembleia(AssembleiaBuilder.umaAssembleiaQualquer().build());

@@ -21,75 +21,43 @@ public class DataHoraBuilder {
     }
 
     public DataHoraBuilder comDiaDoMes(final int diaDoMes) {
-        return gerarNovaInstanciaDeDataHoraBuilder(new Command() {
-            @Override
-            public void execute(DataHoraBuilder DataHoraBuilder) {
-                DataHoraBuilder.calendar.set(Calendar.DAY_OF_MONTH, diaDoMes);
-            }
-        });
+        final Command command = DataHoraBuilder -> DataHoraBuilder.calendar.set(Calendar.DAY_OF_MONTH, diaDoMes);
+        return gerarNovaInstanciaDeDataHoraBuilder(command);
     }
 
     public DataHoraBuilder nDiasAtras(final int numeroDeDias) {
-        return gerarNovaInstanciaDeDataHoraBuilder(new Command() {
-            @Override
-            public void execute(DataHoraBuilder DataHoraBuilder) {
-                DataHoraBuilder.calendar.add(Calendar.DAY_OF_MONTH, -numeroDeDias);
-            }
-        });
+        final Command command = DataHoraBuilder -> DataHoraBuilder.calendar.add(Calendar.DAY_OF_MONTH, -numeroDeDias);
+        return gerarNovaInstanciaDeDataHoraBuilder(command);
     }
 
     public DataHoraBuilder comMes(final int mes) {
-        return gerarNovaInstanciaDeDataHoraBuilder(new Command() {
-            @Override
-            public void execute(DataHoraBuilder DataHoraBuilder) {
-                DataHoraBuilder.calendar.set(Calendar.MONTH, mes - 1);
-            }
-        });
+        final Command command = DataHoraBuilder -> DataHoraBuilder.calendar.set(Calendar.MONTH, mes - 1);
+        return gerarNovaInstanciaDeDataHoraBuilder(command);
     }
 
     public DataHoraBuilder comAno(final int ano) {
-        return gerarNovaInstanciaDeDataHoraBuilder(new Command() {
-            @Override
-            public void execute(DataHoraBuilder DataHoraBuilder) {
-                DataHoraBuilder.calendar.set(Calendar.YEAR, ano);
-            }
-        });
+        final Command command = DataHoraBuilder -> DataHoraBuilder.calendar.set(Calendar.YEAR, ano);
+        return gerarNovaInstanciaDeDataHoraBuilder(command);
     }
 
     public DataHoraBuilder comHora(final int hora) {
-        return gerarNovaInstanciaDeDataHoraBuilder(new Command() {
-            @Override
-            public void execute(DataHoraBuilder DataHoraBuilder) {
-                DataHoraBuilder.calendar.set(Calendar.HOUR_OF_DAY, hora);
-            }
-        });
+        final Command command = DataHoraBuilder -> DataHoraBuilder.calendar.set(Calendar.HOUR_OF_DAY, hora);
+        return gerarNovaInstanciaDeDataHoraBuilder(command);
     }
 
     public DataHoraBuilder comMinuto(final int minuto) {
-        return gerarNovaInstanciaDeDataHoraBuilder(new Command() {
-            @Override
-            public void execute(DataHoraBuilder DataHoraBuilder) {
-                DataHoraBuilder.calendar.set(Calendar.MINUTE, minuto);
-            }
-        });
+        final Command command = DataHoraBuilder -> DataHoraBuilder.calendar.set(Calendar.MINUTE, minuto);
+        return gerarNovaInstanciaDeDataHoraBuilder(command);
     }
 
     public DataHoraBuilder nMinutosAtras(final int numeroDeMinutos) {
-        return gerarNovaInstanciaDeDataHoraBuilder(new Command() {
-            @Override
-            public void execute(DataHoraBuilder DataHoraBuilder) {
-                DataHoraBuilder.calendar.add(Calendar.MINUTE, -numeroDeMinutos);
-            }
-        });
+        final Command command = DataHoraBuilder -> DataHoraBuilder.calendar.add(Calendar.MINUTE, -numeroDeMinutos);
+        return gerarNovaInstanciaDeDataHoraBuilder(command);
     }
 
     public DataHoraBuilder comSegundo(final int segundo) {
-        return gerarNovaInstanciaDeDataHoraBuilder(new Command() {
-            @Override
-            public void execute(DataHoraBuilder DataHoraBuilder) {
-                DataHoraBuilder.calendar.set(Calendar.SECOND, segundo);
-            }
-        });
+        final Command command = DataHoraBuilder -> DataHoraBuilder.calendar.set(Calendar.SECOND, segundo);
+        return gerarNovaInstanciaDeDataHoraBuilder(command);
     }
 
     public Date build() {

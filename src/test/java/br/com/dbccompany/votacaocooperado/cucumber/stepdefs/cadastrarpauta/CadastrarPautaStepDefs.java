@@ -18,7 +18,7 @@ public class CadastrarPautaStepDefs extends StepDefs {
     @Autowired
     private PautaVerificador pautaVerificador;
 
-    private PautaDataTable pautaDataTable = new PautaDataTable();
+    private final PautaDataTable pautaDataTable = new PautaDataTable();
 
     @Before
     public void inicializarContexto() {

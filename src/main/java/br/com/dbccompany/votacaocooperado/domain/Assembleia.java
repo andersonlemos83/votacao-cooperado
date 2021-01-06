@@ -97,7 +97,7 @@ public class Assembleia implements Serializable {
                 .orElse(emptyList())
                 .stream()
                 .collect(groupingBy(Voto::ehSim, counting()));
-        return apuracao.getOrDefault(TRUE, 0l).intValue();
+        return apuracao.getOrDefault(TRUE, 0L).intValue();
     }
 
     public int obterQuantidadeVotosNao() {
@@ -105,7 +105,7 @@ public class Assembleia implements Serializable {
                 .orElse(emptyList())
                 .stream()
                 .collect(groupingBy(Voto::ehNao, counting()));
-        return apuracao.getOrDefault(TRUE, 0l).intValue();
+        return apuracao.getOrDefault(TRUE, 0L).intValue();
     }
 
     public StatusAssembleia obterStatusAssembleia() {

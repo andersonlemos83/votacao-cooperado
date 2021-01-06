@@ -4,14 +4,14 @@ import br.com.dbccompany.votacaocooperado.domain.Pauta;
 
 public final class PautaBuilder {
 
-    private Pauta pauta = new Pauta();
+    private final Pauta pauta = new Pauta();
 
     public static PautaBuilder umaPauta() {
         return new PautaBuilder();
     }
 
     public static PautaBuilder umaPautaQualquer() {
-        return umaPauta().comId(1l).comDecricao("Emissão de novas cotas do fundo Musical");
+        return umaPauta().comId(1L).comDecricao("Emissão de novas cotas do fundo Musical");
     }
 
     public PautaBuilder comId(Long id) {

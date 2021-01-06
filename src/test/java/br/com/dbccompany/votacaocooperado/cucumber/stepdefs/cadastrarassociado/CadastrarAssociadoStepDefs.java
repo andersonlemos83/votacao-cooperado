@@ -21,7 +21,7 @@ public class CadastrarAssociadoStepDefs extends StepDefs {
     @Autowired
     private AssociadoVerificador associadoVerificador;
 
-    private AssociadoDataTable associadoDataTable = new AssociadoDataTable();
+    private final AssociadoDataTable associadoDataTable = new AssociadoDataTable();
 
     @Before
     public void inicializarContexto() {

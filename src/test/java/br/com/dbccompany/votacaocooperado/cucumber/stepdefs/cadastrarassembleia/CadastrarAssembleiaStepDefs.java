@@ -22,7 +22,7 @@ public class CadastrarAssembleiaStepDefs extends StepDefs {
     @Autowired
     private AssembleiaVerificador assembleiaVerificador;
 
-    private AssembleiaDataTable assembleiaDataTable = new AssembleiaDataTable();
+    private final AssembleiaDataTable assembleiaDataTable = new AssembleiaDataTable();
 
     @Before
     public void inicializarContexto() {

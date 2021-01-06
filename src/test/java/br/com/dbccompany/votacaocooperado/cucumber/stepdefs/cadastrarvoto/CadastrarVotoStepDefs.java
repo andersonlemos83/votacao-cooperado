@@ -22,7 +22,7 @@ public class CadastrarVotoStepDefs extends StepDefs {
     @Autowired
     private VotoVerificador votoVerificador;
 
-    private VotoDataTable votoDataTable = new VotoDataTable();
+    private final VotoDataTable votoDataTable = new VotoDataTable();
 
     @Before
     public void inicializarContexto() {
@@ -37,7 +37,6 @@ public class CadastrarVotoStepDefs extends StepDefs {
     @E("^que seja informado a assembleia \"([^\"]*)\"$")
     public void queSejaInformadaAhAssembleia(Long idAssembleia) {
         votoDataTable.setIdAssembleia(idAssembleia);
-        ;
     }
 
     @E("^que seja informado o voto \"([^\"]*)\"$")

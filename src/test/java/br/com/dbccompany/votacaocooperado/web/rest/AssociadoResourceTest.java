@@ -22,7 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.util.Arrays;
+import java.util.Collections;
 
 import static br.com.dbccompany.votacaocooperado.util.ConstanteUtil.URI_V1_API_ASSOCIADOS;
 import static org.mockito.ArgumentMatchers.any;
@@ -55,7 +55,7 @@ public class AssociadoResourceTest {
 
     @Test
     public void aoListarTodosDeveriaRetornarAsAssociadosEsperadas() throws Exception {
-        BDDMockito.given(associadoServiceMock.listarTodos()).willReturn(Arrays.asList(associado));
+        BDDMockito.given(associadoServiceMock.listarTodos()).willReturn(Collections.singletonList(associado));
         BDDMockito.given(modelMapperMock.map(associado, AssociadoDto.class)).willReturn(associadoDto);
 
         ResultActions resultActions = listarTodos();

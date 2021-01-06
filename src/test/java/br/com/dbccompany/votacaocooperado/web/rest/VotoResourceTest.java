@@ -23,7 +23,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.util.Arrays;
+import java.util.Collections;
 
 import static br.com.dbccompany.votacaocooperado.util.ConstanteUtil.URI_V1_API_VOTOS;
 import static org.mockito.ArgumentMatchers.any;
@@ -56,7 +56,7 @@ public class VotoResourceTest {
 
     @Test
     public void aoListarTodosDeveriaRetornarAsVotosEsperadas() throws Exception {
-        BDDMockito.given(votoServiceMock.listarTodos()).willReturn(Arrays.asList(voto));
+        BDDMockito.given(votoServiceMock.listarTodos()).willReturn(Collections.singletonList(voto));
         BDDMockito.given(modelMapperMock.map(voto, VotoDto.class)).willReturn(votoDto);
 
         ResultActions resultActions = listarTodos();

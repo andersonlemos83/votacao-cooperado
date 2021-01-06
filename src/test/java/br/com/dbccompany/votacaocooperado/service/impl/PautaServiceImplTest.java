@@ -44,7 +44,7 @@ public class PautaServiceImplTest {
 
         pautasEsperadas = new ArrayList<>();
         pautaEsperada = PautaBuilder.umaPautaQualquer().build();
-        idEsperado = 1l;
+        idEsperado = 1L;
         pautaOptionalEsperada = ofNullable(pautaEsperada);
     }
 
@@ -86,7 +86,7 @@ public class PautaServiceImplTest {
 
     @Test
     public void aoBuscarPorIdDadoQueNaoExistaPautaDeveriaLancarAhMensagemEsperada() {
-        Mockito.when(pautaRepositoryMock.findById(idEsperado)).thenReturn(ofNullable(null));
+        Mockito.when(pautaRepositoryMock.findById(idEsperado)).thenReturn(Optional.empty());
 
         exception.expect(NegocioException.class);
         exception.expectMessage("A pauta informada não exite");

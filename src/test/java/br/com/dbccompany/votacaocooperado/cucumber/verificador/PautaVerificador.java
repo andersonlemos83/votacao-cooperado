@@ -32,8 +32,7 @@ public class PautaVerificador {
     public void verificarConsolidado(List<PautaConsolidadaDataTable> esperados, ResultActions retorno) throws Exception {
         retorno.andExpect(status().isOk());
 
-        for (int i = 0; i < esperados.size(); i++) {
-            final PautaConsolidadaDataTable esperado = esperados.get(i);
+        for (final PautaConsolidadaDataTable esperado : esperados) {
             retorno.andExpect(jsonPath("$.descricao").value(esperado.getDescricaoPauta()))
                     .andExpect(jsonPath("$.statusAssembleia").value(esperado.getStatusAssembleia().name()))
                     .andExpect(jsonPath("$.quantidadeVotosSim").value(esperado.getQuantidadeVotosSim()))

@@ -20,9 +20,9 @@ public class ValidadorVotoImpl implements ValidadorVoto {
     @Override
     public void validar(Voto voto) {
         Optional<Voto> votoOptinal = buscarVoto(voto);
-        if (votoOptinal.isPresent()) {
+        votoOptinal.ifPresent(v -> {
             throw new NegocioException("O associado já exerceu seu direito de voto para esta pauta");
-        }
+        });
     }
 
     private Optional<Voto> buscarVoto(Voto voto) {

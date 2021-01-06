@@ -4,14 +4,14 @@ import br.com.dbccompany.votacaocooperado.web.dto.PautaDto;
 
 public final class PautaDtoBuilder {
 
-    private PautaDto pautaDto = new PautaDto();
+    private final PautaDto pautaDto = new PautaDto();
 
     public static PautaDtoBuilder umaPauta() {
         return new PautaDtoBuilder();
     }
 
     public static PautaDtoBuilder umaPautaQualquer() {
-        return umaPauta().comId(1l).comDecricao("Emissão de novas cotas do fundo Musical");
+        return umaPauta().comId(1L).comDecricao("Emissão de novas cotas do fundo Musical");
     }
 
     public PautaDtoBuilder comId(Long id) {

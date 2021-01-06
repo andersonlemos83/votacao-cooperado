@@ -25,7 +25,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.text.MessageFormat;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 
 import static br.com.dbccompany.votacaocooperado.util.ConstanteUtil.URI_V1_API_PAUTAS;
@@ -66,7 +66,7 @@ public class PautaResourceTest {
 
     @Test
     public void aoListarTodosDeveriaRetornarAsPautasEsperadas() throws Exception {
-        BDDMockito.given(pautaServiceMock.listarTodos()).willReturn(Arrays.asList(pauta));
+        BDDMockito.given(pautaServiceMock.listarTodos()).willReturn(Collections.singletonList(pauta));
         BDDMockito.given(modelMapperMock.map(pauta, PautaDto.class)).willReturn(pautaDto);
 
         ResultActions resultActions = listarTodos();

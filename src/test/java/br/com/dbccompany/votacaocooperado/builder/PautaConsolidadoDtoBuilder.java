@@ -9,7 +9,7 @@ import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.ABERTA;
 
 public final class PautaConsolidadoDtoBuilder {
 
-    private PautaConsolidadaDto pautaConsolidadaDto = new PautaConsolidadaDto();
+    private final PautaConsolidadaDto pautaConsolidadaDto = new PautaConsolidadaDto();
 
     public static PautaConsolidadoDtoBuilder umaPautaConsolidada() {
         return new PautaConsolidadoDtoBuilder();

@@ -24,7 +24,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.text.MessageFormat;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 
 import static br.com.dbccompany.votacaocooperado.util.ConstanteUtil.URI_V1_API_ASSEMBLEIAS;
@@ -60,7 +60,7 @@ public class AssembleiaResourceTest {
 
     @Test
     public void aoListarTodosDeveriaRetornarAsAssembleiasEsperadas() throws Exception {
-        BDDMockito.given(assembleiaServiceMock.listarTodos()).willReturn(Arrays.asList(assembleia));
+        BDDMockito.given(assembleiaServiceMock.listarTodos()).willReturn(Collections.singletonList(assembleia));
         BDDMockito.given(modelMapperMock.map(assembleia, AssembleiaDto.class)).willReturn(assembleiaDto);
 
         ResultActions resultActions = listarTodos();
