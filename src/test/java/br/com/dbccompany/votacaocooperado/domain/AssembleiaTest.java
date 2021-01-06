@@ -53,6 +53,13 @@ public class AssembleiaTest {
     }
 
     @Test
+    public void aoChamarMetodoEstaFechadaDadoQueDataCriacaoEstejaNulaDeveriaRetornarVerdadeiro() {
+        assembleia.setDataCriacao(null);
+        assembleia.setTempoDuracao(1);
+        assertTrue("Deveria retornar verdadeiro", assembleia.estaFechada());
+    }
+
+    @Test
     public void aoChamarMetodoEstaFechadaDadoQueVotacaoNaoEstejaExpiradaDeveriaRetornarFalso() {
         assembleia.setDataCriacao(new Date());
         assembleia.setTempoDuracao(1);

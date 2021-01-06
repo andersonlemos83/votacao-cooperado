@@ -1,12 +1,13 @@
 package br.com.dbccompany.votacaocooperado.builder;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.GregorianCalendar;
+
+import static java.time.ZoneId.systemDefault;
 
 public class DataHoraBuilder {
 
-    private Calendar calendar = GregorianCalendar.getInstance();
+    private LocalDateTime localDateTime = LocalDateTime.now();
 
     public static DataHoraBuilder umaData() {
         return new DataHoraBuilder();
@@ -16,61 +17,54 @@ public class DataHoraBuilder {
 
     }
 
-    private DataHoraBuilder(DataHoraBuilder DataHoraBuilder) {
-        this.calendar = DataHoraBuilder.calendar;
-    }
-
     public DataHoraBuilder comDiaDoMes(final int diaDoMes) {
-        final Command command = DataHoraBuilder -> DataHoraBuilder.calendar.set(Calendar.DAY_OF_MONTH, diaDoMes);
-        return gerarNovaInstanciaDeDataHoraBuilder(command);
+        this.localDateTime = this.localDateTime.withDayOfMonth(diaDoMes);
+        return this;
     }
 
     public DataHoraBuilder nDiasAtras(final int numeroDeDias) {
-        final Command command = DataHoraBuilder -> DataHoraBuilder.calendar.add(Calendar.DAY_OF_MONTH, -numeroDeDias);
-        return gerarNovaInstanciaDeDataHoraBuilder(command);
+        this.localDateTime = localDateTime.minusDays(numeroDeDias);
+        return this;
     }
 
     public DataHoraBuilder comMes(final int mes) {
-        final Command command = DataHoraBuilder -> DataHoraBuilder.calendar.set(Calendar.MONTH, mes - 1);
-        return gerarNovaInstanciaDeDataHoraBuilder(command);
+        this.localDateTime = localDateTime.withMonth(mes);
+        return this;
     }
 
     public DataHoraBuilder comAno(final int ano) {
-        final Command command = DataHoraBuilder -> DataHoraBuilder.calendar.set(Calendar.YEAR, ano);
-        return gerarNovaInstanciaDeDataHoraBuilder(command);
+        this.localDateTime = localDateTime.withYear(ano);
+        return this;
     }
 
     public DataHoraBuilder comHora(final int hora) {
-        final Command command = DataHoraBuilder -> DataHoraBuilder.calendar.set(Calendar.HOUR_OF_DAY, hora);
-        return gerarNovaInstanciaDeDataHoraBuilder(command);
+        this.localDateTime = localDateTime.withHour(hora);
+        return this;
     }
 
     public DataHoraBuilder comMinuto(final int minuto) {
-        final Command command = DataHoraBuilder -> DataHoraBuilder.calendar.set(Calendar.MINUTE, minuto);
-        return gerarNovaInstanciaDeDataHoraBuilder(command);
+        this.localDateTime = localDateTime.withMinute(minuto);
+        return this;
     }
 
     public DataHoraBuilder nMinutosAtras(final int numeroDeMinutos) {
-        final Command command = DataHoraBuilder -> DataHoraBuilder.calendar.add(Calendar.MINUTE, -numeroDeMinutos);
-        return gerarNovaInstanciaDeDataHoraBuilder(command);
+        this.localDateTime = localDateTime.minusMinutes(numeroDeMinutos);
+        return this;
     }
 
     public DataHoraBuilder comSegundo(final int segundo) {
-        final Command command = DataHoraBuilder -> DataHoraBuilder.calendar.set(Calendar.SECOND, segundo);
-        return gerarNovaInstanciaDeDataHoraBuilder(command);
+        this.localDateTime = localDateTime.withSecond(segundo);
+        return this;
     }
 
     public Date build() {
-        return new Date(calendar.getTimeInMillis());
+        return Date.from(localDateTime.atZone(systemDefault()).toInstant());
     }
 
-    private DataHoraBuilder gerarNovaInstanciaDeDataHoraBuilder(Command command) {
-        DataHoraBuilder DataHoraBuilder = new DataHoraBuilder(this);
-        command.execute(DataHoraBuilder);
-        return DataHoraBuilder;
-    }
-
-    private interface Command {
-        void execute(DataHoraBuilder DataHoraBuilder);
+    public static void main(String[] args) {
+        final DataHoraBuilder dataHoraBuilder = DataHoraBuilder.umaData().nMinutosAtras(3);
+        LocalDateTime localDateTime = LocalDateTime.now();
+        localDateTime.withDayOfMonth(1);
+        System.out.println(dataHoraBuilder.build());
     }
 }

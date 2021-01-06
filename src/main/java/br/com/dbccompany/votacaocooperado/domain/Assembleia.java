@@ -2,12 +2,13 @@ package br.com.dbccompany.votacaocooperado.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.*;
 
 import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.ABERTA;
 import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.FECHADA;
 import static java.lang.Boolean.TRUE;
-import static java.util.Calendar.MINUTE;
+import static java.time.ZoneId.systemDefault;
 import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
@@ -86,10 +87,14 @@ public class Assembleia implements Serializable {
     }
 
     public boolean estaFechada() {
-        Calendar dataCriacaoCalendar = Calendar.getInstance();
-        dataCriacaoCalendar.setTime(dataCriacao);
-        dataCriacaoCalendar.add(MINUTE, tempoDuracao);
-        return Calendar.getInstance().after(dataCriacaoCalendar);
+        if (dataCriacao == null) {
+            return true;
+        }
+        return dataCriacao.toInstant()
+                .atZone(systemDefault())
+                .toLocalDateTime()
+                .plusMinutes(tempoDuracao)
+                .isBefore(LocalDateTime.now());
     }
 
     public int obterQuantidadeVotosSim() {
