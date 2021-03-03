@@ -1,0 +1,12 @@
+version: '2'
+services:
+  votacao-cooperado-api-app:
+    container_name: votacao-cooperado-api
+    image: andersonlemos83/votacao-cooperado-api:0.0.2-SNAPSHOT
+    environment:
+      TZ: America/Maceio
+      _JAVA_OPTIONS: -Xms128m -Xmx256m
+    ports:
+      - 8095:8081
+    expose:
+      - 8095
