@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: votacao-cooperado-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: votacao-cooperado-api
+  template:
+    metadata:
+      labels:
+        app: votacao-cooperado-api
+    spec:
+      containers:
+        - name: votacao-cooperado-api
+          image: andersonlemos83/votacao-cooperado-api:0.0.2-SNAPSHOT
+          ports:
+            - containerPort: 8081
