@@ -109,10 +109,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>pl.project13.maven</groupId>-->
-<!--			<artifactId>git-commit-id-plugin</artifactId>-->
-<!--		</dependency>-->
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-prometheus</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

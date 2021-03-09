@@ -9,11 +9,16 @@ spec:
       app: votacao-cooperado-api
   template:
     metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: /metrics
+        prometheus.io/port: "8081"
       labels:
         app: votacao-cooperado-api
     spec:
       containers:
         - name: votacao-cooperado-api
           image: andersonlemos83/votacao-cooperado-api:0.0.3-SNAPSHOT
+          imagePullPolicy: "Always"
           ports:
             - containerPort: 8081

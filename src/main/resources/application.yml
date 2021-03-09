@@ -1,0 +1,41 @@
+server:
+  port: 8081
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:h2:file:./votacao-cooperado-h2-db
+    username: sa
+    password: sa
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  h2:
+    console:
+      path: /h2-console
+      enabled: true
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+management:
+  endpoints:
+    web:
+      base-path: /
+      path-mapping:
+        prometheus: /metrics
+      exposure:
+        include: '*'
+        exclude: metrics
+  metrics:
+    enabled: true
+    export:
+      prometheus:
+        enabled: true
+  endpoint:
+    health:
+      show-details: always
+    prometheus:
+      enabled: true
