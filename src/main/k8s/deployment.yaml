@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: votacao-cooperado-api
-          image: andersonlemos83/votacao-cooperado-api:0.0.2-SNAPSHOT
+          image: andersonlemos83/votacao-cooperado-api:0.0.3-SNAPSHOT
           ports:
             - containerPort: 8081
