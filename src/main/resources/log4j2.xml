@@ -1,0 +1,26 @@
+<Configuration monitorInterval="300" status="WARN">
+    <properties>
+        <property name="LOG_HOME">/tmp/xbatch_log</property>
+        <property name="FILE_NAME">batchlog</property>
+    </properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} -- %msg%n"/>
+        </Console>
+        <GELF name="gelfAppender" server="127.0.0.1" port="12201" hostName="votacao-cooperado-udp-host" protocol="UDP">
+            <KeyValuePair key="environment" value="DEV"/>
+            <KeyValuePair key="application" value="votacao-cooperado-api"/>
+            <KeyValuePair key="additionalFields" value="{'environment': 'DEV', 'application': 'votacao-cooperado-api'}"/>
+        </GELF>
+    </Appenders>
+
+    <Loggers>
+        <Logger additivity="false" level="error" name="com.daimler.xbatch.gssn.step">
+            <AppenderRef ref="gelfAppender"/>
+        </Logger>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="gelfAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>
