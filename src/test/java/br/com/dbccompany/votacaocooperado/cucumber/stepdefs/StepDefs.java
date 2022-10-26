@@ -21,7 +21,7 @@ import static java.text.MessageFormat.format;
 
 @WebAppConfiguration
 @SpringBootTest
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc(printOnlyOnFailure = false)
 @ContextConfiguration(classes = {VotacaoCooperadoApplication.class, VotacaoCooperadoConfigTest.class})
 public class StepDefs {
 
