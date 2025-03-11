@@ -6,16 +6,16 @@ import br.com.dbccompany.votacaocooperado.repository.AssociadoRepository;
 import br.com.dbccompany.votacaocooperado.repository.CpfRepository;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorAssociado;
 import br.com.dbccompany.votacaocooperado.shared.exception.NegocioException;
-import org.junit.Before;
-import org.junit.Rule;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.rules.ExpectedException;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static java.util.Optional.ofNullable;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SuppressWarnings("java:S5786") // Public required for JUnit test suite
 @ExtendWith(SpringExtension.class)
@@ -29,12 +29,9 @@ public class ValidadorAssociadoImplTest {
     @Mock
     private AssociadoRepository associadoRepositoryMock;
 
-    @Rule
-    public ExpectedException exception = ExpectedException.none();
-
     private Associado associado;
 
-    @Before
+    @BeforeEach
     public void inicializarContexto() {
         validadorAssociado = new ValidadorAssociadoImpl(cpfRepositoryMock, associadoRepositoryMock);
 
@@ -45,10 +42,8 @@ public class ValidadorAssociadoImplTest {
     public void aoValidarDadoQueCpfSejaInvalidoDeveriaLancarAhMensagemEsperada() {
         Mockito.when(cpfRepositoryMock.verificarSeEstaValido(associado.getCpf())).thenReturn(false);
 
-        exception.expect(NegocioException.class);
-        exception.expectMessage("O CPF do associado é inválido");
-
-        validadorAssociado.validar(associado);
+        NegocioException thrown = assertThrows(NegocioException.class, () -> validadorAssociado.validar(associado));
+        assertEquals("O CPF do associado é inválido", thrown.getMessage());
     }
 
     @Test
@@ -56,10 +51,8 @@ public class ValidadorAssociadoImplTest {
         Mockito.when(cpfRepositoryMock.verificarSeEstaValido(associado.getCpf())).thenReturn(true);
         Mockito.when(associadoRepositoryMock.findByCpf(associado.getCpf())).thenReturn(ofNullable(associado));
 
-        exception.expect(NegocioException.class);
-        exception.expectMessage("O CPF informado já está cadastrado");
-
-        validadorAssociado.validar(associado);
+        NegocioException thrown = assertThrows(NegocioException.class, () -> validadorAssociado.validar(associado));
+        assertEquals("O CPF informado já está cadastrado", thrown.getMessage());
     }
 
     @Test

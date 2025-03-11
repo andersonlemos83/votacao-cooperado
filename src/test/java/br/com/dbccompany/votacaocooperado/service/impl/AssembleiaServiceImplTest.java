@@ -5,7 +5,7 @@ import br.com.dbccompany.votacaocooperado.domain.Assembleia;
 import br.com.dbccompany.votacaocooperado.repository.AssembleiaRepository;
 import br.com.dbccompany.votacaocooperado.service.AssembleiaService;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorAssembleia;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -33,7 +33,7 @@ public class AssembleiaServiceImplTest {
     private List<Assembleia> assembleiasEsperadas;
     private Assembleia assembleiaEsperada;
 
-    @Before
+    @BeforeEach
     public void inicializarContexto() {
         assembleiaService = new AssembleiaServiceImpl(validadorAssembleiaMock, assembleiaRepositoryMock);
 

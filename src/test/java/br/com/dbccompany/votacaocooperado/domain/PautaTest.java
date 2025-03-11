@@ -4,7 +4,7 @@ import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
 import br.com.dbccompany.votacaocooperado.builder.DataHoraBuilder;
 import br.com.dbccompany.votacaocooperado.builder.PautaBuilder;
 import br.com.dbccompany.votacaocooperado.builder.VotoBuilder;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -22,7 +22,7 @@ public class PautaTest {
     private Pauta pauta;
     private Assembleia assembleiaAtual;
 
-    @Before
+    @BeforeEach
     public void inicializarContexto() {
         pauta = PautaBuilder.umaPautaQualquer().build();
     }

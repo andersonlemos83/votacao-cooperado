@@ -33,9 +33,9 @@ management:
     enabled: true
     export:
     prometheus:
-      access: unrestricted
+      enabled: true
   endpoint:
     health:
       show-details: always
     prometheus:
-      enabled: true
+      access: unrestricted

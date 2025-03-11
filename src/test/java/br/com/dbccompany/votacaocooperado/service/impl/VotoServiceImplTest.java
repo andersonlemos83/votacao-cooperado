@@ -8,7 +8,7 @@ import br.com.dbccompany.votacaocooperado.repository.VotoRepository;
 import br.com.dbccompany.votacaocooperado.service.VotoService;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorAssembleia;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorVoto;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -40,7 +40,7 @@ public class VotoServiceImplTest {
     private Voto votoEsperado;
     private Long idAssembleiEsperado;
 
-    @Before
+    @BeforeEach
     public void inicializarContexto() {
         votoService = new VotoServiceImpl(votoRepositoryMock, validadorAssembleiaMock, validadorVotoMock);
 

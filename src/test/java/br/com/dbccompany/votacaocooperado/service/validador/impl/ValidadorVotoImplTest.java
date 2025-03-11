@@ -9,14 +9,15 @@ import br.com.dbccompany.votacaocooperado.domain.Voto;
 import br.com.dbccompany.votacaocooperado.repository.VotoRepository;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorVoto;
 import br.com.dbccompany.votacaocooperado.shared.exception.NegocioException;
-import org.junit.Before;
-import org.junit.Rule;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.rules.ExpectedException;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SuppressWarnings("java:S5786") // Public required for JUnit test suite
 @ExtendWith(SpringExtension.class)
@@ -27,14 +28,11 @@ public class ValidadorVotoImplTest {
     @Mock
     private VotoRepository votoRepositoryMock;
 
-    @Rule
-    public ExpectedException exception = ExpectedException.none();
-
     private Voto voto;
     private Assembleia assembleia;
     private Associado associado;
 
-    @Before
+    @BeforeEach
     public void inicializarContexto() {
         validadorVoto = new ValidadorVotoImpl(votoRepositoryMock);
 
@@ -47,10 +45,8 @@ public class ValidadorVotoImplTest {
     public void aoValidarDadoQueExistaVotoDeveriaLancarAhMensagemEsperada() {
         Mockito.when(votoRepositoryMock.findByAssociado_IdAndAssembleia_Id(associado.getId(), assembleia.getId())).thenReturn(voto);
 
-        exception.expect(NegocioException.class);
-        exception.expectMessage("O associado já exerceu seu direito de voto para esta pauta");
-
-        validadorVoto.validar(voto);
+        NegocioException thrown = assertThrows(NegocioException.class, () -> validadorVoto.validar(voto));
+        assertEquals("O associado já exerceu seu direito de voto para esta pauta", thrown.getMessage());
     }
 
     @Test

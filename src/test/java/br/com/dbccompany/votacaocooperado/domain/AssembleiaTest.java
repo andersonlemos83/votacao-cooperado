@@ -3,7 +3,7 @@ package br.com.dbccompany.votacaocooperado.domain;
 import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
 import br.com.dbccompany.votacaocooperado.builder.DataHoraBuilder;
 import br.com.dbccompany.votacaocooperado.builder.PautaBuilder;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -28,7 +28,7 @@ public class AssembleiaTest {
 
     private Assembleia assembleia;
 
-    @Before
+    @BeforeEach
     public void inicializarContexto() {
         assembleia = AssembleiaBuilder.umaAssembleiaQualquer().build();
     }

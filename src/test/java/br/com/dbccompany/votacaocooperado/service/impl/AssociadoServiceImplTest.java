@@ -5,7 +5,7 @@ import br.com.dbccompany.votacaocooperado.domain.Associado;
 import br.com.dbccompany.votacaocooperado.repository.AssociadoRepository;
 import br.com.dbccompany.votacaocooperado.service.AssociadoService;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorAssociado;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -33,7 +33,7 @@ public class AssociadoServiceImplTest {
     private List<Associado> associadosEsperados;
     private Associado associadoEsperado;
 
-    @Before
+    @BeforeEach
     public void inicializarContexto() {
         associadoService = new AssociadoServiceImpl(validadorAssociadoMock, associadoRepositoryMock);
 

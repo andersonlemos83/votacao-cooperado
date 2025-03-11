@@ -1,22 +1,23 @@
 package br.com.dbccompany.votacaocooperado.web.rest;
 
-import br.com.dbccompany.votacaocooperado.VotacaoCooperadoApplication;
 import br.com.dbccompany.votacaocooperado.builder.VotoBuilder;
 import br.com.dbccompany.votacaocooperado.builder.VotoDtoBuilder;
 import br.com.dbccompany.votacaocooperado.domain.Voto;
 import br.com.dbccompany.votacaocooperado.service.VotoService;
 import br.com.dbccompany.votacaocooperado.web.dto.VotoDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.BDDMockito;
 import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -30,23 +31,24 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SuppressWarnings("java:S5786") // Public required for JUnit test suite
-@AutoConfigureMockMvc
-@SpringBootTest(classes = VotacaoCooperadoApplication.class)
+@ActiveProfiles("test")
+@ExtendWith(MockitoExtension.class)
+@WebMvcTest(VotoResource.class)
 public class VotoResourceTest {
 
     @Autowired
     protected MockMvc mvc;
 
-    @MockBean
+    @MockitoBean
     private VotoService votoServiceMock;
 
-    @MockBean
+    @MockitoBean
     private ModelMapper modelMapperMock;
 
     private VotoDto votoDto;
     private Voto voto;
 
-    @Before
+    @BeforeEach
     public void inicializarContexto() {
         votoDto = VotoDtoBuilder.umVotoQualquer().build();
         voto = VotoBuilder.umVotoQualquer().build();

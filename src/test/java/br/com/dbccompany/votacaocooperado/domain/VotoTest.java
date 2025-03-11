@@ -3,7 +3,7 @@ package br.com.dbccompany.votacaocooperado.domain;
 import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
 import br.com.dbccompany.votacaocooperado.builder.AssociadoBuilder;
 import br.com.dbccompany.votacaocooperado.builder.VotoBuilder;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -19,7 +19,7 @@ public class VotoTest {
 
     private Voto voto;
 
-    @Before
+    @BeforeEach
     public void inicializarContexto() {
         voto = VotoBuilder.umVotoQualquer().build();
     }

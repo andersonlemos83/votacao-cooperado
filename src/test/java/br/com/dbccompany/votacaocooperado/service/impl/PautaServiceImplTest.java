@@ -5,11 +5,9 @@ import br.com.dbccompany.votacaocooperado.domain.Pauta;
 import br.com.dbccompany.votacaocooperado.repository.PautaRepository;
 import br.com.dbccompany.votacaocooperado.service.PautaService;
 import br.com.dbccompany.votacaocooperado.shared.exception.NegocioException;
-import org.junit.Before;
-import org.junit.Rule;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.rules.ExpectedException;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -19,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static java.util.Optional.ofNullable;
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 
 @SuppressWarnings("java:S5786") // Public required for JUnit test suite
@@ -31,15 +29,12 @@ public class PautaServiceImplTest {
     @Mock
     private PautaRepository pautaRepositoryMock;
 
-    @Rule
-    public ExpectedException exception = ExpectedException.none();
-
     private List<Pauta> pautasEsperadas;
     private Pauta pautaEsperada;
     private Long idEsperado;
     private Optional<Pauta> pautaOptionalEsperada;
 
-    @Before
+    @BeforeEach
     public void inicializarContexto() {
         pautaService = new PautaServiceImpl(pautaRepositoryMock);
 
@@ -89,9 +84,7 @@ public class PautaServiceImplTest {
     public void aoBuscarPorIdDadoQueNaoExistaPautaDeveriaLancarAhMensagemEsperada() {
         Mockito.when(pautaRepositoryMock.findById(idEsperado)).thenReturn(Optional.empty());
 
-        exception.expect(NegocioException.class);
-        exception.expectMessage("A pauta informada não exite");
-
-        pautaService.buscarPorId(idEsperado);
+        NegocioException thrown = assertThrows(NegocioException.class, () -> pautaService.buscarPorId(idEsperado));
+        assertEquals("A pauta informada não exite", thrown.getMessage());
     }
 }

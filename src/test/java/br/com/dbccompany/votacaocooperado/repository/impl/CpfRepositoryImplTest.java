@@ -2,11 +2,9 @@ package br.com.dbccompany.votacaocooperado.repository.impl;
 
 import br.com.dbccompany.votacaocooperado.repository.CpfRepository;
 import br.com.dbccompany.votacaocooperado.shared.exception.NegocioException;
-import org.junit.Before;
-import org.junit.Rule;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.rules.ExpectedException;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.http.HttpStatus;
@@ -19,6 +17,8 @@ import java.util.Map;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SuppressWarnings("java:S5786") // Public required for JUnit test suite
 @ExtendWith(SpringExtension.class)
@@ -31,12 +31,9 @@ public class CpfRepositoryImplTest {
     @Mock
     private RestTemplate restTemplateMock;
 
-    @Rule
-    public ExpectedException exception = ExpectedException.none();
-
     private String cpf;
 
-    @Before
+    @BeforeEach
     public void inicializarContexto() {
         cpfRepository = new CpfRepositoryImpl(restTemplateMock);
 
@@ -65,10 +62,8 @@ public class CpfRepositoryImplTest {
     public void aoVerificarSeEstaValidoDadoQueServicoEstejaOffilineDeveriaLancarAhMensagemEsperada() {
         Mockito.when(restTemplateMock.getForObject(URL_ESPERADA, Map.class)).thenThrow(new RuntimeException());
 
-        exception.expect(NegocioException.class);
-        exception.expectMessage("O serviço de validação do CPF está offline");
-
-        cpfRepository.verificarSeEstaValido(cpf);
+        NegocioException thrown = assertThrows(NegocioException.class, () -> cpfRepository.verificarSeEstaValido(cpf));
+        assertEquals("O serviço de validação do CPF está offline", thrown.getMessage());
     }
 
     private HttpStatusCodeException gerarHttpStatusCodeException() {
