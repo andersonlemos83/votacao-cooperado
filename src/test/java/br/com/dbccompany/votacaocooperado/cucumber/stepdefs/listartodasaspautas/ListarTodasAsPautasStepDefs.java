@@ -4,9 +4,8 @@ import br.com.dbccompany.votacaocooperado.cucumber.datatable.PautaDataTable;
 import br.com.dbccompany.votacaocooperado.cucumber.funcionalidade.PautaFuncionalidade;
 import br.com.dbccompany.votacaocooperado.cucumber.stepdefs.StepDefs;
 import br.com.dbccompany.votacaocooperado.cucumber.verificador.PautaVerificador;
-import cucumber.api.java.Before;
-import cucumber.api.java.pt.Entao;
-import cucumber.api.java.pt.Quando;
+import io.cucumber.java.pt.Entao;
+import io.cucumber.java.pt.Quando;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -18,11 +17,6 @@ public class ListarTodasAsPautasStepDefs extends StepDefs {
 
     @Autowired
     private PautaVerificador pautaVerificador;
-
-    @Before
-    public void inicializarContexto() {
-        super.inicializarContexto();
-    }
 
     @Quando("^listar todas as pautas$")
     public void listarTodasAsPautas() throws Exception {

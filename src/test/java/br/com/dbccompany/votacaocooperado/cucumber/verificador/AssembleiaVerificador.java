@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import java.util.List;
 import java.util.Optional;
 
-import static br.com.dbccompany.votacaocooperado.util.AssertUtil.assertData;
+import static br.com.dbccompany.votacaocooperado.helper.util.AssertUtil.assertData;
 import static java.text.MessageFormat.format;
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;

@@ -8,8 +8,7 @@ import br.com.dbccompany.votacaocooperado.service.AssociadoService;
 import br.com.dbccompany.votacaocooperado.web.dto.AssociadoDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,22 +16,21 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.Collections;
 
-import static br.com.dbccompany.votacaocooperado.util.ConstanteUtil.URI_V1_API_ASSOCIADOS;
+import static br.com.dbccompany.votacaocooperado.helper.util.ConstanteUtil.URI_V1_API_ASSOCIADOS;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = VotacaoCooperadoApplication.class)
+@SuppressWarnings("java:S5786") // Public required for JUnit test suite
 @AutoConfigureMockMvc
+@SpringBootTest(classes = VotacaoCooperadoApplication.class)
 public class AssociadoResourceTest {
 
     @Autowired

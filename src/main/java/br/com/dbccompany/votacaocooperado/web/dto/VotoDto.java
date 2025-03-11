@@ -1,8 +1,8 @@
 package br.com.dbccompany.votacaocooperado.web.dto;
 
 import br.com.dbccompany.votacaocooperado.domain.TipoVoto;
+import jakarta.validation.constraints.NotNull;
 
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 public class VotoDto implements Serializable {

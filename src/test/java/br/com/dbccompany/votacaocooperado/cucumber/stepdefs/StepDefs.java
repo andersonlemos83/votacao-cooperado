@@ -1,17 +1,11 @@
 package br.com.dbccompany.votacaocooperado.cucumber.stepdefs;
 
-import br.com.dbccompany.votacaocooperado.VotacaoCooperadoApplication;
-import br.com.dbccompany.votacaocooperado.config.VotacaoCooperadoConfigTest;
 import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.AssembleiaRepositoryTestHelper;
 import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.AssociadoRepositoryTestHelper;
 import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.PautaRepositoryTestHelper;
 import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.VotoRepositoryTestHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.List;
@@ -19,10 +13,6 @@ import java.util.Map;
 
 import static java.text.MessageFormat.format;
 
-@WebAppConfiguration
-@SpringBootTest
-@AutoConfigureMockMvc(printOnlyOnFailure = false)
-@ContextConfiguration(classes = {VotacaoCooperadoApplication.class, VotacaoCooperadoConfigTest.class})
 public class StepDefs {
 
     protected static ResultActions retorno;

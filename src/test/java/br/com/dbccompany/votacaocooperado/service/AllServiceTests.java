@@ -7,11 +7,12 @@ import br.com.dbccompany.votacaocooperado.service.impl.VotoServiceImplTest;
 import br.com.dbccompany.votacaocooperado.service.validador.impl.ValidadorAssembleiaImplTest;
 import br.com.dbccompany.votacaocooperado.service.validador.impl.ValidadorAssociadoImplTest;
 import br.com.dbccompany.votacaocooperado.service.validador.impl.ValidadorVotoImplTest;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
+import org.junit.platform.suite.api.SelectClasses;
+import org.junit.platform.suite.api.Suite;
+import org.junit.platform.suite.api.SuiteDisplayName;
 
-@RunWith(Suite.class)
-@Suite.SuiteClasses({
+@Suite
+@SelectClasses({
         AssociadoServiceImplTest.class,
         PautaServiceImplTest.class,
         AssembleiaServiceImplTest.class,
@@ -20,5 +21,8 @@ import org.junit.runners.Suite;
         ValidadorVotoImplTest.class,
         ValidadorAssociadoImplTest.class
 })
+@SuppressWarnings("squid:S2187")
+@SuiteDisplayName("Suite that gathers all unit tests of the Service package")
 public class AllServiceTests {
+
 }

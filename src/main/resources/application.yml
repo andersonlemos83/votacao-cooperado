@@ -32,8 +32,8 @@ management:
   metrics:
     enabled: true
     export:
-      prometheus:
-        enabled: true
+    prometheus:
+      access: unrestricted
   endpoint:
     health:
       show-details: always

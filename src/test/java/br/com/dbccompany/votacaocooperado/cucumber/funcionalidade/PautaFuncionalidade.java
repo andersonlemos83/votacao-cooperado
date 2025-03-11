@@ -9,7 +9,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static br.com.dbccompany.votacaocooperado.util.ConstanteUtil.URI_V1_API_PAUTAS;
+import static br.com.dbccompany.votacaocooperado.helper.util.ConstanteUtil.URI_V1_API_PAUTAS;
 
 @Component
 public class PautaFuncionalidade {

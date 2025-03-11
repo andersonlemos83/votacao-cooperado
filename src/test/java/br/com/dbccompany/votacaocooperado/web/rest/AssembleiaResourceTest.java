@@ -8,8 +8,7 @@ import br.com.dbccompany.votacaocooperado.service.AssembleiaService;
 import br.com.dbccompany.votacaocooperado.web.dto.AssembleiaDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
 import org.mockito.Mockito;
 import org.modelmapper.ModelMapper;
@@ -18,7 +17,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -27,15 +25,15 @@ import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.Date;
 
-import static br.com.dbccompany.votacaocooperado.util.ConstanteUtil.URI_V1_API_ASSEMBLEIAS;
+import static br.com.dbccompany.votacaocooperado.helper.util.ConstanteUtil.URI_V1_API_ASSEMBLEIAS;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = VotacaoCooperadoApplication.class)
+@SuppressWarnings("java:S5786") // Public required for JUnit test suite
 @AutoConfigureMockMvc
+@SpringBootTest(classes = VotacaoCooperadoApplication.class)
 public class AssembleiaResourceTest {
 
     @Autowired

@@ -6,19 +6,20 @@ import br.com.dbccompany.votacaocooperado.repository.AssociadoRepository;
 import br.com.dbccompany.votacaocooperado.service.AssociadoService;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorAssociado;
 import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.Mockito.verify;
 
-@RunWith(MockitoJUnitRunner.class)
+@SuppressWarnings("java:S5786") // Public required for JUnit test suite
+@ExtendWith(SpringExtension.class)
 public class AssociadoServiceImplTest {
 
     private AssociadoService associadoService;

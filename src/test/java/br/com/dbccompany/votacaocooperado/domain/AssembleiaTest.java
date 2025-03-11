@@ -4,9 +4,9 @@ import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
 import br.com.dbccompany.votacaocooperado.builder.DataHoraBuilder;
 import br.com.dbccompany.votacaocooperado.builder.PautaBuilder;
 import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -16,11 +16,14 @@ import static br.com.dbccompany.votacaocooperado.builder.VotoBuilder.umVotoQualq
 import static br.com.dbccompany.votacaocooperado.builder.VotoBuilder.umVotoQualquerSim;
 import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.ABERTA;
 import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.FECHADA;
-import static br.com.dbccompany.votacaocooperado.util.AssertUtil.assertData;
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.*;
+import static br.com.dbccompany.votacaocooperado.helper.util.AssertUtil.assertData;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-@RunWith(JUnit4.class)
+@SuppressWarnings("java:S5786") // Public required for JUnit test suite
+@ExtendWith(SpringExtension.class)
 public class AssembleiaTest {
 
     private Assembleia assembleia;

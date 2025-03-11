@@ -4,23 +4,24 @@ import br.com.dbccompany.votacaocooperado.repository.CpfRepository;
 import br.com.dbccompany.votacaocooperado.shared.exception.NegocioException;
 import org.junit.Before;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-@RunWith(MockitoJUnitRunner.class)
+@SuppressWarnings("java:S5786") // Public required for JUnit test suite
+@ExtendWith(SpringExtension.class)
 public class CpfRepositoryImplTest {
 
     private static final String URL_ESPERADA = "https://user-info.herokuapp.com/users/22149030039";

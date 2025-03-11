@@ -5,17 +5,18 @@ import br.com.dbccompany.votacaocooperado.builder.DataHoraBuilder;
 import br.com.dbccompany.votacaocooperado.builder.PautaBuilder;
 import br.com.dbccompany.votacaocooperado.builder.VotoBuilder;
 import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@RunWith(JUnit4.class)
+@SuppressWarnings("java:S5786") // Public required for JUnit test suite
+@ExtendWith(SpringExtension.class)
 public class PautaTest {
 
     private Pauta pauta;

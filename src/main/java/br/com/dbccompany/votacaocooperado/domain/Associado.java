@@ -1,15 +1,20 @@
 package br.com.dbccompany.votacaocooperado.domain;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+
+import static jakarta.persistence.CascadeType.ALL;
+import static jakarta.persistence.FetchType.LAZY;
+import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
 public class Associado implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -18,7 +23,7 @@ public class Associado implements Serializable {
     @Column(nullable = false)
     private String cpf;
 
-    @OneToMany(mappedBy = "associado", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "associado", fetch = LAZY, cascade = ALL)
     private List<Voto> votos;
 
     public Associado() {

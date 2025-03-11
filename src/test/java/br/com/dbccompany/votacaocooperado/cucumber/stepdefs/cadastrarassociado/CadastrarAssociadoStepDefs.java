@@ -4,11 +4,10 @@ import br.com.dbccompany.votacaocooperado.cucumber.datatable.AssociadoDataTable;
 import br.com.dbccompany.votacaocooperado.cucumber.funcionalidade.AssociadoFuncionalidade;
 import br.com.dbccompany.votacaocooperado.cucumber.stepdefs.StepDefs;
 import br.com.dbccompany.votacaocooperado.cucumber.verificador.AssociadoVerificador;
-import cucumber.api.java.Before;
-import cucumber.api.java.pt.Dado;
-import cucumber.api.java.pt.E;
-import cucumber.api.java.pt.Entao;
-import cucumber.api.java.pt.Quando;
+import io.cucumber.java.pt.Dado;
+import io.cucumber.java.pt.E;
+import io.cucumber.java.pt.Entao;
+import io.cucumber.java.pt.Quando;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -22,11 +21,6 @@ public class CadastrarAssociadoStepDefs extends StepDefs {
     private AssociadoVerificador associadoVerificador;
 
     private final AssociadoDataTable associadoDataTable = new AssociadoDataTable();
-
-    @Before
-    public void inicializarContexto() {
-        super.inicializarContexto();
-    }
 
     @Dado("^que seja informado o nome \"([^\"]*)\"$")
     public void queSejaInformadoOhNome(String nome) {

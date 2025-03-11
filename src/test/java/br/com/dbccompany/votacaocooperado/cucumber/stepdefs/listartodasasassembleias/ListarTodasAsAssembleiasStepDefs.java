@@ -4,9 +4,8 @@ import br.com.dbccompany.votacaocooperado.cucumber.datatable.AssembleiaDataTable
 import br.com.dbccompany.votacaocooperado.cucumber.funcionalidade.AssembleiaFuncionalidade;
 import br.com.dbccompany.votacaocooperado.cucumber.stepdefs.StepDefs;
 import br.com.dbccompany.votacaocooperado.cucumber.verificador.AssembleiaVerificador;
-import cucumber.api.java.Before;
-import cucumber.api.java.pt.Entao;
-import cucumber.api.java.pt.Quando;
+import io.cucumber.java.pt.Entao;
+import io.cucumber.java.pt.Quando;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -18,11 +17,6 @@ public class ListarTodasAsAssembleiasStepDefs extends StepDefs {
 
     @Autowired
     private AssembleiaVerificador assembleiaVerificador;
-
-    @Before
-    public void inicializarContexto() {
-        super.inicializarContexto();
-    }
 
     @Quando("^listar todas as assembleias$")
     public void listarTodasAsAssembleias() throws Exception {

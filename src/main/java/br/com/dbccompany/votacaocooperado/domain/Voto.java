@@ -1,14 +1,17 @@
 package br.com.dbccompany.votacaocooperado.domain;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Objects;
+
+import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
 public class Voto implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
     @Enumerated(EnumType.STRING)

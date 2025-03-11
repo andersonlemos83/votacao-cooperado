@@ -3,6 +3,7 @@ package br.com.dbccompany.votacaocooperado.web.rest;
 import br.com.dbccompany.votacaocooperado.domain.Assembleia;
 import br.com.dbccompany.votacaocooperado.service.AssembleiaService;
 import br.com.dbccompany.votacaocooperado.web.dto.AssembleiaDto;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 

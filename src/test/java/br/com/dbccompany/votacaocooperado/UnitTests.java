@@ -4,15 +4,19 @@ import br.com.dbccompany.votacaocooperado.domain.AllDomainTests;
 import br.com.dbccompany.votacaocooperado.repository.impl.AllRepositoryTests;
 import br.com.dbccompany.votacaocooperado.service.AllServiceTests;
 import br.com.dbccompany.votacaocooperado.web.AllWebTests;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
+import org.junit.platform.suite.api.SelectClasses;
+import org.junit.platform.suite.api.Suite;
+import org.junit.platform.suite.api.SuiteDisplayName;
 
-@RunWith(Suite.class)
-@Suite.SuiteClasses({
+@Suite
+@SelectClasses({
         AllDomainTests.class,
         AllRepositoryTests.class,
         AllServiceTests.class,
         AllWebTests.class
 })
+@SuppressWarnings("squid:S2187")
+@SuiteDisplayName("Suite that gathers all Unit tests")
 public class UnitTests {
+
 }

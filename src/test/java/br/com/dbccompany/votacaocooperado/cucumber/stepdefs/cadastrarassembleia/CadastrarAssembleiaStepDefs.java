@@ -4,11 +4,10 @@ import br.com.dbccompany.votacaocooperado.cucumber.datatable.AssembleiaDataTable
 import br.com.dbccompany.votacaocooperado.cucumber.funcionalidade.AssembleiaFuncionalidade;
 import br.com.dbccompany.votacaocooperado.cucumber.stepdefs.StepDefs;
 import br.com.dbccompany.votacaocooperado.cucumber.verificador.AssembleiaVerificador;
-import cucumber.api.java.pt.Dado;
-import cucumber.api.java.pt.E;
-import cucumber.api.java.pt.Entao;
-import cucumber.api.java.pt.Quando;
-import org.junit.Before;
+import io.cucumber.java.pt.Dado;
+import io.cucumber.java.pt.E;
+import io.cucumber.java.pt.Entao;
+import io.cucumber.java.pt.Quando;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -23,11 +22,6 @@ public class CadastrarAssembleiaStepDefs extends StepDefs {
     private AssembleiaVerificador assembleiaVerificador;
 
     private final AssembleiaDataTable assembleiaDataTable = new AssembleiaDataTable();
-
-    @Before
-    public void inicializarContexto() {
-        super.inicializarContexto();
-    }
 
     @Dado("^que seja informado o tempo de duracao de \"([^\"]*)\" minutos$")
     public void queSejaInformadoOhTempoDeDuracaoDeMinutos(Integer tempoDuracao) {

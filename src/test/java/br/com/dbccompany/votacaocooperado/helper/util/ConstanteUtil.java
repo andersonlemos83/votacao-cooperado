@@ -1,4 +1,4 @@
-package br.com.dbccompany.votacaocooperado.util;
+package br.com.dbccompany.votacaocooperado.helper.util;
 
 public final class ConstanteUtil {
 

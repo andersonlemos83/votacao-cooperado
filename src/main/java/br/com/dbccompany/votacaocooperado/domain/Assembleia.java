@@ -1,12 +1,16 @@
 package br.com.dbccompany.votacaocooperado.domain;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;
 
 import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.ABERTA;
 import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.FECHADA;
+import static jakarta.persistence.CascadeType.ALL;
+import static jakarta.persistence.FetchType.LAZY;
+import static jakarta.persistence.GenerationType.IDENTITY;
 import static java.lang.Boolean.TRUE;
 import static java.time.ZoneId.systemDefault;
 import static java.util.Collections.emptyList;
@@ -17,7 +21,7 @@ import static java.util.stream.Collectors.groupingBy;
 public class Assembleia implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -29,7 +33,7 @@ public class Assembleia implements Serializable {
     @ManyToOne
     private Pauta pauta;
 
-    @OneToMany(mappedBy = "assembleia", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "assembleia", fetch = LAZY, cascade = ALL)
     private List<Voto> votos;
 
     public Assembleia() {

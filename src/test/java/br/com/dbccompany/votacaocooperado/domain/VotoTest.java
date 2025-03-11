@@ -4,14 +4,17 @@ import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
 import br.com.dbccompany.votacaocooperado.builder.AssociadoBuilder;
 import br.com.dbccompany.votacaocooperado.builder.VotoBuilder;
 import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-@RunWith(JUnit4.class)
+@SuppressWarnings("java:S5786") // Public required for JUnit test suite
+@ExtendWith(SpringExtension.class)
 public class VotoTest {
 
     private Voto voto;
