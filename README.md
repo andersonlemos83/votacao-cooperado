@@ -1,4 +1,8 @@
-[![Build Status](https://travis-ci.org/andersonlemos83/votacao-cooperado.svg?branch=main)](https://travis-ci.org/andersonlemos83/votacao-cooperado) [![codecov](https://codecov.io/gh/andersonlemos83/votacao-cooperado/branch/main/graph/badge.svg?token=BYOJWGTKMR)](https://codecov.io/gh/andersonlemos83/votacao-cooperado)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=andersonlemos83_votacao-cooperado&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=andersonlemos83_votacao-cooperado)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=andersonlemos83_votacao-cooperado&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=andersonlemos83_votacao-cooperado)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=andersonlemos83_votacao-cooperado&metric=coverage)](https://sonarcloud.io/summary/new_code?id=andersonlemos83_votacao-cooperado)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=andersonlemos83_votacao-cooperado&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=andersonlemos83_votacao-cooperado)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=andersonlemos83_votacao-cooperado&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=andersonlemos83_votacao-cooperado)
 
 # Sobre o projeto Votação Cooperado API
 

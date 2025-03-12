@@ -10,6 +10,7 @@ import static br.com.dbccompany.votacaocooperado.domain.TipoVoto.NAO;
 import static br.com.dbccompany.votacaocooperado.domain.TipoVoto.SIM;
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
+@SuppressWarnings("squid:S7091") // Circular dependencies between classes across packages
 @Data
 @Entity
 @Builder

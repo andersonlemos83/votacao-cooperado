@@ -14,7 +14,6 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static br.com.dbccompany.votacaocooperado.shared.util.ObjectMapperUtil.generateJson;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
@@ -24,7 +23,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 public class VotacaoCooperadoExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NegocioException.class)
-    public ResponseEntity<Object> HandlerDomain(NegocioException exception, WebRequest request) {
+    public ResponseEntity<Object> handleNegocioException(NegocioException exception, WebRequest request) {
         ResponseDto responseDto = ResponseDto.builder()
                 .status(BAD_REQUEST.value())
                 .mensagem(exception.getMessage())
@@ -39,7 +38,7 @@ public class VotacaoCooperadoExceptionHandler extends ResponseEntityExceptionHan
                 .getFieldErrors()
                 .stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                .collect(Collectors.toList());
+                .toList();
         String replace = errors.toString().replace("[", "").replace("]", "");
         ResponseDto responseDto = ResponseDto.builder().status(status.value()).mensagem(replace).build();
         log.debug("Saindo de VotacaoCooperadoExceptionHandler: {}", generateJson(responseDto));

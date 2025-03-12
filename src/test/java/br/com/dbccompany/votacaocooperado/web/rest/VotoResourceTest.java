@@ -14,7 +14,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -26,6 +25,7 @@ import java.util.Collections;
 import static br.com.dbccompany.votacaocooperado.helper.util.ConstanteUtil.URI_V1_API_VOTOS;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -85,13 +85,13 @@ public class VotoResourceTest {
     private ResultActions cadastrarVoto() throws Exception {
         return mvc.perform(MockMvcRequestBuilders.post(URI_V1_API_VOTOS)
                 .content(new ObjectMapper().writeValueAsString(votoDto))
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .accept(MediaType.APPLICATION_JSON_UTF8));
+                .contentType(APPLICATION_JSON)
+                .accept(APPLICATION_JSON));
     }
 
     private ResultActions listarTodos() throws Exception {
         return mvc.perform(MockMvcRequestBuilders.get(URI_V1_API_VOTOS)
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON));
+                .contentType(APPLICATION_JSON)
+                .accept(APPLICATION_JSON));
     }
 }

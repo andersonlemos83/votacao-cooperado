@@ -21,6 +21,7 @@ import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 
+@SuppressWarnings("squid:S7091") // Circular dependencies between classes across packages
 @Data
 @Entity
 @Builder

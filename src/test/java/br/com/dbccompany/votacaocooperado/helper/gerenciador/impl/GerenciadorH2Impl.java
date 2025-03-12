@@ -25,10 +25,10 @@ public class GerenciadorH2Impl implements GerenciadorH2 {
                 .parallel()
                 .filter(constraint -> "COOP_OWNER".equals(constraint.get("TABLE_SCHEMA")) && "FOREIGN KEY".equals(constraint.get("CONSTRAINT_TYPE")))
                 .forEach(constraint -> {
-                    String table_schema = (String) constraint.get("TABLE_SCHEMA");
-                    String table_name = (String) constraint.get("TABLE_NAME");
+                    String tableSchema = (String) constraint.get("TABLE_SCHEMA");
+                    String tableName = (String) constraint.get("TABLE_NAME");
                     String constraint_name = (String) constraint.get("CONSTRAINT_NAME");
-                    String truncateSql = format("ALTER TABLE {0}.{1} DROP CONSTRAINT {2} RESTRICT", table_schema, table_name, constraint_name);
+                    String truncateSql = format("ALTER TABLE {0}.{1} DROP CONSTRAINT {2} RESTRICT", tableSchema, tableName, constraint_name);
                     log.info("--> {}", truncateSql);
                     jdbcTemplate.execute(truncateSql);
                 });
@@ -41,9 +41,9 @@ public class GerenciadorH2Impl implements GerenciadorH2 {
                 .parallel()
                 .filter(table -> "COOP_OWNER".equals(table.get("TABLE_SCHEMA")))
                 .forEach(table -> {
-                    String table_schema = (String) table.get("TABLE_SCHEMA");
-                    String table_name = (String) table.get("TABLE_NAME");
-                    String truncateSql = format("TRUNCATE TABLE {0}.{1}", table_schema, table_name);
+                    String tableSchema = (String) table.get("TABLE_SCHEMA");
+                    String tableName = (String) table.get("TABLE_NAME");
+                    String truncateSql = format("TRUNCATE TABLE {0}.{1}", tableSchema, tableName);
                     log.info("--> {}", truncateSql);
                     jdbcTemplate.execute(truncateSql);
                 });
@@ -53,9 +53,9 @@ public class GerenciadorH2Impl implements GerenciadorH2 {
     public void resetarSequences() {
         List<Map<String, Object>> sequences = jdbcTemplate.queryForList("SELECT * FROM INFORMATION_SCHEMA.SEQUENCES");
         sequences.forEach(sequence -> {
-            String sequence_schema = (String) sequence.get("SEQUENCE_SCHEMA");
-            String sequence_name = (String) sequence.get("SEQUENCE_NAME");
-            jdbcTemplate.execute(format("ALTER SEQUENCE {0}.{1} RESTART WITH 1", sequence_schema, sequence_name));
+            String sequenceSchema = (String) sequence.get("SEQUENCE_SCHEMA");
+            String sequenceName = (String) sequence.get("SEQUENCE_NAME");
+            jdbcTemplate.execute(format("ALTER SEQUENCE {0}.{1} RESTART WITH 1", sequenceSchema, sequenceName));
         });
     }
 }
