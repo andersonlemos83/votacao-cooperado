@@ -1,23 +1,17 @@
 package br.com.dbccompany.votacaocooperado.cucumber.datatable;
 
-public class PautaDataTable {
+import lombok.*;
+
+import java.io.Serializable;
+
+@Data
+@Builder
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+public class PautaDataTable implements Serializable {
 
     private Long id;
     private String descricao;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
 }

@@ -1,36 +1,33 @@
 package br.com.dbccompany.votacaocooperado.cucumber.stepdefs.cadastrarpauta;
 
-import br.com.dbccompany.votacaocooperado.cucumber.datatable.PautaDataTable;
 import br.com.dbccompany.votacaocooperado.cucumber.funcionalidade.PautaFuncionalidade;
 import br.com.dbccompany.votacaocooperado.cucumber.stepdefs.StepDefs;
 import br.com.dbccompany.votacaocooperado.cucumber.verificador.PautaVerificador;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Entao;
 import io.cucumber.java.pt.Quando;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import org.springframework.test.web.servlet.ResultActions;
 
+@AllArgsConstructor
 public class CadastrarPautaStepDefs extends StepDefs {
 
-    @Autowired
-    private PautaFuncionalidade pautaFuncionalidade;
-
-    @Autowired
-    private PautaVerificador pautaVerificador;
-
-    private final PautaDataTable pautaDataTable = new PautaDataTable();
+    private final PautaFuncionalidade pautaFuncionalidade;
+    private final PautaVerificador pautaVerificador;
 
     @Dado("^que seja informado a descricao \"([^\"]*)\"$")
     public void queSejaInformadoAhDescricao(String descricao) {
-        pautaDataTable.setDescricao(descricao);
+        transicaoDataTable.getPautaDataTable().setDescricao(descricao);
     }
 
     @Quando("^cadastrar pauta$")
     public void cadastrarPauta() throws Exception {
-        retorno = pautaFuncionalidade.cadastrar(pautaDataTable);
+        ResultActions resultActions = pautaFuncionalidade.cadastrar(transicaoDataTable.getPautaDataTable());
+        transicaoDataTable.setResponse(resultActions);
     }
 
     @Entao("^deveria cadastrar a seguinte pauta \"([^\"]*)\"$")
     public void deveriaCadastrarAhSeguintePauta(String descricao) throws Exception {
-        pautaVerificador.verificar(descricao, retorno);
+        pautaVerificador.verificar(descricao, transicaoDataTable.getResponse());
     }
 }

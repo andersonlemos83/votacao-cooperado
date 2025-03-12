@@ -1,60 +1,33 @@
 package br.com.dbccompany.votacaocooperado.cucumber.datatable;
 
 import br.com.dbccompany.votacaocooperado.builder.DataHoraBuilder;
+import lombok.*;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import static java.text.MessageFormat.format;
+import static lombok.AccessLevel.NONE;
 
-public class AssembleiaDataTable {
+@Data
+@Builder
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+public class AssembleiaDataTable implements Serializable {
 
     private Long id;
+    @Getter(NONE)
     private String dataCriacao;
     private int tempoDuracao;
     private String descricaoPauta;
     private Long idPauta;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getDataCriacao() {
         if ("DATA_ATUAL".equalsIgnoreCase(dataCriacao)) {
             return format("{0,date,dd/MM/yyyy HH:mm}", new Date());
         }
         return dataCriacao;
-    }
-
-    public void setDataCriacao(String dataCriacao) {
-        this.dataCriacao = dataCriacao;
-    }
-
-    public int getTempoDuracao() {
-        return tempoDuracao;
-    }
-
-    public void setTempoDuracao(int tempoDuracao) {
-        this.tempoDuracao = tempoDuracao;
-    }
-
-    public String getDescricaoPauta() {
-        return descricaoPauta;
-    }
-
-    public void setDescricaoPauta(String descricaoPauta) {
-        this.descricaoPauta = descricaoPauta;
-    }
-
-    public Long getIdPauta() {
-        return idPauta;
-    }
-
-    public void setIdPauta(Long idPauta) {
-        this.idPauta = idPauta;
     }
 
     public Date obterDataCriacao() {

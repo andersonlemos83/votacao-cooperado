@@ -4,7 +4,7 @@ import br.com.dbccompany.votacaocooperado.cucumber.datatable.PautaConsolidadaDat
 import br.com.dbccompany.votacaocooperado.cucumber.datatable.PautaDataTable;
 import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.PautaRepositoryTestHelper;
 import br.com.dbccompany.votacaocooperado.domain.Pauta;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -16,10 +16,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Component
+@AllArgsConstructor
 public class PautaVerificador {
 
-    @Autowired
-    private PautaRepositoryTestHelper pautaRepositoryTestHelper;
+    private final PautaRepositoryTestHelper pautaRepositoryTestHelper;
 
     public void verificar(List<PautaDataTable> esperados, ResultActions retorno) throws Exception {
         retorno.andExpect(status().isOk());

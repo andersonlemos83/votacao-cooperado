@@ -6,7 +6,7 @@ import org.junit.platform.suite.api.SuiteDisplayName;
 
 @Suite
 @SelectClasses({
-        CpfRepositoryImplTest.class
+        UsuarioClientImplTest.class
 })
 @SuppressWarnings("squid:S2187")
 @SuiteDisplayName("Suite that gathers all unit tests of the Repository package")

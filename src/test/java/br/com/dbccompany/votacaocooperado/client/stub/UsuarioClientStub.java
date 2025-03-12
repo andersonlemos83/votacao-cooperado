@@ -1,0 +1,38 @@
+package br.com.dbccompany.votacaocooperado.client.stub;
+
+import br.com.dbccompany.votacaocooperado.cucumber.datatable.servicosexternos.JsonResponseDataTable;
+import com.github.tomakehurst.wiremock.WireMockServer;
+import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
+import org.springframework.stereotype.Component;
+
+import java.text.MessageFormat;
+import java.util.Optional;
+
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import static wiremock.org.eclipse.jetty.http.HttpStatus.BAD_REQUEST_400;
+
+@Component
+@RequiredArgsConstructor
+public class UsuarioClientStub {
+
+    private static final String URL_FIND_BY_CPF = "/{0}";
+
+    private final WireMockServer wireMockServer;
+
+    @SneakyThrows
+    public void configurarEndpointFindByCpf(JsonResponseDataTable jsonResponseDataTable) {
+        String code = Optional.ofNullable(jsonResponseDataTable.getKey()).map(String::valueOf).orElse(null);
+        String url = MessageFormat.format(URL_FIND_BY_CPF, code);
+        if (jsonResponseDataTable.isStatusOk()) {
+            wireMockServer.stubFor(get(urlEqualTo(url))
+                    .withName(url)
+                    .willReturn(okJson(jsonResponseDataTable.getResponse())));
+        }
+        if (jsonResponseDataTable.isStatusBadRequest()) {
+            wireMockServer.stubFor(get(urlEqualTo(url))
+                    .withName(url)
+                    .willReturn(aResponse().withStatus(BAD_REQUEST_400).withBody(jsonResponseDataTable.getResponse())));
+        }
+    }
+}

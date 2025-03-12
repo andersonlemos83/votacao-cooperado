@@ -14,8 +14,8 @@ public class VotacaoCooperadoConfig {
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
         return builder
-                .setConnectTimeout(Duration.ofMillis(10000))
-                .setReadTimeout(Duration.ofMillis(10000))
+                .connectTimeout(Duration.ofMillis(10000))
+                .readTimeout(Duration.ofMillis(10000))
                 .build();
     }
 

@@ -1,27 +1,29 @@
 package br.com.dbccompany.votacaocooperado.cucumber.contexto;
 
-import br.com.dbccompany.votacaocooperado.builder.PautaBuilder;
 import br.com.dbccompany.votacaocooperado.cucumber.datatable.PautaDataTable;
 import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.PautaRepositoryTestHelper;
 import br.com.dbccompany.votacaocooperado.domain.Pauta;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@AllArgsConstructor
 public class PautaContexto {
 
-    @Autowired
-    private PautaRepositoryTestHelper pautaRepositoryTestHelper;
+    private final PautaRepositoryTestHelper pautaRepositoryTestHelper;
 
     public void cadastrar(List<PautaDataTable> pautasDataTable) {
-        pautasDataTable.forEach(pautaDataTable -> {
-            Pauta pauta = PautaBuilder.umaPauta()
-                    .comId(pautaDataTable.getId())
-                    .comDecricao(pautaDataTable.getDescricao())
-                    .build();
-            pautaRepositoryTestHelper.saveAndFlush(pauta);
-        });
+        List<Pauta> pautas = pautasDataTable.stream().map(this::gerarPauta).toList();
+        pautaRepositoryTestHelper.saveAll(pautas);
+    }
+
+    private Pauta gerarPauta(PautaDataTable pautaDataTable) {
+        Pauta pauta = new Pauta();
+        BeanUtils.copyProperties(pautaDataTable, pauta);
+        pauta.setId(null);
+        return pauta;
     }
 }

@@ -7,7 +7,7 @@ import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.VotoRepo
 import br.com.dbccompany.votacaocooperado.domain.Assembleia;
 import br.com.dbccompany.votacaocooperado.domain.Associado;
 import br.com.dbccompany.votacaocooperado.domain.Voto;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -20,16 +20,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Component
+@AllArgsConstructor
 public class VotoVerificador {
 
-    @Autowired
-    private AssociadoRepositoryTestHelper associadoRepositoryTestHelper;
-
-    @Autowired
-    private AssembleiaRepositoryTestHelper assembleiaRepositoryTestHelper;
-
-    @Autowired
-    private VotoRepositoryTestHelper votoRepositoryTestHelper;
+    private final AssociadoRepositoryTestHelper associadoRepositoryTestHelper;
+    private final AssembleiaRepositoryTestHelper assembleiaRepositoryTestHelper;
+    private final VotoRepositoryTestHelper votoRepositoryTestHelper;
 
     public void verificar(List<VotoDataTable> esperados, ResultActions retorno) throws Exception {
         retorno.andExpect(status().isOk());

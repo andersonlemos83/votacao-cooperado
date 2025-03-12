@@ -8,13 +8,16 @@ import java.util.Objects;
 
 import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.FetchType.LAZY;
-import static jakarta.persistence.GenerationType.IDENTITY;
+import static jakarta.persistence.GenerationType.SEQUENCE;
 
 @Entity
+@Table(schema = "COOP_OWNER", name = "ASSOCIADO")
+@SequenceGenerator(schema = "COOP_OWNER", name = "associado_seq", sequenceName = "ASSOCIADO_SEQ", allocationSize = 1)
 public class Associado implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "ID")
+    @GeneratedValue(strategy = SEQUENCE, generator = "associado_seq")
     private Long id;
 
     @Column(nullable = false)

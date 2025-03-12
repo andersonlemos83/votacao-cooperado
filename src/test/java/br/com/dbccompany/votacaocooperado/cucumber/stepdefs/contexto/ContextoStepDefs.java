@@ -10,23 +10,17 @@ import br.com.dbccompany.votacaocooperado.cucumber.datatable.PautaDataTable;
 import br.com.dbccompany.votacaocooperado.cucumber.datatable.VotoDataTable;
 import br.com.dbccompany.votacaocooperado.cucumber.stepdefs.StepDefs;
 import io.cucumber.java.pt.Dado;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 
 import java.util.List;
 
+@AllArgsConstructor
 public class ContextoStepDefs extends StepDefs {
 
-    @Autowired
-    private PautaContexto pautaContexto;
-
-    @Autowired
-    private AssociadoContexto associadoContexto;
-
-    @Autowired
-    private AssembleiaContexto assembleiaContexto;
-
-    @Autowired
-    private VotoContexto votoContexto;
+    private final PautaContexto pautaContexto;
+    private final AssociadoContexto associadoContexto;
+    private final AssembleiaContexto assembleiaContexto;
+    private final VotoContexto votoContexto;
 
     @Dado("^que existam as pautas cadastradas$")
     public void queExistamAsPautasCadastradas(List<PautaDataTable> pautasDataTable) {

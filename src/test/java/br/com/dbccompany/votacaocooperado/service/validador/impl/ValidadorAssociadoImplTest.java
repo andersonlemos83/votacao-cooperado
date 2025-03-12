@@ -3,7 +3,7 @@ package br.com.dbccompany.votacaocooperado.service.validador.impl;
 import br.com.dbccompany.votacaocooperado.builder.AssociadoBuilder;
 import br.com.dbccompany.votacaocooperado.domain.Associado;
 import br.com.dbccompany.votacaocooperado.repository.AssociadoRepository;
-import br.com.dbccompany.votacaocooperado.repository.CpfRepository;
+import br.com.dbccompany.votacaocooperado.client.UsuarioClient;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorAssociado;
 import br.com.dbccompany.votacaocooperado.shared.exception.NegocioException;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,7 +24,7 @@ public class ValidadorAssociadoImplTest {
     private ValidadorAssociado validadorAssociado;
 
     @Mock
-    private CpfRepository cpfRepositoryMock;
+    private UsuarioClient usuarioClientMock;
 
     @Mock
     private AssociadoRepository associadoRepositoryMock;
@@ -33,14 +33,14 @@ public class ValidadorAssociadoImplTest {
 
     @BeforeEach
     public void inicializarContexto() {
-        validadorAssociado = new ValidadorAssociadoImpl(cpfRepositoryMock, associadoRepositoryMock);
+        validadorAssociado = new ValidadorAssociadoImpl(usuarioClientMock, associadoRepositoryMock);
 
         associado = AssociadoBuilder.umAssociadoQualquer().build();
     }
 
     @Test
     public void aoValidarDadoQueCpfSejaInvalidoDeveriaLancarAhMensagemEsperada() {
-        Mockito.when(cpfRepositoryMock.verificarSeEstaValido(associado.getCpf())).thenReturn(false);
+        Mockito.when(usuarioClientMock.verificarSeEstaValido(associado.getCpf())).thenReturn(false);
 
         NegocioException thrown = assertThrows(NegocioException.class, () -> validadorAssociado.validar(associado));
         assertEquals("O CPF do associado é inválido", thrown.getMessage());
@@ -48,7 +48,7 @@ public class ValidadorAssociadoImplTest {
 
     @Test
     public void aoValidarDadoQueCpfSejaValidoIhJaEstejaCadastradoDeveriaLancarAhMensagemEsperada() {
-        Mockito.when(cpfRepositoryMock.verificarSeEstaValido(associado.getCpf())).thenReturn(true);
+        Mockito.when(usuarioClientMock.verificarSeEstaValido(associado.getCpf())).thenReturn(true);
         Mockito.when(associadoRepositoryMock.findByCpf(associado.getCpf())).thenReturn(ofNullable(associado));
 
         NegocioException thrown = assertThrows(NegocioException.class, () -> validadorAssociado.validar(associado));
@@ -57,7 +57,7 @@ public class ValidadorAssociadoImplTest {
 
     @Test
     public void aoValidarDadoQueCpfSejaValidoIhNaoEstejaCadastradoNaoDeveriaLancarNenhumaMensagem() {
-        Mockito.when(cpfRepositoryMock.verificarSeEstaValido(associado.getCpf())).thenReturn(true);
+        Mockito.when(usuarioClientMock.verificarSeEstaValido(associado.getCpf())).thenReturn(true);
         validadorAssociado.validar(associado);
     }
 }

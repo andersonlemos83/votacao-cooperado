@@ -2,7 +2,7 @@ package br.com.dbccompany.votacaocooperado.cucumber.funcionalidade;
 
 import br.com.dbccompany.votacaocooperado.cucumber.datatable.VotoDataTable;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.test.web.servlet.MockMvc;
@@ -12,10 +12,10 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static br.com.dbccompany.votacaocooperado.helper.util.ConstanteUtil.URI_V1_API_VOTOS;
 
 @Component
+@AllArgsConstructor
 public class VotoFuncionalidade {
 
-    @Autowired
-    private MockMvc mockMvc;
+    private final MockMvc mockMvc;
 
     public ResultActions listarTodas() throws Exception {
         return mockMvc.perform(MockMvcRequestBuilders.get(URI_V1_API_VOTOS)

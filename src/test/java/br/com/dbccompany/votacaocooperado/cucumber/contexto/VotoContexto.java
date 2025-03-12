@@ -1,6 +1,5 @@
 package br.com.dbccompany.votacaocooperado.cucumber.contexto;
 
-import br.com.dbccompany.votacaocooperado.builder.VotoBuilder;
 import br.com.dbccompany.votacaocooperado.cucumber.datatable.VotoDataTable;
 import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.AssembleiaRepositoryTestHelper;
 import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.AssociadoRepositoryTestHelper;
@@ -8,38 +7,33 @@ import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.VotoRepo
 import br.com.dbccompany.votacaocooperado.domain.Assembleia;
 import br.com.dbccompany.votacaocooperado.domain.Associado;
 import br.com.dbccompany.votacaocooperado.domain.Voto;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@AllArgsConstructor
 public class VotoContexto {
 
-    @Autowired
-    private VotoRepositoryTestHelper votoRepositoryTestHelper;
-
-    @Autowired
-    private AssociadoRepositoryTestHelper associadoRepositoryTestHelper;
-
-    @Autowired
-    private AssembleiaRepositoryTestHelper assembleiaRepositoryTestHelper;
+    private final VotoRepositoryTestHelper votoRepositoryTestHelper;
+    private final AssociadoRepositoryTestHelper associadoRepositoryTestHelper;
+    private final AssembleiaRepositoryTestHelper assembleiaRepositoryTestHelper;
 
     public void cadastrar(List<VotoDataTable> votosDataTable) {
-        votosDataTable.forEach(votoDataTable -> {
-            Voto voto = converter(votoDataTable);
-            votoRepositoryTestHelper.saveAndFlush(voto);
-        });
+        List<Voto> votos = votosDataTable.stream().map(this::gerarVoto).toList();
+        votoRepositoryTestHelper.saveAll(votos);
     }
 
-    private Voto converter(VotoDataTable votoDataTable) {
+    private Voto gerarVoto(VotoDataTable votoDataTable) {
         Associado associado = associadoRepositoryTestHelper.findByNome(votoDataTable.getNomeAssociado());
         Assembleia assembleia = assembleiaRepositoryTestHelper.findByPauta_Descricao(votoDataTable.getDescricaoPauta());
-        return VotoBuilder.umVoto()
-                .comId(votoDataTable.getId())
-                .comTipoVoto(votoDataTable.getTipoVoto())
-                .comAssociado(associado)
-                .comAssembleia(assembleia)
-                .build();
+        Voto voto = new Voto();
+        BeanUtils.copyProperties(votoDataTable, voto);
+        voto.setId(null);
+        voto.setAssociado(associado);
+        voto.setAssembleia(assembleia);
+        return voto;
     }
 }

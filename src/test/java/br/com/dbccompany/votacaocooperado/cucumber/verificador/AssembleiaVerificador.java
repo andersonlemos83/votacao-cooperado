@@ -5,7 +5,7 @@ import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.Assemble
 import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.PautaRepositoryTestHelper;
 import br.com.dbccompany.votacaocooperado.domain.Assembleia;
 import br.com.dbccompany.votacaocooperado.domain.Pauta;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -19,13 +19,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Component
+@AllArgsConstructor
 public class AssembleiaVerificador {
 
-    @Autowired
-    private PautaRepositoryTestHelper pautaRepositoryTestHelper;
-
-    @Autowired
-    private AssembleiaRepositoryTestHelper assembleiaRepositoryTestHelper;
+    private final PautaRepositoryTestHelper pautaRepositoryTestHelper;
+    private final AssembleiaRepositoryTestHelper assembleiaRepositoryTestHelper;
 
     public void verificar(List<AssembleiaDataTable> esperados, ResultActions retorno) throws Exception {
         retorno.andExpect(status().isOk());

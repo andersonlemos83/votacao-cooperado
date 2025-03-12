@@ -5,13 +5,16 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
-import static jakarta.persistence.GenerationType.IDENTITY;
+import static jakarta.persistence.GenerationType.SEQUENCE;
 
 @Entity
+@Table(schema = "COOP_OWNER", name = "VOTO")
+@SequenceGenerator(schema = "COOP_OWNER", name = "voto_seq", sequenceName = "VOTO_SEQ", allocationSize = 1)
 public class Voto implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "ID")
+    @GeneratedValue(strategy = SEQUENCE, generator = "voto_seq")
     private Long id;
 
     @Enumerated(EnumType.STRING)

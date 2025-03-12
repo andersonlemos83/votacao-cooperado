@@ -10,7 +10,7 @@ import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.ABERTA;
 import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.FECHADA;
 import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.FetchType.LAZY;
-import static jakarta.persistence.GenerationType.IDENTITY;
+import static jakarta.persistence.GenerationType.SEQUENCE;
 import static java.lang.Boolean.TRUE;
 import static java.time.ZoneId.systemDefault;
 import static java.util.Collections.emptyList;
@@ -18,10 +18,13 @@ import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 
 @Entity
+@Table(schema = "COOP_OWNER", name = "ASSEMBLEIA")
+@SequenceGenerator(schema = "COOP_OWNER", name = "assembleia_seq", sequenceName = "ASSEMBLEIA_SEQ", allocationSize = 1)
 public class Assembleia implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "ID")
+    @GeneratedValue(strategy = SEQUENCE, generator = "assembleia_seq")
     private Long id;
 
     @Column(nullable = false)

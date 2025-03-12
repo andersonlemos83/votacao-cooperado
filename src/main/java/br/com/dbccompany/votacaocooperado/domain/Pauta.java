@@ -9,13 +9,16 @@ import java.util.Objects;
 
 import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.FetchType.LAZY;
-import static jakarta.persistence.GenerationType.IDENTITY;
+import static jakarta.persistence.GenerationType.SEQUENCE;
 
 @Entity
+@Table(schema = "COOP_OWNER", name = "PAUTA")
+@SequenceGenerator(schema = "COOP_OWNER", name = "pauta_seq", sequenceName = "PAUTA_SEQ", allocationSize = 1)
 public class Pauta implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "ID")
+    @GeneratedValue(strategy = SEQUENCE, generator = "pauta_seq")
     private Long id;
 
     @Column(nullable = false)

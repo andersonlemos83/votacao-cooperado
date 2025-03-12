@@ -3,7 +3,7 @@ package br.com.dbccompany.votacaocooperado.cucumber.verificador;
 import br.com.dbccompany.votacaocooperado.cucumber.datatable.AssociadoDataTable;
 import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.AssociadoRepositoryTestHelper;
 import br.com.dbccompany.votacaocooperado.domain.Associado;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -16,10 +16,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Component
+@AllArgsConstructor
 public class AssociadoVerificador {
 
-    @Autowired
-    private AssociadoRepositoryTestHelper associadoRepositoryTestHelper;
+    private final AssociadoRepositoryTestHelper associadoRepositoryTestHelper;
 
     public void verificar(List<AssociadoDataTable> esperados, ResultActions retorno) throws Exception {
         for (int i = 0; i < esperados.size(); i++) {

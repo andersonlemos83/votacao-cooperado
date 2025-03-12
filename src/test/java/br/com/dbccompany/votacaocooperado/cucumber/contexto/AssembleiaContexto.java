@@ -1,39 +1,35 @@
 package br.com.dbccompany.votacaocooperado.cucumber.contexto;
 
-import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
 import br.com.dbccompany.votacaocooperado.cucumber.datatable.AssembleiaDataTable;
 import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.AssembleiaRepositoryTestHelper;
 import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.PautaRepositoryTestHelper;
 import br.com.dbccompany.votacaocooperado.domain.Assembleia;
 import br.com.dbccompany.votacaocooperado.domain.Pauta;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@AllArgsConstructor
 public class AssembleiaContexto {
 
-    @Autowired
-    private AssembleiaRepositoryTestHelper assembleiaRepositoryTestHelper;
-
-    @Autowired
-    private PautaRepositoryTestHelper pautaRepositoryTestHelper;
+    private final AssembleiaRepositoryTestHelper assembleiaRepositoryTestHelper;
+    private final PautaRepositoryTestHelper pautaRepositoryTestHelper;
 
     public void cadastrar(List<AssembleiaDataTable> assembleiasDataTable) {
-        assembleiasDataTable.forEach(assembleiaDataTable -> {
-            Assembleia assembleia = converter(assembleiaDataTable);
-            assembleiaRepositoryTestHelper.saveAndFlush(assembleia);
-        });
+        List<Assembleia> assembleias = assembleiasDataTable.stream().map(this::gerarAssembleia).toList();
+        assembleiaRepositoryTestHelper.saveAll(assembleias);
     }
 
-    private Assembleia converter(AssembleiaDataTable assembleiaDataTable) {
+    private Assembleia gerarAssembleia(AssembleiaDataTable assembleiaDataTable) {
         Pauta pauta = pautaRepositoryTestHelper.findByDescricao(assembleiaDataTable.getDescricaoPauta());
-        return AssembleiaBuilder.umaAssembleia()
-                .comId(assembleiaDataTable.getId())
-                .comTempoDuracao(assembleiaDataTable.getTempoDuracao())
-                .comDataCriacao(assembleiaDataTable.obterDataCriacao())
-                .comPauta(pauta)
-                .build();
+        Assembleia assembleia = new Assembleia();
+        BeanUtils.copyProperties(assembleiaDataTable, assembleia);
+        assembleia.setId(null);
+        assembleia.setPauta(pauta);
+        assembleia.setDataCriacao(assembleiaDataTable.obterDataCriacao());
+        return assembleia;
     }
 }
