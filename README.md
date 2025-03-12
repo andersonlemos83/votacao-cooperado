@@ -61,7 +61,18 @@ Com o intuito de organizar melhor os testes do projeto, foram agrupados os teste
 - API: http://localhost:8484 (profile local)
 - Swagger UI: http://localhost:8484/swagger-ui.html (profile local)
 
-**7. Lista de serviços**
+**7. Wiremock para Serviços Externos**:
+1. Subir uma instância do Wiremock:
+  ```
+    docker-compose -f .\script\docker\wiremock.yml up -d
+  ```
+
+2. Testar a instância do Wiremock: [Testar Wiremock](http://localhost:8443/users/05551874460)
+  ```
+    curl 'http://localhost:8443/users/05551874460'
+  ```
+
+**8. Lista de serviços**
 
 Apesar da documentação da API ser gerada via Swagger, segue uma breve listagem dos serviços disponíveis:
 
@@ -77,7 +88,7 @@ Apesar da documentação da API ser gerada via Swagger, segue uma breve listagem
 
 [votacao-cooperado.postman_collection.json](./script/postman/votacao-cooperado.postman_collection.json)
 
-**8. Sugestão de uso**
+**9. Sugestão de uso**
 
 O usuário tem total liberdade para utilizar a API e seus serviços na ordem que desejar. No entanto, apenas como
 sugestão, segue um breve roteiro:
@@ -88,6 +99,6 @@ sugestão, segue um breve roteiro:
 4. Criar um novo voto relacionando com a assembleia criada no item 2 e com o associado criado no item 3;
 5. Consultar o consolidado da pauta criada no item 1.
 
-**9. That's all folks!**
+**10. That's all folks!**
 
 Caro avaliador, obrigado pela oportunidade.

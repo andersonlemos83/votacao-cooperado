@@ -7,6 +7,7 @@ import org.junit.platform.suite.api.SuiteDisplayName;
 
 @Suite
 @SelectClasses({
+        BeforeTests.class, // Don't change the order!
         UnitTests.class,
         RunCucumberTest.class
 })
