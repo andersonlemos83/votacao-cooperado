@@ -15,8 +15,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SuppressWarnings("java:S5786") // Public required for JUnit test suite
 @ExtendWith(SpringExtension.class)
@@ -55,6 +54,6 @@ public class ValidadorVotoImplTest {
     public void aoValidarDadoQueExistaVotoNaoDeveriaLancarNenhumaMensagem() {
         Mockito.when(votoRepositoryMock.findByAssociado_IdAndAssembleia_Id(associado.getId(), assembleia.getId())).thenReturn(null);
 
-        validadorVoto.validar(voto);
+        assertDoesNotThrow(() -> validadorVoto.validar(voto));
     }
 }

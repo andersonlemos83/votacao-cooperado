@@ -20,8 +20,7 @@ import java.util.Date;
 import java.util.Optional;
 
 import static java.util.Optional.ofNullable;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SuppressWarnings("java:S5786") // Public required for JUnit test suite
 @ExtendWith(SpringExtension.class)
@@ -75,7 +74,7 @@ public class ValidadorAssembleiaImplTest {
         assembleia.setTempoDuracao(10);
         Mockito.when(assembleiaRepositoryMock.findById(idAssembleia)).thenReturn(assembleiaOptional);
 
-        validadorAssembleia.validar(idAssembleia);
+        assertDoesNotThrow(() -> validadorAssembleia.validar(idAssembleia));
     }
 
     @Test
@@ -91,7 +90,7 @@ public class ValidadorAssembleiaImplTest {
         Pauta pauta = Instancio.create(Pauta.class);
         Mockito.when(pautaRepositoryMock.findById(Mockito.any(Long.class))).thenReturn((ofNullable(pauta)));
 
-        validadorAssembleia.validar(assembleia);
+        assertDoesNotThrow(() -> validadorAssembleia.validar(assembleia));
     }
 
     private Date obterDataCriacaoExpirada() {

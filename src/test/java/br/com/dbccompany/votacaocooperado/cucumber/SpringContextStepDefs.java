@@ -1,7 +1,7 @@
 package br.com.dbccompany.votacaocooperado.cucumber;
 
 import br.com.dbccompany.votacaocooperado.VotacaoCooperadoApplication;
-import br.com.dbccompany.votacaocooperado.config.VotacaoCooperadoConfigTest;
+import br.com.dbccompany.votacaocooperado.config.VotacaoCooperadoConfig;
 import br.com.dbccompany.votacaocooperado.cucumber.stepdefs.StepDefs;
 import br.com.dbccompany.votacaocooperado.helper.util.ObjectMapperHelper;
 import com.fasterxml.jackson.databind.JavaType;
@@ -26,7 +26,7 @@ import java.util.Map;
 @CucumberContextConfiguration
 @AutoConfigureMockMvc(printOnlyOnFailure = true) // Set false for debug
 @SpringBootTest(classes = VotacaoCooperadoApplication.class)
-@ContextConfiguration(classes = {VotacaoCooperadoApplication.class, VotacaoCooperadoConfigTest.class})
+@ContextConfiguration(classes = {VotacaoCooperadoApplication.class, VotacaoCooperadoConfig.class})
 public class SpringContextStepDefs extends StepDefs {
 
     @DefaultParameterTransformer

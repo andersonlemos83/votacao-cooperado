@@ -76,7 +76,7 @@ public class AssembleiaTest {
 
         int quantidadeVotosSim = assembleia.obterQuantidadeVotosSim();
 
-        assertTrue("Deveria retornar 4", quantidadeVotosSim == 4);
+        assertEquals(4, quantidadeVotosSim, "Deveria retornar 4");
     }
 
     @Test
@@ -85,7 +85,7 @@ public class AssembleiaTest {
 
         int quantidadeVotosNao = assembleia.obterQuantidadeVotosNao();
 
-        assertTrue("Deveria retornar 6", quantidadeVotosNao == 6);
+        assertEquals(6, quantidadeVotosNao, "Deveria retornar 6");
     }
 
     @Test
