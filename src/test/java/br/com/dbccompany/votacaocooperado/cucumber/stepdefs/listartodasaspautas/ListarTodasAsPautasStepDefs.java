@@ -1,6 +1,6 @@
 package br.com.dbccompany.votacaocooperado.cucumber.stepdefs.listartodasaspautas;
 
-import br.com.dbccompany.votacaocooperado.cucumber.datatable.PautaDataTable;
+import br.com.dbccompany.votacaocooperado.cucumber.datatable.domain.PautaDataTable;
 import br.com.dbccompany.votacaocooperado.cucumber.funcionalidade.PautaFuncionalidade;
 import br.com.dbccompany.votacaocooperado.cucumber.stepdefs.StepDefs;
 import br.com.dbccompany.votacaocooperado.cucumber.verificador.PautaVerificador;

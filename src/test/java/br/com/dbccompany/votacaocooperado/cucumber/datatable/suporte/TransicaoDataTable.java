@@ -1,9 +1,9 @@
 package br.com.dbccompany.votacaocooperado.cucumber.datatable.suporte;
 
-import br.com.dbccompany.votacaocooperado.cucumber.datatable.AssembleiaDataTable;
-import br.com.dbccompany.votacaocooperado.cucumber.datatable.AssociadoDataTable;
-import br.com.dbccompany.votacaocooperado.cucumber.datatable.PautaDataTable;
-import br.com.dbccompany.votacaocooperado.cucumber.datatable.VotoDataTable;
+import br.com.dbccompany.votacaocooperado.cucumber.datatable.domain.AssembleiaDataTable;
+import br.com.dbccompany.votacaocooperado.cucumber.datatable.domain.AssociadoDataTable;
+import br.com.dbccompany.votacaocooperado.cucumber.datatable.domain.PautaDataTable;
+import br.com.dbccompany.votacaocooperado.cucumber.datatable.domain.VotoDataTable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

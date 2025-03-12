@@ -1,7 +1,7 @@
 package br.com.dbccompany.votacaocooperado;
 
+import br.com.dbccompany.votacaocooperado.client.AllClientTests;
 import br.com.dbccompany.votacaocooperado.domain.AllDomainTests;
-import br.com.dbccompany.votacaocooperado.repository.impl.AllRepositoryTests;
 import br.com.dbccompany.votacaocooperado.service.AllServiceTests;
 import br.com.dbccompany.votacaocooperado.shared.AllSharedTests;
 import br.com.dbccompany.votacaocooperado.web.AllWebTests;
@@ -11,8 +11,8 @@ import org.junit.platform.suite.api.SuiteDisplayName;
 
 @Suite
 @SelectClasses({
+        AllClientTests.class,
         AllDomainTests.class,
-        AllRepositoryTests.class,
         AllServiceTests.class,
         AllSharedTests.class,
         AllWebTests.class

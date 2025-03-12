@@ -1,6 +1,6 @@
 package br.com.dbccompany.votacaocooperado.cucumber.stepdefs.listartodososassociados;
 
-import br.com.dbccompany.votacaocooperado.cucumber.datatable.AssociadoDataTable;
+import br.com.dbccompany.votacaocooperado.cucumber.datatable.domain.AssociadoDataTable;
 import br.com.dbccompany.votacaocooperado.cucumber.funcionalidade.AssociadoFuncionalidade;
 import br.com.dbccompany.votacaocooperado.cucumber.stepdefs.StepDefs;
 import br.com.dbccompany.votacaocooperado.cucumber.verificador.AssociadoVerificador;

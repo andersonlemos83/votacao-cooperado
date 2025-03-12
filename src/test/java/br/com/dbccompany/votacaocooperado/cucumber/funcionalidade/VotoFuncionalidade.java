@@ -1,6 +1,6 @@
 package br.com.dbccompany.votacaocooperado.cucumber.funcionalidade;
 
-import br.com.dbccompany.votacaocooperado.cucumber.datatable.VotoDataTable;
+import br.com.dbccompany.votacaocooperado.cucumber.datatable.domain.VotoDataTable;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;

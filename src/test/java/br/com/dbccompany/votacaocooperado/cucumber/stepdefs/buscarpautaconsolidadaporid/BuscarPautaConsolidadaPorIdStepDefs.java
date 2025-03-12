@@ -1,6 +1,6 @@
 package br.com.dbccompany.votacaocooperado.cucumber.stepdefs.buscarpautaconsolidadaporid;
 
-import br.com.dbccompany.votacaocooperado.cucumber.datatable.PautaConsolidadaDataTable;
+import br.com.dbccompany.votacaocooperado.cucumber.datatable.domain.PautaConsolidadaDataTable;
 import br.com.dbccompany.votacaocooperado.cucumber.funcionalidade.PautaFuncionalidade;
 import br.com.dbccompany.votacaocooperado.cucumber.stepdefs.StepDefs;
 import br.com.dbccompany.votacaocooperado.cucumber.verificador.MensagemVerificador;

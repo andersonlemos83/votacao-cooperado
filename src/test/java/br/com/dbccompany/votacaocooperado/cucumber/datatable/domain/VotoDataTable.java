@@ -1,4 +1,4 @@
-package br.com.dbccompany.votacaocooperado.cucumber.datatable;
+package br.com.dbccompany.votacaocooperado.cucumber.datatable.domain;
 
 import br.com.dbccompany.votacaocooperado.domain.TipoVoto;
 import lombok.*;

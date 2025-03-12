@@ -1,8 +1,8 @@
 package br.com.dbccompany.votacaocooperado.service.validador.impl;
 
+import br.com.dbccompany.votacaocooperado.client.UsuarioClient;
 import br.com.dbccompany.votacaocooperado.domain.Associado;
 import br.com.dbccompany.votacaocooperado.repository.AssociadoRepository;
-import br.com.dbccompany.votacaocooperado.client.UsuarioClient;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorAssociado;
 import br.com.dbccompany.votacaocooperado.shared.exception.NegocioException;
 import org.springframework.stereotype.Service;

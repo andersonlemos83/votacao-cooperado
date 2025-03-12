@@ -1,12 +1,14 @@
 package br.com.dbccompany.votacaocooperado.service.validador.impl;
 
-import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
-import br.com.dbccompany.votacaocooperado.builder.DataHoraBuilder;
 import br.com.dbccompany.votacaocooperado.domain.Assembleia;
+import br.com.dbccompany.votacaocooperado.domain.Pauta;
+import br.com.dbccompany.votacaocooperado.helper.builder.DataHoraBuilder;
 import br.com.dbccompany.votacaocooperado.repository.AssembleiaRepository;
 import br.com.dbccompany.votacaocooperado.repository.PautaRepository;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorAssembleia;
 import br.com.dbccompany.votacaocooperado.shared.exception.NegocioException;
+import org.instancio.Instancio;
+import org.instancio.Select;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,7 +19,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.Date;
 import java.util.Optional;
 
-import static br.com.dbccompany.votacaocooperado.builder.PautaBuilder.umaPautaQualquer;
 import static java.util.Optional.ofNullable;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -43,10 +44,10 @@ public class ValidadorAssembleiaImplTest {
         validadorAssembleia = new ValidadorAssembleiaImpl(assembleiaRepositoryMock, pautaRepositoryMock);
 
         idAssembleia = 1L;
-        assembleia = AssembleiaBuilder.umaAssembleiaQualquer()
-                .comId(idAssembleia)
-                .comPauta(umaPautaQualquer().build())
-                .build();
+        assembleia = Instancio.of(Assembleia.class)
+                .set(Select.field("id"), idAssembleia)
+                .set(Select.field("pauta"), Instancio.create(Pauta.class))
+                .create();
         assembleiaOptional = ofNullable(assembleia);
     }
 
@@ -87,7 +88,8 @@ public class ValidadorAssembleiaImplTest {
 
     @Test
     public void aoValidarDadoQueExistaPautaNaoDeveriaLancarNenhumaMensagem() {
-        Mockito.when(pautaRepositoryMock.findById(Mockito.any(Long.class))).thenReturn((ofNullable(umaPautaQualquer().build())));
+        Pauta pauta = Instancio.create(Pauta.class);
+        Mockito.when(pautaRepositoryMock.findById(Mockito.any(Long.class))).thenReturn((ofNullable(pauta)));
 
         validadorAssembleia.validar(assembleia);
     }

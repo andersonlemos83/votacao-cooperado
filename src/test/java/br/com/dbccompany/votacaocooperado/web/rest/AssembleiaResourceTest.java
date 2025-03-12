@@ -1,11 +1,11 @@
 package br.com.dbccompany.votacaocooperado.web.rest;
 
-import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
-import br.com.dbccompany.votacaocooperado.builder.AssembleiaDtoBuilder;
 import br.com.dbccompany.votacaocooperado.domain.Assembleia;
 import br.com.dbccompany.votacaocooperado.service.AssembleiaService;
 import br.com.dbccompany.votacaocooperado.web.dto.AssembleiaDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.instancio.Instancio;
+import org.instancio.Select;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -54,8 +54,8 @@ public class AssembleiaResourceTest {
     @BeforeEach
     public void inicializarContexto() {
         dataCriacao = new Date();
-        assembleiaDto = AssembleiaDtoBuilder.umaAssembleiaQualquer().comDataCriacao(dataCriacao).build();
-        assembleia = AssembleiaBuilder.umaAssembleiaQualquer().comDataCriacao(dataCriacao).build();
+        assembleiaDto = Instancio.of(AssembleiaDto.class).set(Select.field("dataCriacao"), dataCriacao).create();
+        assembleia = Instancio.of(Assembleia.class).set(Select.field("dataCriacao"), dataCriacao).create();
     }
 
     @Test

@@ -1,6 +1,6 @@
 package br.com.dbccompany.votacaocooperado.cucumber.stepdefs.cadastrarassembleia;
 
-import br.com.dbccompany.votacaocooperado.cucumber.datatable.AssembleiaDataTable;
+import br.com.dbccompany.votacaocooperado.cucumber.datatable.domain.AssembleiaDataTable;
 import br.com.dbccompany.votacaocooperado.cucumber.funcionalidade.AssembleiaFuncionalidade;
 import br.com.dbccompany.votacaocooperado.cucumber.stepdefs.StepDefs;
 import br.com.dbccompany.votacaocooperado.cucumber.verificador.AssembleiaVerificador;

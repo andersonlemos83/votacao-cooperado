@@ -1,4 +1,4 @@
-package br.com.dbccompany.votacaocooperado.builder;
+package br.com.dbccompany.votacaocooperado.helper.builder;
 
 import java.time.LocalDateTime;
 import java.util.Date;

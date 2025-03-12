@@ -1,7 +1,6 @@
-package br.com.dbccompany.votacaocooperado.repository.impl;
+package br.com.dbccompany.votacaocooperado.client.impl;
 
 import br.com.dbccompany.votacaocooperado.client.UsuarioClient;
-import br.com.dbccompany.votacaocooperado.client.impl.UsuarioClientImpl;
 import br.com.dbccompany.votacaocooperado.shared.exception.NegocioException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

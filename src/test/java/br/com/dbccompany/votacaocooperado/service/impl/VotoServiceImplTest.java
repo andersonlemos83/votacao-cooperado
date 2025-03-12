@@ -1,13 +1,13 @@
 package br.com.dbccompany.votacaocooperado.service.impl;
 
-import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
-import br.com.dbccompany.votacaocooperado.builder.VotoBuilder;
 import br.com.dbccompany.votacaocooperado.domain.Assembleia;
 import br.com.dbccompany.votacaocooperado.domain.Voto;
 import br.com.dbccompany.votacaocooperado.repository.VotoRepository;
 import br.com.dbccompany.votacaocooperado.service.VotoService;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorAssembleia;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorVoto;
+import org.instancio.Instancio;
+import org.instancio.Select;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -48,8 +48,8 @@ public class VotoServiceImplTest {
 
         idAssembleiEsperado = 1L;
 
-        Assembleia assembleia = AssembleiaBuilder.umaAssembleia().comId(idAssembleiEsperado).build();
-        votoEsperado = VotoBuilder.umVotoQualquer().comAssembleia(assembleia).build();
+        Assembleia assembleia = Instancio.of(Assembleia.class).set(Select.field("id"), idAssembleiEsperado).create();
+        votoEsperado = Instancio.of(Voto.class).set(Select.field("assembleia"), assembleia).create();
     }
 
     @Test

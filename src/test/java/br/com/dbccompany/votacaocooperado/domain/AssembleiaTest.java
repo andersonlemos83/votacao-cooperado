@@ -1,8 +1,8 @@
 package br.com.dbccompany.votacaocooperado.domain;
 
-import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
-import br.com.dbccompany.votacaocooperado.builder.DataHoraBuilder;
-import br.com.dbccompany.votacaocooperado.builder.PautaBuilder;
+import br.com.dbccompany.votacaocooperado.helper.builder.DataHoraBuilder;
+import org.instancio.Instancio;
+import org.instancio.Select;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,10 +12,10 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import static br.com.dbccompany.votacaocooperado.builder.VotoBuilder.umVotoQualquerNao;
-import static br.com.dbccompany.votacaocooperado.builder.VotoBuilder.umVotoQualquerSim;
 import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.ABERTA;
 import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.FECHADA;
+import static br.com.dbccompany.votacaocooperado.domain.TipoVoto.NAO;
+import static br.com.dbccompany.votacaocooperado.domain.TipoVoto.SIM;
 import static br.com.dbccompany.votacaocooperado.helper.util.AssertUtil.assertData;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -30,7 +30,7 @@ public class AssembleiaTest {
 
     @BeforeEach
     public void inicializarContexto() {
-        assembleia = AssembleiaBuilder.umaAssembleiaQualquer().build();
+        assembleia = Instancio.create(Assembleia.class);
     }
 
     @Test
@@ -41,11 +41,12 @@ public class AssembleiaTest {
 
     @Test
     public void aoObterIdPautaDadoQuePautaNaoEstejaNulaDeveriaRetornarIdPautaEsperado() {
-        assembleia.setPauta(PautaBuilder.umaPautaQualquer().build());
+        Pauta pautaEsperada = Instancio.create(Pauta.class);
+        assembleia.setPauta(pautaEsperada);
 
         Long idPautaRetornado = assembleia.obterIdPauta();
 
-        assertEquals(Long.valueOf(1), idPautaRetornado);
+        assertEquals(pautaEsperada.getId(), idPautaRetornado);
     }
 
     @Test
@@ -135,9 +136,16 @@ public class AssembleiaTest {
     }
 
     private List<Voto> gerarListaComQuatroVotosSimIhSeisVotosNao() {
-        return Arrays.asList(umVotoQualquerSim().build(), umVotoQualquerSim().build(), umVotoQualquerSim().build(),
-                umVotoQualquerSim().build(), umVotoQualquerNao().build(), umVotoQualquerNao().build(),
-                umVotoQualquerNao().build(), umVotoQualquerNao().build(), umVotoQualquerNao().build(),
-                umVotoQualquerNao().build());
+        return Arrays.asList(gerarVotoSim(), gerarVotoSim(), gerarVotoSim(), gerarVotoSim(),
+                gerarVotoNao(), gerarVotoNao(), gerarVotoNao(), gerarVotoNao(), gerarVotoNao(),
+                gerarVotoNao());
+    }
+
+    private Voto gerarVotoSim() {
+        return Instancio.of(Voto.class).set(Select.field("tipoVoto"), SIM).create();
+    }
+
+    private Voto gerarVotoNao() {
+        return Instancio.of(Voto.class).set(Select.field("tipoVoto"), NAO).create();
     }
 }

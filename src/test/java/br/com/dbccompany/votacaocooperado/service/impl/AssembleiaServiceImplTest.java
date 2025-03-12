@@ -1,10 +1,10 @@
 package br.com.dbccompany.votacaocooperado.service.impl;
 
-import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
 import br.com.dbccompany.votacaocooperado.domain.Assembleia;
 import br.com.dbccompany.votacaocooperado.repository.AssembleiaRepository;
 import br.com.dbccompany.votacaocooperado.service.AssembleiaService;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorAssembleia;
+import org.instancio.Instancio;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -38,7 +38,7 @@ public class AssembleiaServiceImplTest {
         assembleiaService = new AssembleiaServiceImpl(validadorAssembleiaMock, assembleiaRepositoryMock);
 
         assembleiasEsperadas = new ArrayList<>();
-        assembleiaEsperada = AssembleiaBuilder.umaAssembleiaQualquer().build();
+        assembleiaEsperada = Instancio.create(Assembleia.class);
     }
 
     @Test

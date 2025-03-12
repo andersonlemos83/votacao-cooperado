@@ -1,13 +1,12 @@
 package br.com.dbccompany.votacaocooperado.web.rest;
 
-import br.com.dbccompany.votacaocooperado.builder.PautaBuilder;
-import br.com.dbccompany.votacaocooperado.builder.PautaConsolidadoDtoBuilder;
-import br.com.dbccompany.votacaocooperado.builder.PautaDtoBuilder;
 import br.com.dbccompany.votacaocooperado.domain.Pauta;
 import br.com.dbccompany.votacaocooperado.service.PautaService;
 import br.com.dbccompany.votacaocooperado.web.dto.PautaConsolidadaDto;
 import br.com.dbccompany.votacaocooperado.web.dto.PautaDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.instancio.Instancio;
+import org.instancio.Select;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -55,13 +54,10 @@ public class PautaResourceTest {
 
     @BeforeEach
     public void inicializarContexto() {
-        pautaDto = PautaDtoBuilder.umaPautaQualquer().build();
-        pauta = PautaBuilder.umaPautaQualquer().build();
+        pautaDto = Instancio.create(PautaDto.class);
+        pauta = Instancio.create(Pauta.class);
         dataCriacao = new Date();
-        pautaConsolidadaDto = PautaConsolidadoDtoBuilder
-                .umaPautaConsolidadaQualquer()
-                .comDataCriacao(dataCriacao)
-                .build();
+        pautaConsolidadaDto = Instancio.of(PautaConsolidadaDto.class).set(Select.field("dataCriacao"), dataCriacao).create();
     }
 
     @Test

@@ -1,6 +1,6 @@
-package br.com.dbccompany.votacaocooperado.cucumber.datatable;
+package br.com.dbccompany.votacaocooperado.cucumber.datatable.domain;
 
-import br.com.dbccompany.votacaocooperado.builder.DataHoraBuilder;
+import br.com.dbccompany.votacaocooperado.helper.builder.DataHoraBuilder;
 import lombok.*;
 
 import java.io.Serializable;

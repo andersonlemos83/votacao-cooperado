@@ -1,10 +1,10 @@
 package br.com.dbccompany.votacaocooperado.service.impl;
 
-import br.com.dbccompany.votacaocooperado.builder.PautaBuilder;
 import br.com.dbccompany.votacaocooperado.domain.Pauta;
 import br.com.dbccompany.votacaocooperado.repository.PautaRepository;
 import br.com.dbccompany.votacaocooperado.service.PautaService;
 import br.com.dbccompany.votacaocooperado.shared.exception.NegocioException;
+import org.instancio.Instancio;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,7 +39,7 @@ public class PautaServiceImplTest {
         pautaService = new PautaServiceImpl(pautaRepositoryMock);
 
         pautasEsperadas = new ArrayList<>();
-        pautaEsperada = PautaBuilder.umaPautaQualquer().build();
+        pautaEsperada = Instancio.create(Pauta.class);
         idEsperado = 1L;
         pautaOptionalEsperada = ofNullable(pautaEsperada);
     }

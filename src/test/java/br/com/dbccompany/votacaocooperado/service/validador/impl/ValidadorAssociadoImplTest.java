@@ -1,11 +1,11 @@
 package br.com.dbccompany.votacaocooperado.service.validador.impl;
 
-import br.com.dbccompany.votacaocooperado.builder.AssociadoBuilder;
+import br.com.dbccompany.votacaocooperado.client.UsuarioClient;
 import br.com.dbccompany.votacaocooperado.domain.Associado;
 import br.com.dbccompany.votacaocooperado.repository.AssociadoRepository;
-import br.com.dbccompany.votacaocooperado.client.UsuarioClient;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorAssociado;
 import br.com.dbccompany.votacaocooperado.shared.exception.NegocioException;
+import org.instancio.Instancio;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,7 +35,7 @@ public class ValidadorAssociadoImplTest {
     public void inicializarContexto() {
         validadorAssociado = new ValidadorAssociadoImpl(usuarioClientMock, associadoRepositoryMock);
 
-        associado = AssociadoBuilder.umAssociadoQualquer().build();
+        associado = Instancio.create(Associado.class);
     }
 
     @Test

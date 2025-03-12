@@ -1,6 +1,6 @@
 package br.com.dbccompany.votacaocooperado.cucumber.funcionalidade;
 
-import br.com.dbccompany.votacaocooperado.cucumber.datatable.AssociadoDataTable;
+import br.com.dbccompany.votacaocooperado.cucumber.datatable.domain.AssociadoDataTable;
 import br.com.dbccompany.votacaocooperado.helper.util.ConstanteUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;

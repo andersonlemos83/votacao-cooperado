@@ -1,10 +1,10 @@
 package br.com.dbccompany.votacaocooperado.service.impl;
 
-import br.com.dbccompany.votacaocooperado.builder.AssociadoBuilder;
 import br.com.dbccompany.votacaocooperado.domain.Associado;
 import br.com.dbccompany.votacaocooperado.repository.AssociadoRepository;
 import br.com.dbccompany.votacaocooperado.service.AssociadoService;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorAssociado;
+import org.instancio.Instancio;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -38,7 +38,7 @@ public class AssociadoServiceImplTest {
         associadoService = new AssociadoServiceImpl(validadorAssociadoMock, associadoRepositoryMock);
 
         associadosEsperados = new ArrayList<>();
-        associadoEsperado = AssociadoBuilder.umAssociadoQualquer().build();
+        associadoEsperado = Instancio.create(Associado.class);
     }
 
     @Test

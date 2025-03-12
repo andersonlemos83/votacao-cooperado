@@ -1,11 +1,10 @@
 package br.com.dbccompany.votacaocooperado.web.rest;
 
-import br.com.dbccompany.votacaocooperado.builder.VotoBuilder;
-import br.com.dbccompany.votacaocooperado.builder.VotoDtoBuilder;
 import br.com.dbccompany.votacaocooperado.domain.Voto;
 import br.com.dbccompany.votacaocooperado.service.VotoService;
 import br.com.dbccompany.votacaocooperado.web.dto.VotoDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.instancio.Instancio;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -50,8 +49,8 @@ public class VotoResourceTest {
 
     @BeforeEach
     public void inicializarContexto() {
-        votoDto = VotoDtoBuilder.umVotoQualquer().build();
-        voto = VotoBuilder.umVotoQualquer().build();
+        votoDto = Instancio.create(VotoDto.class);
+        voto = Instancio.create(Voto.class);
     }
 
     @Test
