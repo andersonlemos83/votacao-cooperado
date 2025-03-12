@@ -1,0 +1,326 @@
+{
+	"info": {
+		"_postman_id": "1eb52613-ac70-46cc-bd83-9282062257e5",
+		"name": "votacao-cooperado",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2549117"
+	},
+	"item": [
+		{
+			"name": "Cadastrar Pauta",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "00220ce4-b3e8-4ed1-b59a-db40c1098296",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"descricao\": \"Emissão de novas cotas do fundo Musical\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8484/v1/api/pautas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8484",
+					"path": [
+						"v1",
+						"api",
+						"pautas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar Assembléia",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "00220ce4-b3e8-4ed1-b59a-db40c1098296",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"dataCriacao\": \"12/03/2025 18:37:36\",\r\n  \"tempoDuracao\": 60,\r\n  \"idPauta\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8484/v1/api/assembleias",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8484",
+					"path": [
+						"v1",
+						"api",
+						"assembleias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar Associado",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "00220ce4-b3e8-4ed1-b59a-db40c1098296",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Morten Harket\",\r\n  \"cpf\": \"44934360000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8484/v1/api/associados",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8484",
+					"path": [
+						"v1",
+						"api",
+						"associados"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar Voto",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "00220ce4-b3e8-4ed1-b59a-db40c1098296",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"tipoVoto\": \"SIM\",\r\n  \"idAssociado\": 1,\r\n  \"idAssembleia\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8484/v1/api/votos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8484",
+					"path": [
+						"v1",
+						"api",
+						"votos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Pautas",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "a77e4870-9fe0-4b0c-9c7d-93ff634b0da9",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8484/v1/api/pautas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8484",
+					"path": [
+						"v1",
+						"api",
+						"pautas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Assembléias",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "a77e4870-9fe0-4b0c-9c7d-93ff634b0da9",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8484/v1/api/assembleias",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8484",
+					"path": [
+						"v1",
+						"api",
+						"assembleias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Associados",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "a77e4870-9fe0-4b0c-9c7d-93ff634b0da9",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8484/v1/api/associados",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8484",
+					"path": [
+						"v1",
+						"api",
+						"associados"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Votos",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "a77e4870-9fe0-4b0c-9c7d-93ff634b0da9",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8484/v1/api/votos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8484",
+					"path": [
+						"v1",
+						"api",
+						"votos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar Consolidado Pauta",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "a77e4870-9fe0-4b0c-9c7d-93ff634b0da9",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8484/v1/api/pautas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8484",
+					"path": [
+						"v1",
+						"api",
+						"pautas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

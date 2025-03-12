@@ -16,7 +16,7 @@ import static wiremock.org.eclipse.jetty.http.HttpStatus.BAD_REQUEST_400;
 @RequiredArgsConstructor
 public class UsuarioClientStub {
 
-    private static final String URL_FIND_BY_CPF = "/{0}";
+    private static final String URL_FIND_BY_CPF = "/users/{0}";
 
     private final WireMockServer wireMockServer;
 

@@ -33,7 +33,7 @@ public class UsuarioClientImplTest {
 
     @BeforeEach
     public void inicializarContexto() {
-        usuarioClient = new UsuarioClientImpl(restTemplateMock, "https://user-info.herokuapp.com/users");
+        usuarioClient = new UsuarioClientImpl(restTemplateMock, "https://user-info.herokuapp.com");
 
         cpf = "22149030039";
     }

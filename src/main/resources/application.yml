@@ -1,5 +1,9 @@
 server:
-  port: 8081
+  compression:
+    enabled: true
+  port: 8181
+  servlet:
+    context-path: /
 
 spring:
   main:
@@ -10,8 +14,8 @@ spring:
       minimum-idle: 10
       maximum-pool-size: 30
     url: jdbc:h2:file:./votacao-cooperado-h2-db;MODE=Oracle;INIT=RUNSCRIPT FROM 'classpath:schema.sql'
-    username: sa
-    password: sa
+    username:
+    password:
   jpa:
     properties:
       hibernate:
@@ -23,14 +27,23 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
   h2:
     console:
       path: /h2-console
       enabled: true
+  web:
+    locale: pt_BR
+    locale-resolver: accept_header
+  data:
+    jdbc:
+      repositories:
+        enabled: false
+
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
+  packages-to-scan: br.com.dbccompany.votacaocooperado.web.rest
 
 management:
   endpoints:
@@ -54,4 +67,4 @@ management:
 
 client:
   usuario:
-    url: https://user-info.herokuapp.com/users
+    url: https://user-info.herokuapp.com
