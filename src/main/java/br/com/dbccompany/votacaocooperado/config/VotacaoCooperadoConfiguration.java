@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 import java.time.Duration;
 
 @Configuration
-public class VotacaoCooperadoConfig {
+public class VotacaoCooperadoConfiguration {
 
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {

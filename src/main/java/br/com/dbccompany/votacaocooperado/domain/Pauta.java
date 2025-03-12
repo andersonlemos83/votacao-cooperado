@@ -31,7 +31,7 @@ public class Pauta implements Serializable {
 
     @OneToMany(mappedBy = "pauta", fetch = LAZY, cascade = ALL)
     @OrderBy("dataCriacao")
-    public List<Assembleia> assembleias;
+    private List<Assembleia> assembleias;
 
     public Date getDataCriacao() {
         return obterUltimaAssembleia().getDataCriacao();

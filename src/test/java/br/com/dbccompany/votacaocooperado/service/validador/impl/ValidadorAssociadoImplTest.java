@@ -14,8 +14,7 @@ import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static java.util.Optional.ofNullable;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SuppressWarnings("java:S5786") // Public required for JUnit test suite
 @ExtendWith(SpringExtension.class)
@@ -58,6 +57,6 @@ public class ValidadorAssociadoImplTest {
     @Test
     public void aoValidarDadoQueCpfSejaValidoIhNaoEstejaCadastradoNaoDeveriaLancarNenhumaMensagem() {
         Mockito.when(usuarioClientMock.verificarSeEstaValido(associado.getCpf())).thenReturn(true);
-        validadorAssociado.validar(associado);
+        assertDoesNotThrow(() -> validadorAssociado.validar(associado));
     }
 }
