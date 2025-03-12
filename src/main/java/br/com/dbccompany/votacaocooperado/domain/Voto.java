@@ -1,13 +1,21 @@
 package br.com.dbccompany.votacaocooperado.domain;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.Optional;
 
+import static br.com.dbccompany.votacaocooperado.domain.TipoVoto.NAO;
+import static br.com.dbccompany.votacaocooperado.domain.TipoVoto.SIM;
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
+@Data
 @Entity
+@Builder
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(schema = "COOP_OWNER", name = "VOTO")
 @SequenceGenerator(schema = "COOP_OWNER", name = "voto_seq", sequenceName = "VOTO_SEQ", allocationSize = 1)
 public class Voto implements Serializable {
@@ -27,80 +35,23 @@ public class Voto implements Serializable {
     @ManyToOne
     private Assembleia assembleia;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public TipoVoto getTipoVoto() {
-        return tipoVoto;
-    }
-
-    public void setTipoVoto(TipoVoto tipoVoto) {
-        this.tipoVoto = tipoVoto;
-    }
-
-    public Associado getAssociado() {
-        return associado;
-    }
-
-    public void setAssociado(Associado associado) {
-        this.associado = associado;
-    }
-
-    public Assembleia getAssembleia() {
-        return assembleia;
-    }
-
-    public void setAssembleia(Assembleia assembleia) {
-        this.assembleia = assembleia;
-    }
-
     public Long obterIdAssociado() {
-        if (associado == null) {
-            return null;
-        }
-        return associado.getId();
+        return Optional.ofNullable(associado)
+                .map(Associado::getId)
+                .orElse(null);
     }
 
     public Long obterIdAssembleia() {
-        if (assembleia == null) {
-            return null;
-        }
-        return assembleia.getId();
+        return Optional.ofNullable(assembleia)
+                .map(Assembleia::getId)
+                .orElse(null);
     }
 
     public boolean ehSim() {
-        return tipoVoto != null && tipoVoto == TipoVoto.SIM;
+        return SIM.equals(tipoVoto);
     }
 
     public boolean ehNao() {
-        return tipoVoto != null && tipoVoto == TipoVoto.NAO;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Voto voto = (Voto) o;
-        return Objects.equals(id, voto.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "Voto{" +
-                "id=" + id +
-                ", tipoVoto=" + tipoVoto +
-                ", associado=" + associado +
-                ", assembleia=" + assembleia +
-                '}';
+        return NAO.equals(tipoVoto);
     }
 }

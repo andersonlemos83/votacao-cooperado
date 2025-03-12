@@ -4,6 +4,7 @@ import br.com.dbccompany.votacaocooperado.domain.Associado;
 import br.com.dbccompany.votacaocooperado.service.AssociadoService;
 import br.com.dbccompany.votacaocooperado.web.dto.AssociadoDto;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
@@ -16,18 +17,12 @@ import static org.springframework.http.HttpStatus.CREATED;
 
 @Log4j2
 @RestController
+@AllArgsConstructor
 @RequestMapping("/v1/api/associados")
-@CrossOrigin(origins = "*")
 public class AssociadoResource {
 
     private final AssociadoService associadoService;
     private final ModelMapper modelMapper;
-
-    public AssociadoResource(AssociadoService associadoService,
-                             ModelMapper modelMapper) {
-        this.associadoService = associadoService;
-        this.modelMapper = modelMapper;
-    }
 
     @GetMapping
     public ResponseEntity<List<AssociadoDto>> listar() {

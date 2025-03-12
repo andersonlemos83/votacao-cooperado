@@ -4,7 +4,7 @@ import br.com.dbccompany.votacaocooperado.client.UsuarioClient;
 import br.com.dbccompany.votacaocooperado.shared.exception.NegocioException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.client.HttpStatusCodeException;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import static java.text.MessageFormat.format;
@@ -26,7 +26,7 @@ public class UsuarioClientImpl implements UsuarioClient {
         try {
             restTemplate.getForObject(gerarUrl(cpf), String.class);
             return true;
-        } catch (HttpStatusCodeException excecao) {
+        } catch (HttpClientErrorException.BadRequest excecao) {
             return false;
         } catch (Exception excecao) {
             throw new NegocioException("O serviço de validação do CPF está offline");

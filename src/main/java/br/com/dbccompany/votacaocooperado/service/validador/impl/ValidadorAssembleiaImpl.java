@@ -5,21 +5,17 @@ import br.com.dbccompany.votacaocooperado.repository.AssembleiaRepository;
 import br.com.dbccompany.votacaocooperado.repository.PautaRepository;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorAssembleia;
 import br.com.dbccompany.votacaocooperado.shared.exception.NegocioException;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @Component
+@AllArgsConstructor
 public class ValidadorAssembleiaImpl implements ValidadorAssembleia {
 
     private final AssembleiaRepository assembleiaRepository;
     private final PautaRepository pautaRepository;
-
-    public ValidadorAssembleiaImpl(AssembleiaRepository assembleiaRepository,
-                                   PautaRepository pautaRepository) {
-        this.assembleiaRepository = assembleiaRepository;
-        this.pautaRepository = pautaRepository;
-    }
 
     @Override
     public void validar(Long idAssembleia) {

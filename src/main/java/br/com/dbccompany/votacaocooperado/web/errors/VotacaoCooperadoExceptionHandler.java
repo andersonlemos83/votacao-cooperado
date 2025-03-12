@@ -25,7 +25,11 @@ public class VotacaoCooperadoExceptionHandler extends ResponseEntityExceptionHan
 
     @ExceptionHandler(NegocioException.class)
     public ResponseEntity<Object> HandlerDomain(NegocioException exception, WebRequest request) {
-        ResponseDto responseDto = new ResponseDto(BAD_REQUEST.value(), exception.getMessage());
+        ResponseDto responseDto = ResponseDto.builder()
+                .status(BAD_REQUEST.value())
+                .mensagem(exception.getMessage())
+                .build();
+        log.debug("Saindo de VotacaoCooperadoExceptionHandler: {}", generateJson(responseDto));
         return handleExceptionInternal(exception, responseDto, new HttpHeaders(), BAD_REQUEST, request);
     }
 

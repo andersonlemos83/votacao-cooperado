@@ -2,13 +2,14 @@ package br.com.dbccompany.votacaocooperado.client.impl;
 
 import br.com.dbccompany.votacaocooperado.client.UsuarioClient;
 import br.com.dbccompany.votacaocooperado.shared.exception.NegocioException;
+import org.instancio.Instancio;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
@@ -48,7 +49,7 @@ public class UsuarioClientImplTest {
 
     @Test
     public void aoVerificarSeEstaValidoDadoQueVotacaoNaoEstejaExpiradaDeveriaRetornarFalso() {
-        Mockito.when(restTemplateMock.getForObject(URL_ESPERADA, String.class)).thenThrow(gerarHttpStatusCodeException());
+        Mockito.when(restTemplateMock.getForObject(URL_ESPERADA, String.class)).thenThrow(gerarBadRequestException());
 
         boolean estaValido = usuarioClient.verificarSeEstaValido(cpf);
 
@@ -63,8 +64,7 @@ public class UsuarioClientImplTest {
         assertEquals("O serviço de validação do CPF está offline", thrown.getMessage());
     }
 
-    private HttpStatusCodeException gerarHttpStatusCodeException() {
-        return new HttpStatusCodeException(HttpStatus.NO_CONTENT) {
-        };
+    private HttpStatusCodeException gerarBadRequestException() {
+        return Instancio.create(HttpClientErrorException.BadRequest.class);
     }
 }

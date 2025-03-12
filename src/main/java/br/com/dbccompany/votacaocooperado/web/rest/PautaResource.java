@@ -5,6 +5,7 @@ import br.com.dbccompany.votacaocooperado.service.PautaService;
 import br.com.dbccompany.votacaocooperado.web.dto.PautaConsolidadaDto;
 import br.com.dbccompany.votacaocooperado.web.dto.PautaDto;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
@@ -17,18 +18,12 @@ import static org.springframework.http.HttpStatus.CREATED;
 
 @Log4j2
 @RestController
+@AllArgsConstructor
 @RequestMapping("/v1/api/pautas")
-@CrossOrigin(origins = "*")
 public class PautaResource {
 
     private final PautaService pautaService;
     private final ModelMapper modelMapper;
-
-    public PautaResource(PautaService pautaService,
-                         ModelMapper modelMapper) {
-        this.pautaService = pautaService;
-        this.modelMapper = modelMapper;
-    }
 
     @GetMapping
     public ResponseEntity<List<PautaDto>> listarTodos() {

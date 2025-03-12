@@ -1,17 +1,22 @@
 package br.com.dbccompany.votacaocooperado.domain;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
+@Data
 @Entity
+@Builder
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(schema = "COOP_OWNER", name = "PAUTA")
 @SequenceGenerator(schema = "COOP_OWNER", name = "pauta_seq", sequenceName = "PAUTA_SEQ", allocationSize = 1)
 public class Pauta implements Serializable {
@@ -27,37 +32,6 @@ public class Pauta implements Serializable {
     @OneToMany(mappedBy = "pauta", fetch = LAZY, cascade = ALL)
     @OrderBy("dataCriacao")
     public List<Assembleia> assembleias;
-
-    public Pauta() {
-    }
-
-    public Pauta(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public List<Assembleia> getAssembleias() {
-        return assembleias;
-    }
-
-    public void setAssembleias(List<Assembleia> assembleias) {
-        this.assembleias = assembleias;
-    }
 
     public Date getDataCriacao() {
         return obterUltimaAssembleia().getDataCriacao();
@@ -76,27 +50,8 @@ public class Pauta implements Serializable {
     }
 
     private Assembleia obterUltimaAssembleia() {
-        return assembleias.stream().reduce((primeiro, segundo) -> segundo).orElse(new Assembleia());
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Pauta pauta = (Pauta) o;
-        return Objects.equals(id, pauta.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "Pauta{" +
-                "id=" + id +
-                ", descricao='" + descricao + '\'' +
-                '}';
+        return assembleias.stream()
+                .reduce((primeiro, segundo) -> segundo)
+                .orElse(Assembleia.builder().build());
     }
 }

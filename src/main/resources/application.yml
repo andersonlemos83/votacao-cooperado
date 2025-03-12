@@ -9,7 +9,7 @@ spring:
     hikari:
       minimum-idle: 10
       maximum-pool-size: 30
-    url: jdbc:h2:file:./votacao-cooperado-h2-db
+    url: jdbc:h2:file:./votacao-cooperado-h2-db;MODE=Oracle;INIT=RUNSCRIPT FROM 'classpath:schema.sql'
     username: sa
     password: sa
   jpa:

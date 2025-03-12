@@ -4,6 +4,7 @@ import br.com.dbccompany.votacaocooperado.domain.Assembleia;
 import br.com.dbccompany.votacaocooperado.service.AssembleiaService;
 import br.com.dbccompany.votacaocooperado.web.dto.AssembleiaDto;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
@@ -16,18 +17,12 @@ import static org.springframework.http.HttpStatus.CREATED;
 
 @Log4j2
 @RestController
+@AllArgsConstructor
 @RequestMapping("/v1/api/assembleias")
-@CrossOrigin(origins = "*")
 public class AssembleiaResource {
 
     private final AssembleiaService assembleiaService;
     private final ModelMapper modelMapper;
-
-    public AssembleiaResource(AssembleiaService assembleiaService,
-                              ModelMapper modelMapper) {
-        this.assembleiaService = assembleiaService;
-        this.modelMapper = modelMapper;
-    }
 
     @GetMapping
     public ResponseEntity<List<AssembleiaDto>> listarTodos() {

@@ -5,21 +5,17 @@ import br.com.dbccompany.votacaocooperado.domain.Associado;
 import br.com.dbccompany.votacaocooperado.repository.AssociadoRepository;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorAssociado;
 import br.com.dbccompany.votacaocooperado.shared.exception.NegocioException;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class ValidadorAssociadoImpl implements ValidadorAssociado {
 
     private final UsuarioClient usuarioClient;
     private final AssociadoRepository associadoRepository;
-
-    public ValidadorAssociadoImpl(UsuarioClient usuarioClient,
-                                  AssociadoRepository associadoRepository) {
-        this.usuarioClient = usuarioClient;
-        this.associadoRepository = associadoRepository;
-    }
 
     @Override
     public void validar(Associado associado) {
