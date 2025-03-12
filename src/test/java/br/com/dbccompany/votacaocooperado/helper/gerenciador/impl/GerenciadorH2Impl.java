@@ -27,8 +27,8 @@ public class GerenciadorH2Impl implements GerenciadorH2 {
                 .forEach(constraint -> {
                     String tableSchema = (String) constraint.get("TABLE_SCHEMA");
                     String tableName = (String) constraint.get("TABLE_NAME");
-                    String constraint_name = (String) constraint.get("CONSTRAINT_NAME");
-                    String truncateSql = format("ALTER TABLE {0}.{1} DROP CONSTRAINT {2} RESTRICT", tableSchema, tableName, constraint_name);
+                    String constraintName = (String) constraint.get("CONSTRAINT_NAME");
+                    String truncateSql = format("ALTER TABLE {0}.{1} DROP CONSTRAINT {2} RESTRICT", tableSchema, tableName, constraintName);
                     log.info("--> {}", truncateSql);
                     jdbcTemplate.execute(truncateSql);
                 });
