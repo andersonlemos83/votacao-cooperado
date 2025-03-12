@@ -1,24 +1,49 @@
 server:
-  port: 8081
+  compression:
+    enabled: true
+  port: 8181
+  servlet:
+    context-path: /
 
 spring:
   main:
     allow-bean-definition-overriding: true
   datasource:
-    url: jdbc:h2:file:./votacao-cooperado-h2-db
-    username: sa
-    password: sa
+    driver-class-name: org.h2.Driver
+    hikari:
+      minimum-idle: 10
+      maximum-pool-size: 30
+    url: jdbc:h2:file:./votacao-cooperado-h2-db;MODE=Oracle;INIT=RUNSCRIPT FROM 'classpath:schema.sql'
+    username:
+    password:
   jpa:
+    properties:
+      hibernate:
+        default_schema: COOP_OWNER
+        jdbc:
+          batch_size: 10
+        order_inserts: true
+        order_updates: true
+    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
   h2:
     console:
       path: /h2-console
       enabled: true
+  web:
+    locale: pt_BR
+    locale-resolver: accept_header
+  data:
+    jdbc:
+      repositories:
+        enabled: false
+
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
+  packages-to-scan: br.com.dbccompany.votacaocooperado.web.rest
 
 management:
   endpoints:
@@ -32,10 +57,14 @@ management:
   metrics:
     enabled: true
     export:
-      prometheus:
-        enabled: true
+    prometheus:
+      enabled: true
   endpoint:
     health:
       show-details: always
     prometheus:
-      enabled: true
+      access: unrestricted
+
+client:
+  usuario:
+    url: https://user-info.herokuapp.com

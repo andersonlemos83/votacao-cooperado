@@ -1,24 +1,22 @@
 package br.com.dbccompany.votacaocooperado.web.rest;
 
-import br.com.dbccompany.votacaocooperado.VotacaoCooperadoApplication;
-import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
-import br.com.dbccompany.votacaocooperado.builder.AssembleiaDtoBuilder;
 import br.com.dbccompany.votacaocooperado.domain.Assembleia;
 import br.com.dbccompany.votacaocooperado.service.AssembleiaService;
 import br.com.dbccompany.votacaocooperado.web.dto.AssembleiaDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.instancio.Instancio;
+import org.instancio.Select;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.BDDMockito;
 import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -27,35 +25,37 @@ import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.Date;
 
-import static br.com.dbccompany.votacaocooperado.util.ConstanteUtil.URI_V1_API_ASSEMBLEIAS;
+import static br.com.dbccompany.votacaocooperado.helper.util.ConstanteUtil.URI_V1_API_ASSEMBLEIAS;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = VotacaoCooperadoApplication.class)
-@AutoConfigureMockMvc
+@SuppressWarnings("java:S5786") // Public required for JUnit test suite
+@ActiveProfiles("test")
+@ExtendWith(MockitoExtension.class)
+@WebMvcTest(AssembleiaResource.class)
 public class AssembleiaResourceTest {
 
     @Autowired
     protected MockMvc mvc;
 
-    @MockBean
+    @MockitoBean
     private AssembleiaService assembleiaServiceMock;
 
-    @MockBean
+    @MockitoBean
     private ModelMapper modelMapperMock;
 
     private AssembleiaDto assembleiaDto;
     private Assembleia assembleia;
     private Date dataCriacao;
 
-    @Before
+    @BeforeEach
     public void inicializarContexto() {
         dataCriacao = new Date();
-        assembleiaDto = AssembleiaDtoBuilder.umaAssembleiaQualquer().comDataCriacao(dataCriacao).build();
-        assembleia = AssembleiaBuilder.umaAssembleiaQualquer().comDataCriacao(dataCriacao).build();
+        assembleiaDto = Instancio.of(AssembleiaDto.class).set(Select.field("dataCriacao"), dataCriacao).create();
+        assembleia = Instancio.of(Assembleia.class).set(Select.field("dataCriacao"), dataCriacao).create();
     }
 
     @Test
@@ -90,14 +90,14 @@ public class AssembleiaResourceTest {
     private ResultActions cadastrarAssembleia() throws Exception {
         return mvc.perform(MockMvcRequestBuilders.post(URI_V1_API_ASSEMBLEIAS)
                 .content(new ObjectMapper().writeValueAsString(assembleiaDto))
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .accept(MediaType.APPLICATION_JSON_UTF8));
+                .contentType(APPLICATION_JSON)
+                .accept(APPLICATION_JSON));
     }
 
     private ResultActions listarTodos() throws Exception {
         return mvc.perform(MockMvcRequestBuilders.get(URI_V1_API_ASSEMBLEIAS)
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON));
+                .contentType(APPLICATION_JSON)
+                .accept(APPLICATION_JSON));
     }
 
     private String converter(Date data) {

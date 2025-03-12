@@ -1,10 +1,10 @@
 package br.com.dbccompany.votacaocooperado.cucumber.verificador;
 
-import br.com.dbccompany.votacaocooperado.cucumber.datatable.PautaConsolidadaDataTable;
-import br.com.dbccompany.votacaocooperado.cucumber.datatable.PautaDataTable;
-import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.PautaRepositoryTestHelper;
+import br.com.dbccompany.votacaocooperado.cucumber.datatable.domain.PautaConsolidadaDataTable;
+import br.com.dbccompany.votacaocooperado.cucumber.datatable.domain.PautaDataTable;
 import br.com.dbccompany.votacaocooperado.domain.Pauta;
-import org.springframework.beans.factory.annotation.Autowired;
+import br.com.dbccompany.votacaocooperado.helper.repository.PautaRepositoryHelper;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -16,10 +16,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Component
+@AllArgsConstructor
 public class PautaVerificador {
 
-    @Autowired
-    private PautaRepositoryTestHelper pautaRepositoryTestHelper;
+    private final PautaRepositoryHelper pautaRepositoryHelper;
 
     public void verificar(List<PautaDataTable> esperados, ResultActions retorno) throws Exception {
         retorno.andExpect(status().isOk());
@@ -42,7 +42,7 @@ public class PautaVerificador {
 
     public void verificar(String descricao, ResultActions retorno) throws Exception {
         retorno.andExpect(status().isCreated());
-        Pauta pauta = pautaRepositoryTestHelper.findAll().stream().findFirst().orElse(new Pauta());
+        Pauta pauta = pautaRepositoryHelper.findAll().stream().findFirst().orElse(new Pauta());
         assertEquals(descricao, pauta.getDescricao());
     }
 }

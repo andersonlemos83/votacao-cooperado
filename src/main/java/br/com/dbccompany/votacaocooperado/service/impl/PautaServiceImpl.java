@@ -4,18 +4,16 @@ import br.com.dbccompany.votacaocooperado.domain.Pauta;
 import br.com.dbccompany.votacaocooperado.repository.PautaRepository;
 import br.com.dbccompany.votacaocooperado.service.PautaService;
 import br.com.dbccompany.votacaocooperado.shared.exception.NegocioException;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class PautaServiceImpl implements PautaService {
 
     private final PautaRepository pautaRepository;
-
-    public PautaServiceImpl(PautaRepository pautaRepository) {
-        this.pautaRepository = pautaRepository;
-    }
 
     @Override
     public List<Pauta> listarTodos() {

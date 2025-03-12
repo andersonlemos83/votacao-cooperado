@@ -1,0 +1,24 @@
+logging:
+  level:
+    br.com.dbccompany.votacaocooperado: DEBUG
+    org.springframework:
+      ampq: TRACE
+      boot.context: INFO
+      ws.client: TRACE
+      ws.soap: TRACE
+      web: WARN
+
+server:
+  port: 8484
+
+spring:
+  datasource:
+    url: jdbc:h2:file:./votacao-cooperado-h2-db;MODE=Oracle;INIT=RUNSCRIPT FROM 'classpath:schema.sql'
+    username: sa
+    password: sa
+  jpa:
+    show-sql: true
+
+client:
+  usuario:
+    url: http://localhost:8443

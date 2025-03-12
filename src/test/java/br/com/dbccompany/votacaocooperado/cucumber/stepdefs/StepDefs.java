@@ -1,60 +1,18 @@
 package br.com.dbccompany.votacaocooperado.cucumber.stepdefs;
 
-import br.com.dbccompany.votacaocooperado.VotacaoCooperadoApplication;
-import br.com.dbccompany.votacaocooperado.config.VotacaoCooperadoConfigTest;
-import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.AssembleiaRepositoryTestHelper;
-import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.AssociadoRepositoryTestHelper;
-import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.PautaRepositoryTestHelper;
-import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.VotoRepositoryTestHelper;
+import br.com.dbccompany.votacaocooperado.cucumber.configurador.ConfiguradorAmbiente;
+import br.com.dbccompany.votacaocooperado.cucumber.datatable.suporte.TransicaoDataTable;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.test.web.servlet.ResultActions;
 
-import java.util.List;
-import java.util.Map;
-
-import static java.text.MessageFormat.format;
-
-@WebAppConfiguration
-@SpringBootTest
-@AutoConfigureMockMvc(printOnlyOnFailure = false)
-@ContextConfiguration(classes = {VotacaoCooperadoApplication.class, VotacaoCooperadoConfigTest.class})
 public class StepDefs {
 
-    protected static ResultActions retorno;
+    protected static TransicaoDataTable transicaoDataTable = TransicaoDataTable.builder().build();
 
     @Autowired
-    private VotoRepositoryTestHelper votoRepositoryTestHelper;
-
-    @Autowired
-    private AssembleiaRepositoryTestHelper assembleiaRepositoryTestHelper;
-
-    @Autowired
-    private AssociadoRepositoryTestHelper associadoRepositoryTestHelper;
-
-    @Autowired
-    private PautaRepositoryTestHelper pautaRepositoryTestHelper;
-
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private ConfiguradorAmbiente configuradorAmbiente;
 
     public void inicializarContexto() {
-        votoRepositoryTestHelper.deleteAll();
-        assembleiaRepositoryTestHelper.deleteAll();
-        associadoRepositoryTestHelper.deleteAll();
-        pautaRepositoryTestHelper.deleteAll();
-        resetarSequeces();
-    }
-
-    private void resetarSequeces() {
-        List<Map<String, Object>> sequences = jdbcTemplate.queryForList("SELECT * FROM INFORMATION_SCHEMA.SEQUENCES");
-        sequences.forEach(sequence -> {
-            String sequence_name = (String) sequence.get("SEQUENCE_NAME");
-            jdbcTemplate.execute(format("ALTER SEQUENCE {0} RESTART WITH 1", sequence_name));
-        });
+        configuradorAmbiente.configurarAmbiente();
+        transicaoDataTable = TransicaoDataTable.builder().build();
     }
 }

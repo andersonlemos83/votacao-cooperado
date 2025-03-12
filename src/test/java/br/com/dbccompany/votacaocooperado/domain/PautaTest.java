@@ -1,29 +1,31 @@
 package br.com.dbccompany.votacaocooperado.domain;
 
-import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
-import br.com.dbccompany.votacaocooperado.builder.DataHoraBuilder;
-import br.com.dbccompany.votacaocooperado.builder.PautaBuilder;
-import br.com.dbccompany.votacaocooperado.builder.VotoBuilder;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import br.com.dbccompany.votacaocooperado.helper.builder.DataHoraBuilder;
+import org.instancio.Instancio;
+import org.instancio.Select;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static br.com.dbccompany.votacaocooperado.domain.TipoVoto.NAO;
+import static br.com.dbccompany.votacaocooperado.domain.TipoVoto.SIM;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@RunWith(JUnit4.class)
+@SuppressWarnings("java:S5786") // Public required for JUnit test suite
+@ExtendWith(SpringExtension.class)
 public class PautaTest {
 
     private Pauta pauta;
     private Assembleia assembleiaAtual;
 
-    @Before
+    @BeforeEach
     public void inicializarContexto() {
-        pauta = PautaBuilder.umaPautaQualquer().build();
+        pauta = Instancio.create(Pauta.class);
     }
 
     @Test
@@ -58,21 +60,23 @@ public class PautaTest {
     }
 
     private Assembleia gerarAssembleia(int minutos, int quantidadeVotosSim, int quantidadeVotosNao) {
-        return AssembleiaBuilder.umaAssembleiaQualquer()
-                .comId((long) minutos)
-                .comDataCriacao(DataHoraBuilder.umaData().nMinutosAtras(minutos).build())
-                .comTempoDuracao(5)
-                .comVotos(gerarVotos(quantidadeVotosSim, quantidadeVotosNao))
-                .build();
+        Assembleia assembleia = Instancio.create(Assembleia.class);
+        assembleia.setId((long) minutos);
+        assembleia.setDataCriacao(DataHoraBuilder.umaData().nMinutosAtras(minutos).build());
+        assembleia.setTempoDuracao(5);
+        assembleia.setVotos(gerarVotos(quantidadeVotosSim, quantidadeVotosNao));
+        return assembleia;
     }
 
     private List<Voto> gerarVotos(int quantidadeVotosSim, int quantidadeVotosNao) {
         List<Voto> votos = new ArrayList<>();
         for (int i = 0; i < quantidadeVotosSim; i++) {
-            votos.add(VotoBuilder.umVotoQualquerSim().build());
+            Voto voto = Instancio.of(Voto.class).set(Select.field("tipoVoto"), SIM).create();
+            votos.add(voto);
         }
         for (int i = 0; i < quantidadeVotosNao; i++) {
-            votos.add(VotoBuilder.umVotoQualquerNao().build());
+            Voto voto = Instancio.of(Voto.class).set(Select.field("tipoVoto"), NAO).create();
+            votos.add(voto);
         }
         return votos;
     }

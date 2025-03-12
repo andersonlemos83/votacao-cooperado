@@ -1,23 +1,40 @@
 package br.com.dbccompany.votacaocooperado.domain;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import lombok.*;
+
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.ABERTA;
 import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.FECHADA;
+import static jakarta.persistence.CascadeType.ALL;
+import static jakarta.persistence.FetchType.LAZY;
+import static jakarta.persistence.GenerationType.SEQUENCE;
 import static java.lang.Boolean.TRUE;
+import static java.time.LocalDateTime.now;
 import static java.time.ZoneId.systemDefault;
 import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 
+@SuppressWarnings("squid:S7027") // Circular dependencies between classes across packages
+@Data
 @Entity
+@Builder
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(schema = "COOP_OWNER", name = "ASSEMBLEIA")
+@SequenceGenerator(schema = "COOP_OWNER", name = "assembleia_seq", sequenceName = "ASSEMBLEIA_SEQ", allocationSize = 1)
 public class Assembleia implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
+    @GeneratedValue(strategy = SEQUENCE, generator = "assembleia_seq")
     private Long id;
 
     @Column(nullable = false)
@@ -29,61 +46,13 @@ public class Assembleia implements Serializable {
     @ManyToOne
     private Pauta pauta;
 
-    @OneToMany(mappedBy = "assembleia", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "assembleia", fetch = LAZY, cascade = ALL)
     private List<Voto> votos;
 
-    public Assembleia() {
-    }
-
-    public Assembleia(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getDataCriacao() {
-        return dataCriacao;
-    }
-
-    public void setDataCriacao(Date dataCriacao) {
-        this.dataCriacao = dataCriacao;
-    }
-
-    public int getTempoDuracao() {
-        return tempoDuracao;
-    }
-
-    public void setTempoDuracao(int tempoDuracao) {
-        this.tempoDuracao = tempoDuracao;
-    }
-
-    public Pauta getPauta() {
-        return pauta;
-    }
-
-    public void setPauta(Pauta pauta) {
-        this.pauta = pauta;
-    }
-
-    public List<Voto> getVotos() {
-        return votos;
-    }
-
-    public void setVotos(List<Voto> votos) {
-        this.votos = votos;
-    }
-
     public Long obterIdPauta() {
-        if (pauta == null) {
-            return null;
-        }
-        return pauta.getId();
+        return Optional.ofNullable(pauta)
+                .map(Pauta::getId)
+                .orElse(null);
     }
 
     public boolean estaFechada() {
@@ -94,7 +63,7 @@ public class Assembleia implements Serializable {
                 .atZone(systemDefault())
                 .toLocalDateTime()
                 .plusMinutes(tempoDuracao)
-                .isBefore(LocalDateTime.now());
+                .isBefore(now());
     }
 
     public int obterQuantidadeVotosSim() {
@@ -129,28 +98,5 @@ public class Assembleia implements Serializable {
         if (tempoDuracao <= 0) {
             tempoDuracao = 1;
         }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Assembleia that = (Assembleia) o;
-        return Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "Assembleia{" +
-                "id=" + id +
-                ", dataCriacao=" + dataCriacao +
-                ", tempoDuracao=" + tempoDuracao +
-                ", pauta=" + pauta +
-                '}';
     }
 }

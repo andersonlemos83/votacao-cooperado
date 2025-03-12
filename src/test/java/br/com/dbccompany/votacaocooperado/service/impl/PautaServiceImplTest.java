@@ -1,28 +1,27 @@
 package br.com.dbccompany.votacaocooperado.service.impl;
 
-import br.com.dbccompany.votacaocooperado.builder.PautaBuilder;
 import br.com.dbccompany.votacaocooperado.domain.Pauta;
 import br.com.dbccompany.votacaocooperado.repository.PautaRepository;
 import br.com.dbccompany.votacaocooperado.service.PautaService;
 import br.com.dbccompany.votacaocooperado.shared.exception.NegocioException;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
+import org.instancio.Instancio;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static java.util.Optional.ofNullable;
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 
-@RunWith(MockitoJUnitRunner.class)
+@SuppressWarnings("java:S5786") // Public required for JUnit test suite
+@ExtendWith(SpringExtension.class)
 public class PautaServiceImplTest {
 
     private PautaService pautaService;
@@ -30,20 +29,17 @@ public class PautaServiceImplTest {
     @Mock
     private PautaRepository pautaRepositoryMock;
 
-    @Rule
-    public ExpectedException exception = ExpectedException.none();
-
     private List<Pauta> pautasEsperadas;
     private Pauta pautaEsperada;
     private Long idEsperado;
     private Optional<Pauta> pautaOptionalEsperada;
 
-    @Before
+    @BeforeEach
     public void inicializarContexto() {
         pautaService = new PautaServiceImpl(pautaRepositoryMock);
 
         pautasEsperadas = new ArrayList<>();
-        pautaEsperada = PautaBuilder.umaPautaQualquer().build();
+        pautaEsperada = Instancio.create(Pauta.class);
         idEsperado = 1L;
         pautaOptionalEsperada = ofNullable(pautaEsperada);
     }
@@ -88,9 +84,7 @@ public class PautaServiceImplTest {
     public void aoBuscarPorIdDadoQueNaoExistaPautaDeveriaLancarAhMensagemEsperada() {
         Mockito.when(pautaRepositoryMock.findById(idEsperado)).thenReturn(Optional.empty());
 
-        exception.expect(NegocioException.class);
-        exception.expectMessage("A pauta informada não exite");
-
-        pautaService.buscarPorId(idEsperado);
+        NegocioException thrown = assertThrows(NegocioException.class, () -> pautaService.buscarPorId(idEsperado));
+        assertEquals("A pauta informada não exite", thrown.getMessage());
     }
 }

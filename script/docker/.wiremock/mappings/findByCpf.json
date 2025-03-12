@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPattern": "/users/([0-9]{11})"
+  },
+  "response": {
+    "status": 200,
+    "body": "Fulano de Tal",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

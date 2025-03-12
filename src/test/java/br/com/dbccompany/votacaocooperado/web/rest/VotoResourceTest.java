@@ -1,57 +1,56 @@
 package br.com.dbccompany.votacaocooperado.web.rest;
 
-import br.com.dbccompany.votacaocooperado.VotacaoCooperadoApplication;
-import br.com.dbccompany.votacaocooperado.builder.VotoBuilder;
-import br.com.dbccompany.votacaocooperado.builder.VotoDtoBuilder;
 import br.com.dbccompany.votacaocooperado.domain.Voto;
 import br.com.dbccompany.votacaocooperado.service.VotoService;
 import br.com.dbccompany.votacaocooperado.web.dto.VotoDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.instancio.Instancio;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.BDDMockito;
 import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.Collections;
 
-import static br.com.dbccompany.votacaocooperado.util.ConstanteUtil.URI_V1_API_VOTOS;
+import static br.com.dbccompany.votacaocooperado.helper.util.ConstanteUtil.URI_V1_API_VOTOS;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = VotacaoCooperadoApplication.class)
-@AutoConfigureMockMvc
+@SuppressWarnings("java:S5786") // Public required for JUnit test suite
+@ActiveProfiles("test")
+@ExtendWith(MockitoExtension.class)
+@WebMvcTest(VotoResource.class)
 public class VotoResourceTest {
 
     @Autowired
     protected MockMvc mvc;
 
-    @MockBean
+    @MockitoBean
     private VotoService votoServiceMock;
 
-    @MockBean
+    @MockitoBean
     private ModelMapper modelMapperMock;
 
     private VotoDto votoDto;
     private Voto voto;
 
-    @Before
+    @BeforeEach
     public void inicializarContexto() {
-        votoDto = VotoDtoBuilder.umVotoQualquer().build();
-        voto = VotoBuilder.umVotoQualquer().build();
+        votoDto = Instancio.create(VotoDto.class);
+        voto = Instancio.create(Voto.class);
     }
 
     @Test
@@ -86,13 +85,13 @@ public class VotoResourceTest {
     private ResultActions cadastrarVoto() throws Exception {
         return mvc.perform(MockMvcRequestBuilders.post(URI_V1_API_VOTOS)
                 .content(new ObjectMapper().writeValueAsString(votoDto))
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .accept(MediaType.APPLICATION_JSON_UTF8));
+                .contentType(APPLICATION_JSON)
+                .accept(APPLICATION_JSON));
     }
 
     private ResultActions listarTodos() throws Exception {
         return mvc.perform(MockMvcRequestBuilders.get(URI_V1_API_VOTOS)
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON));
+                .contentType(APPLICATION_JSON)
+                .accept(APPLICATION_JSON));
     }
 }

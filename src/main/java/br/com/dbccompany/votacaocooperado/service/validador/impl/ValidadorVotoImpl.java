@@ -4,18 +4,16 @@ import br.com.dbccompany.votacaocooperado.domain.Voto;
 import br.com.dbccompany.votacaocooperado.repository.VotoRepository;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorVoto;
 import br.com.dbccompany.votacaocooperado.shared.exception.NegocioException;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @Component
+@AllArgsConstructor
 public class ValidadorVotoImpl implements ValidadorVoto {
 
     private final VotoRepository votoRepository;
-
-    public ValidadorVotoImpl(VotoRepository votoRepository) {
-        this.votoRepository = votoRepository;
-    }
 
     @Override
     public void validar(Voto voto) {

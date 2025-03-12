@@ -5,24 +5,18 @@ import br.com.dbccompany.votacaocooperado.repository.VotoRepository;
 import br.com.dbccompany.votacaocooperado.service.VotoService;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorAssembleia;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorVoto;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class VotoServiceImpl implements VotoService {
 
     private final VotoRepository votoRepository;
     private final ValidadorAssembleia validadorAssembleia;
     private final ValidadorVoto validadorVoto;
-
-    public VotoServiceImpl(VotoRepository votoRepository,
-                           ValidadorAssembleia validadorAssembleia,
-                           ValidadorVoto validadorVoto) {
-        this.votoRepository = votoRepository;
-        this.validadorAssembleia = validadorAssembleia;
-        this.validadorVoto = validadorVoto;
-    }
 
     @Override
     public List<Voto> listarTodos() {

@@ -4,35 +4,23 @@ import br.com.dbccompany.votacaocooperado.cucumber.contexto.AssembleiaContexto;
 import br.com.dbccompany.votacaocooperado.cucumber.contexto.AssociadoContexto;
 import br.com.dbccompany.votacaocooperado.cucumber.contexto.PautaContexto;
 import br.com.dbccompany.votacaocooperado.cucumber.contexto.VotoContexto;
-import br.com.dbccompany.votacaocooperado.cucumber.datatable.AssembleiaDataTable;
-import br.com.dbccompany.votacaocooperado.cucumber.datatable.AssociadoDataTable;
-import br.com.dbccompany.votacaocooperado.cucumber.datatable.PautaDataTable;
-import br.com.dbccompany.votacaocooperado.cucumber.datatable.VotoDataTable;
+import br.com.dbccompany.votacaocooperado.cucumber.datatable.domain.AssembleiaDataTable;
+import br.com.dbccompany.votacaocooperado.cucumber.datatable.domain.AssociadoDataTable;
+import br.com.dbccompany.votacaocooperado.cucumber.datatable.domain.PautaDataTable;
+import br.com.dbccompany.votacaocooperado.cucumber.datatable.domain.VotoDataTable;
 import br.com.dbccompany.votacaocooperado.cucumber.stepdefs.StepDefs;
-import cucumber.api.java.Before;
-import cucumber.api.java.pt.Dado;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.cucumber.java.pt.Dado;
+import lombok.AllArgsConstructor;
 
 import java.util.List;
 
+@AllArgsConstructor
 public class ContextoStepDefs extends StepDefs {
 
-    @Autowired
-    private PautaContexto pautaContexto;
-
-    @Autowired
-    private AssociadoContexto associadoContexto;
-
-    @Autowired
-    private AssembleiaContexto assembleiaContexto;
-
-    @Autowired
-    private VotoContexto votoContexto;
-
-    @Before
-    public void inicializarContexto() {
-        super.inicializarContexto();
-    }
+    private final PautaContexto pautaContexto;
+    private final AssociadoContexto associadoContexto;
+    private final AssembleiaContexto assembleiaContexto;
+    private final VotoContexto votoContexto;
 
     @Dado("^que existam as pautas cadastradas$")
     public void queExistamAsPautasCadastradas(List<PautaDataTable> pautasDataTable) {

@@ -1,33 +1,36 @@
 package br.com.dbccompany.votacaocooperado.domain;
 
-import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
-import br.com.dbccompany.votacaocooperado.builder.DataHoraBuilder;
-import br.com.dbccompany.votacaocooperado.builder.PautaBuilder;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import br.com.dbccompany.votacaocooperado.helper.builder.DataHoraBuilder;
+import org.instancio.Instancio;
+import org.instancio.Select;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import static br.com.dbccompany.votacaocooperado.builder.VotoBuilder.umVotoQualquerNao;
-import static br.com.dbccompany.votacaocooperado.builder.VotoBuilder.umVotoQualquerSim;
 import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.ABERTA;
 import static br.com.dbccompany.votacaocooperado.domain.StatusAssembleia.FECHADA;
-import static br.com.dbccompany.votacaocooperado.util.AssertUtil.assertData;
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.*;
+import static br.com.dbccompany.votacaocooperado.domain.TipoVoto.NAO;
+import static br.com.dbccompany.votacaocooperado.domain.TipoVoto.SIM;
+import static br.com.dbccompany.votacaocooperado.helper.util.AssertUtil.assertData;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-@RunWith(JUnit4.class)
+@SuppressWarnings("java:S5786") // Public required for JUnit test suite
+@ExtendWith(SpringExtension.class)
 public class AssembleiaTest {
 
     private Assembleia assembleia;
 
-    @Before
+    @BeforeEach
     public void inicializarContexto() {
-        assembleia = AssembleiaBuilder.umaAssembleiaQualquer().build();
+        assembleia = Instancio.create(Assembleia.class);
     }
 
     @Test
@@ -38,11 +41,12 @@ public class AssembleiaTest {
 
     @Test
     public void aoObterIdPautaDadoQuePautaNaoEstejaNulaDeveriaRetornarIdPautaEsperado() {
-        assembleia.setPauta(PautaBuilder.umaPautaQualquer().build());
+        Pauta pautaEsperada = Instancio.create(Pauta.class);
+        assembleia.setPauta(pautaEsperada);
 
         Long idPautaRetornado = assembleia.obterIdPauta();
 
-        assertEquals(Long.valueOf(1), idPautaRetornado);
+        assertEquals(pautaEsperada.getId(), idPautaRetornado);
     }
 
     @Test
@@ -132,9 +136,16 @@ public class AssembleiaTest {
     }
 
     private List<Voto> gerarListaComQuatroVotosSimIhSeisVotosNao() {
-        return Arrays.asList(umVotoQualquerSim().build(), umVotoQualquerSim().build(), umVotoQualquerSim().build(),
-                umVotoQualquerSim().build(), umVotoQualquerNao().build(), umVotoQualquerNao().build(),
-                umVotoQualquerNao().build(), umVotoQualquerNao().build(), umVotoQualquerNao().build(),
-                umVotoQualquerNao().build());
+        return Arrays.asList(gerarVotoSim(), gerarVotoSim(), gerarVotoSim(), gerarVotoSim(),
+                gerarVotoNao(), gerarVotoNao(), gerarVotoNao(), gerarVotoNao(), gerarVotoNao(),
+                gerarVotoNao());
+    }
+
+    private Voto gerarVotoSim() {
+        return Instancio.of(Voto.class).set(Select.field("tipoVoto"), SIM).create();
+    }
+
+    private Voto gerarVotoNao() {
+        return Instancio.of(Voto.class).set(Select.field("tipoVoto"), NAO).create();
     }
 }

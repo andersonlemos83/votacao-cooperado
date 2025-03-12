@@ -1,45 +1,39 @@
 package br.com.dbccompany.votacaocooperado.cucumber.contexto;
 
-import br.com.dbccompany.votacaocooperado.builder.VotoBuilder;
-import br.com.dbccompany.votacaocooperado.cucumber.datatable.VotoDataTable;
-import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.AssembleiaRepositoryTestHelper;
-import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.AssociadoRepositoryTestHelper;
-import br.com.dbccompany.votacaocooperado.cucumber.repositorytesthelper.VotoRepositoryTestHelper;
+import br.com.dbccompany.votacaocooperado.cucumber.datatable.domain.VotoDataTable;
 import br.com.dbccompany.votacaocooperado.domain.Assembleia;
 import br.com.dbccompany.votacaocooperado.domain.Associado;
 import br.com.dbccompany.votacaocooperado.domain.Voto;
-import org.springframework.beans.factory.annotation.Autowired;
+import br.com.dbccompany.votacaocooperado.helper.repository.AssembleiaRepositoryHelper;
+import br.com.dbccompany.votacaocooperado.helper.repository.AssociadoRepositoryHelper;
+import br.com.dbccompany.votacaocooperado.helper.repository.VotoRepositoryHelper;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@AllArgsConstructor
 public class VotoContexto {
 
-    @Autowired
-    private VotoRepositoryTestHelper votoRepositoryTestHelper;
-
-    @Autowired
-    private AssociadoRepositoryTestHelper associadoRepositoryTestHelper;
-
-    @Autowired
-    private AssembleiaRepositoryTestHelper assembleiaRepositoryTestHelper;
+    private final VotoRepositoryHelper votoRepositoryHelper;
+    private final AssociadoRepositoryHelper associadoRepositoryHelper;
+    private final AssembleiaRepositoryHelper assembleiaRepositoryHelper;
 
     public void cadastrar(List<VotoDataTable> votosDataTable) {
-        votosDataTable.forEach(votoDataTable -> {
-            Voto voto = converter(votoDataTable);
-            votoRepositoryTestHelper.saveAndFlush(voto);
-        });
+        List<Voto> votos = votosDataTable.stream().map(this::gerarVoto).toList();
+        votoRepositoryHelper.saveAll(votos);
     }
 
-    private Voto converter(VotoDataTable votoDataTable) {
-        Associado associado = associadoRepositoryTestHelper.findByNome(votoDataTable.getNomeAssociado());
-        Assembleia assembleia = assembleiaRepositoryTestHelper.findByPauta_Descricao(votoDataTable.getDescricaoPauta());
-        return VotoBuilder.umVoto()
-                .comId(votoDataTable.getId())
-                .comTipoVoto(votoDataTable.getTipoVoto())
-                .comAssociado(associado)
-                .comAssembleia(assembleia)
-                .build();
+    private Voto gerarVoto(VotoDataTable votoDataTable) {
+        Associado associado = associadoRepositoryHelper.findByNome(votoDataTable.getNomeAssociado());
+        Assembleia assembleia = assembleiaRepositoryHelper.findByPauta_Descricao(votoDataTable.getDescricaoPauta());
+        Voto voto = new Voto();
+        BeanUtils.copyProperties(votoDataTable, voto);
+        voto.setId(null);
+        voto.setAssociado(associado);
+        voto.setAssembleia(assembleia);
+        return voto;
     }
 }

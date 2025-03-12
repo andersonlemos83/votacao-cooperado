@@ -1,28 +1,30 @@
 package br.com.dbccompany.votacaocooperado.service.validador.impl;
 
-import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
-import br.com.dbccompany.votacaocooperado.builder.DataHoraBuilder;
 import br.com.dbccompany.votacaocooperado.domain.Assembleia;
+import br.com.dbccompany.votacaocooperado.domain.Pauta;
+import br.com.dbccompany.votacaocooperado.helper.builder.DataHoraBuilder;
 import br.com.dbccompany.votacaocooperado.repository.AssembleiaRepository;
 import br.com.dbccompany.votacaocooperado.repository.PautaRepository;
 import br.com.dbccompany.votacaocooperado.service.validador.ValidadorAssembleia;
 import br.com.dbccompany.votacaocooperado.shared.exception.NegocioException;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
+import org.instancio.Instancio;
+import org.instancio.Select;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Date;
 import java.util.Optional;
 
-import static br.com.dbccompany.votacaocooperado.builder.PautaBuilder.umaPautaQualquer;
 import static java.util.Optional.ofNullable;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@RunWith(MockitoJUnitRunner.class)
+@SuppressWarnings("java:S5786") // Public required for JUnit test suite
+@ExtendWith(SpringExtension.class)
 public class ValidadorAssembleiaImplTest {
 
     private ValidadorAssembleia validadorAssembleia;
@@ -33,22 +35,19 @@ public class ValidadorAssembleiaImplTest {
     @Mock
     private PautaRepository pautaRepositoryMock;
 
-    @Rule
-    public ExpectedException exception = ExpectedException.none();
-
     private Long idAssembleia;
     private Assembleia assembleia;
     private Optional<Assembleia> assembleiaOptional;
 
-    @Before
+    @BeforeEach
     public void inicializarContexto() {
         validadorAssembleia = new ValidadorAssembleiaImpl(assembleiaRepositoryMock, pautaRepositoryMock);
 
         idAssembleia = 1L;
-        assembleia = AssembleiaBuilder.umaAssembleiaQualquer()
-                .comId(idAssembleia)
-                .comPauta(umaPautaQualquer().build())
-                .build();
+        assembleia = Instancio.of(Assembleia.class)
+                .set(Select.field("id"), idAssembleia)
+                .set(Select.field("pauta"), Instancio.create(Pauta.class))
+                .create();
         assembleiaOptional = ofNullable(assembleia);
     }
 
@@ -56,10 +55,8 @@ public class ValidadorAssembleiaImplTest {
     public void aoValidarDadoQueNaoExistaAssembleiaDeveriaLancarAhMensagemEsperada() {
         Mockito.when(assembleiaRepositoryMock.findById(idAssembleia)).thenReturn(Optional.empty());
 
-        exception.expect(NegocioException.class);
-        exception.expectMessage("A assembleia informada não existe");
-
-        validadorAssembleia.validar(idAssembleia);
+        NegocioException thrown = assertThrows(NegocioException.class, () -> validadorAssembleia.validar(idAssembleia));
+        assertEquals("A assembleia informada não existe", thrown.getMessage());
     }
 
     @Test
@@ -68,10 +65,8 @@ public class ValidadorAssembleiaImplTest {
         assembleia.setTempoDuracao(2);
         Mockito.when(assembleiaRepositoryMock.findById(idAssembleia)).thenReturn(assembleiaOptional);
 
-        exception.expect(NegocioException.class);
-        exception.expectMessage("A assembleia informada está fechada");
-
-        validadorAssembleia.validar(idAssembleia);
+        NegocioException thrown = assertThrows(NegocioException.class, () -> validadorAssembleia.validar(idAssembleia));
+        assertEquals("A assembleia informada está fechada", thrown.getMessage());
     }
 
     @Test
@@ -87,15 +82,14 @@ public class ValidadorAssembleiaImplTest {
     public void aoValidarDadoQueNaoExistaPautaDeveriaLancarAhMensagemEsperada() {
         Mockito.when(pautaRepositoryMock.findById(Mockito.any(Long.class))).thenReturn(Optional.empty());
 
-        exception.expect(NegocioException.class);
-        exception.expectMessage("A pauta informada não existe");
-
-        validadorAssembleia.validar(assembleia);
+        NegocioException thrown = assertThrows(NegocioException.class, () -> validadorAssembleia.validar(assembleia));
+        assertEquals("A pauta informada não existe", thrown.getMessage());
     }
 
     @Test
     public void aoValidarDadoQueExistaPautaNaoDeveriaLancarNenhumaMensagem() {
-        Mockito.when(pautaRepositoryMock.findById(Mockito.any(Long.class))).thenReturn((ofNullable(umaPautaQualquer().build())));
+        Pauta pauta = Instancio.create(Pauta.class);
+        Mockito.when(pautaRepositoryMock.findById(Mockito.any(Long.class))).thenReturn((ofNullable(pauta)));
 
         validadorAssembleia.validar(assembleia);
     }

@@ -1,24 +1,27 @@
 package br.com.dbccompany.votacaocooperado.domain;
 
-import br.com.dbccompany.votacaocooperado.builder.AssembleiaBuilder;
-import br.com.dbccompany.votacaocooperado.builder.AssociadoBuilder;
-import br.com.dbccompany.votacaocooperado.builder.VotoBuilder;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.instancio.Instancio;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.*;
+import static br.com.dbccompany.votacaocooperado.domain.TipoVoto.NAO;
+import static br.com.dbccompany.votacaocooperado.domain.TipoVoto.SIM;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-@RunWith(JUnit4.class)
+@SuppressWarnings("java:S5786") // Public required for JUnit test suite
+@ExtendWith(SpringExtension.class)
 public class VotoTest {
 
     private Voto voto;
 
-    @Before
+    @BeforeEach
     public void inicializarContexto() {
-        voto = VotoBuilder.umVotoQualquer().build();
+        voto = Instancio.create(Voto.class);
     }
 
     @Test
@@ -29,11 +32,12 @@ public class VotoTest {
 
     @Test
     public void aoObterIdAssociadoDadoQueAssociadoNaoEstejaNuloDeveriaRetornarIdAssociadoEsperado() {
-        voto.setAssociado(AssociadoBuilder.umAssociadoQualquer().build());
+        Associado associadoEsperado = Instancio.create(Associado.class);
+        voto.setAssociado(associadoEsperado);
 
         Long idAssociadoRetornado = voto.obterIdAssociado();
 
-        assertEquals(Long.valueOf(1), idAssociadoRetornado);
+        assertEquals(associadoEsperado.getId(), idAssociadoRetornado);
     }
 
     @Test
@@ -44,34 +48,35 @@ public class VotoTest {
 
     @Test
     public void aoObterIdAssembleiaDadoQueAssembleiaNaoEstejaNulaDeveriaRetornarIdAssembleiaEsperado() {
-        voto.setAssembleia(AssembleiaBuilder.umaAssembleiaQualquer().build());
+        Assembleia assembleiaEsperada = Instancio.create(Assembleia.class);
+        voto.setAssembleia(assembleiaEsperada);
 
         Long idAssembleiaRetornado = voto.obterIdAssembleia();
 
-        assertEquals(Long.valueOf(1), idAssembleiaRetornado);
+        assertEquals(assembleiaEsperada.getId(), idAssembleiaRetornado);
     }
 
     @Test
     public void aoChamarMetodoEhSimDadoQueTipoVotoSejaSimDeveriaRetornarVerdadeiro() {
-        voto.setTipoVoto(TipoVoto.SIM);
+        voto.setTipoVoto(SIM);
         assertTrue("Deveria retornar verdadeiro", voto.ehSim());
     }
 
     @Test
     public void aoChamarMetodoEhSimDadoQueTipoVotoSejaNaoDeveriaRetornarFalso() {
-        voto.setTipoVoto(TipoVoto.NAO);
+        voto.setTipoVoto(NAO);
         assertFalse("Deveria retornar falso", voto.ehSim());
     }
 
     @Test
     public void aoChamarMetodoEhNaoDadoQueTipoVotoSejaNaoDeveriaRetornarVerdadeiro() {
-        voto.setTipoVoto(TipoVoto.NAO);
+        voto.setTipoVoto(NAO);
         assertTrue("Deveria retornar verdadeiro", voto.ehNao());
     }
 
     @Test
     public void aoChamarMetodoEhNaoDadoQueTipoVotoSejaSimDeveriaRetornarFalso() {
-        voto.setTipoVoto(TipoVoto.SIM);
+        voto.setTipoVoto(SIM);
         assertFalse("Deveria retornar falso", voto.ehNao());
     }
 }
