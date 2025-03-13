@@ -374,39 +374,38 @@
                 </executions>
             </plugin>
 
-            <!-- dockerfile -->
-            <!--			<plugin>-->
-            <!--				<groupId>com.spotify</groupId>-->
-            <!--				<artifactId>dockerfile-maven-plugin</artifactId>-->
-            <!--				<version>1.4.13</version>-->
-            <!--				<executions>-->
-            <!--					<execution>-->
-            <!--						<id>default</id>-->
-            <!--						<goals>-->
-            <!--							<goal>build</goal>-->
-            <!--						</goals>-->
-            <!--					</execution>-->
-            <!--				</executions>-->
-            <!--				<configuration>-->
-            <!--					<repository>andersonlemos83/api-votacao-cooperado</repository>-->
-            <!--					<tag>${project.version}</tag>-->
-            <!--				</configuration>-->
-            <!--			</plugin>-->
-
-<!--            <plugin>-->
-<!--                <groupId>org.graalvm.buildtools</groupId>-->
-<!--                <artifactId>native-maven-plugin</artifactId>-->
-<!--                <version>0.10.5</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <goals>-->
-<!--                            <goal>compile-no-fork</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
-
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>docker-build</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <configuration>
+                            <image>
+                                <name>andersonlemos83/${project.name}:${project.version}</name>
+                            </image>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>build-image</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>build-image</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
