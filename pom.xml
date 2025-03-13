@@ -391,6 +391,9 @@
                         <configuration>
                             <image>
                                 <name>andersonlemos83/${project.name}:${project.version}</name>
+                                <tags>
+                                    <tag>andersonlemos83/${project.name}:latest</tag>
+                                </tags>
                             </image>
                         </configuration>
                         <executions>
