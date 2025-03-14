@@ -394,6 +394,7 @@
                                 <tags>
                                     <tag>andersonlemos83/${project.name}:latest</tag>
                                 </tags>
+                                <publish>true</publish>
                             </image>
                         </configuration>
                         <executions>

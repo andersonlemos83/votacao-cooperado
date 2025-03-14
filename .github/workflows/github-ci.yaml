@@ -47,7 +47,9 @@ jobs:
           distribution: 'temurin'
           architecture: x64
           cache: maven
-      - name: Configure Authentication on Docker Hub
+      - name: Login on Docker Hub
         run: echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
-      - name: Package
+      - name: Build Docker Image
         run: mvn -U -B package -Pdocker-build -Dmaven.test.skip=true -DargLine="-Xms512M -Xmx2G -Xss4M"
+      - name: Logout on Docker Hub
+        run: echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
