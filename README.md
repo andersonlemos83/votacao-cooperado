@@ -4,6 +4,10 @@
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=andersonlemos83_votacao-cooperado&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=andersonlemos83_votacao-cooperado)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=andersonlemos83_votacao-cooperado&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=andersonlemos83_votacao-cooperado)
 
+![GitHub Created At](https://img.shields.io/github/created-at/andersonlemos83/votacao-cooperado)
+![Build Status](https://github.com/andersonlemos83/votacao-cooperado/actions/workflows/github-ci.yaml/badge.svg)
+![Docker Image Version](https://img.shields.io/docker/v/andersonlemos83/api-votacao-cooperado?sort=semver&label=api-votacao-cooperado)
+
 # Sobre o projeto Votação Cooperado API
 
 Este projeto foi concebido no final do ano de 2020 como parte de uma avaliação técnica de backend para tentativa de
