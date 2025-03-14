@@ -60,12 +60,25 @@ Com o intuito de organizar melhor os testes do projeto, foram agrupados os teste
 - UnitTests: Esta suite agrupa todos os testes de unidade do projeto.
 - AllTests: Esta suite agrupa todos os testes implementados. Consiste na união do CucumberTest com UnitTests.
 
-**6. URL's**
+**6. Primeiros Passos**
+- Baixar todas as dependências do projeto:
+  ```
+    mvn dependency:resolve -U
+  ```
+- Executar o build do projeto:
+  ```
+    mvn -U -B clean install -Dmaven.test.skip=true
+  ```
+- Executar o build do projeto executando todos os testes:
+  ```
+    mvn -U -B clean install
+  ```
+- Executar construção da imagem docker:
+  ```
+    mvn -U -B package -Pdocker-build -Dmaven.test.skip=true
+  ```
 
-- API: http://localhost:8484 (profile local)
-- Swagger UI: http://localhost:8484/swagger-ui.html (profile local)
-
-**7. Wiremock para Serviços Externos**:
+**7. Começando com a Aplicação**
 1. Subir uma instância do Wiremock:
   ```
     docker-compose -f .\script\docker\wiremock.yml up -d
@@ -76,7 +89,26 @@ Com o intuito de organizar melhor os testes do projeto, foram agrupados os teste
     curl 'http://localhost:8443/users/05551874460'
   ```
 
-**8. Lista de serviços**
+3. Configurar o compose [api-votacao-cooperado.yml](./script/docker/api-votacao-cooperado.yml):
+  ```
+    Altere "/c/Users/DEV" por um caminho válido
+  ```
+
+4. Subir uma instância da api-votacao-cooperado:
+  ```
+    docker-compose -f .\script\docker\api-votacao-cooperado.yml up -d
+  ```
+
+5. Testar a instância da api-votacao-cooperado: [Testar api-votacao-cooperado](http://localhost:8484/v1/api/associados)
+  ```
+    curl 'http://localhost:8484/v1/api/associados'
+  ```
+
+**8. URL's**
+
+- Swagger UI: http://localhost:8484/swagger-ui.html
+
+**9. Lista de serviços**
 
 Apesar da documentação da API ser gerada via Swagger, segue uma breve listagem dos serviços disponíveis:
 
@@ -92,7 +124,7 @@ Apesar da documentação da API ser gerada via Swagger, segue uma breve listagem
 
 [votacao-cooperado.postman_collection.json](./script/postman/votacao-cooperado.postman_collection.json)
 
-**9. Sugestão de uso**
+**10. Sugestão de uso**
 
 O usuário tem total liberdade para utilizar a API e seus serviços na ordem que desejar. No entanto, apenas como
 sugestão, segue um breve roteiro:
@@ -103,6 +135,6 @@ sugestão, segue um breve roteiro:
 4. Criar um novo voto relacionando com a assembleia criada no item 2 e com o associado criado no item 3;
 5. Consultar o consolidado da pauta criada no item 1.
 
-**10. That's all folks!**
+**11. That's all folks!**
 
 Caro avaliador, obrigado pela oportunidade.

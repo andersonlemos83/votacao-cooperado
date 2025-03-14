@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  api-votacao-cooperado:
+    container_name: api-votacao-cooperado
+    image: andersonlemos83/api-votacao-cooperado:latest
+    environment:
+      SPRING_PROFILES_ACTIVE: "docker"
+      TZ: America/Maceio
+      PATH_DB: "/var/lib/app"
+      USERNAME_H2: "sa"
+      PASSWORD_H2: "sa"
+      URL_USUARIO_CLIENT: "http://host.docker.internal:8443"
+    ports:
+      - 8484:8080
+    volumes:
+      - "/c/Users/DEV:/var/lib/app"

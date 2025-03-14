@@ -10,14 +10,7 @@
 			"name": "Cadastrar Pauta",
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "00220ce4-b3e8-4ed1-b59a-db40c1098296",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "POST",
 				"header": [],
@@ -50,14 +43,7 @@
 			"name": "Cadastrar Assembléia",
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "00220ce4-b3e8-4ed1-b59a-db40c1098296",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "POST",
 				"header": [],
@@ -90,14 +76,7 @@
 			"name": "Cadastrar Associado",
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "00220ce4-b3e8-4ed1-b59a-db40c1098296",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "POST",
 				"header": [],
@@ -130,14 +109,7 @@
 			"name": "Cadastrar Voto",
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "00220ce4-b3e8-4ed1-b59a-db40c1098296",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "POST",
 				"header": [],
@@ -170,14 +142,7 @@
 			"name": "Listar Pautas",
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "a77e4870-9fe0-4b0c-9c7d-93ff634b0da9",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "GET",
 				"header": [],
@@ -201,14 +166,7 @@
 			"name": "Listar Assembléias",
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "a77e4870-9fe0-4b0c-9c7d-93ff634b0da9",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "GET",
 				"header": [],
@@ -232,14 +190,7 @@
 			"name": "Listar Associados",
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "a77e4870-9fe0-4b0c-9c7d-93ff634b0da9",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "GET",
 				"header": [],
@@ -263,14 +214,7 @@
 			"name": "Listar Votos",
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "a77e4870-9fe0-4b0c-9c7d-93ff634b0da9",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "GET",
 				"header": [],
@@ -294,14 +238,7 @@
 			"name": "Consultar Consolidado Pauta",
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "a77e4870-9fe0-4b0c-9c7d-93ff634b0da9",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "GET",
 				"header": [],

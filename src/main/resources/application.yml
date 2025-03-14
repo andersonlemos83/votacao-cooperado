@@ -8,6 +8,7 @@ server:
 spring:
   main:
     allow-bean-definition-overriding: true
+    web-application-type: servlet
   datasource:
     driver-class-name: org.h2.Driver
     hikari:
@@ -67,4 +68,4 @@ management:
 
 client:
   usuario:
-    url: https://user-info.herokuapp.com
+    url:
