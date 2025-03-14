@@ -52,6 +52,6 @@ jobs:
       - name: Build Docker Image
         run: mvn -U -B package -Pdocker-build -Dmaven.test.skip=true -DargLine="-Xms512M -Xmx2G -Xss4M"
       - name: Push to Docker Hub
-        run: docker push andersonlemos83/api-votacao-cooperado:latest
+        run: docker image ls --format "{{.Repository}}:{{.Tag}}" | grep "${{ secrets.DOCKER_HUB_USERNAME }}" | xargs -L1 docker push
       - name: Logout on Docker Hub
-        run: echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+        run: docker logout
