@@ -2,7 +2,7 @@ version: '3.8'
 services:
   api-votacao-cooperado:
     container_name: api-votacao-cooperado
-    image: andersonlemos83/votacao-cooperado:latest
+    image: andersonlemos83/api-votacao-cooperado:latest
     environment:
       SPRING_PROFILES_ACTIVE: "docker"
       TZ: America/Maceio
