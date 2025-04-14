@@ -5,7 +5,12 @@ services:
     image: andersonlemos83/api-votacao-cooperado:latest
     environment:
       SPRING_PROFILES_ACTIVE: "docker"
-      TZ: America/Maceio
+      JAVA_TOOL_OPTIONS: >
+        -XX:+UseContainerSupport
+        -XX:InitialRAMPercentage=50.0
+        -XX:MaxRAMPercentage=75.0
+        -XX:MaxDirectMemorySize=256M
+      TZ: "America/Maceio"
       PATH_DB: "/var/lib/app"
       USERNAME_H2: "sa"
       PASSWORD_H2: "sa"
