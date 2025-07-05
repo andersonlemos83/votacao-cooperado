@@ -11,10 +11,8 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 @ConfigurationParametersResource("cucumber.properties")
 @SelectPackages("br.com.dbccompany.votacaocooperado.cucumber.stepdefs")
 @SuiteDisplayName("Suite that gathers all Acceptance tests with Cucumber")
-@ConfigurationParameters({
-        @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "br.com.dbccompany.votacaocooperado.cucumber"),
-        @ConfigurationParameter(key = FEATURES_PROPERTY_NAME, value = "src/test/resources/features")
-})
+@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "br.com.dbccompany.votacaocooperado.cucumber")
+@ConfigurationParameter(key = FEATURES_PROPERTY_NAME, value = "src/test/resources/features")
 public class RunCucumberTest {
 
 }
