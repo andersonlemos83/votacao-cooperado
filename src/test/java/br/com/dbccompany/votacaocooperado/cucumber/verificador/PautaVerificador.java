@@ -11,7 +11,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import java.util.List;
 
 import static java.text.MessageFormat.format;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
