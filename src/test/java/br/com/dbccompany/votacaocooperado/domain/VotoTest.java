@@ -8,10 +8,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static br.com.dbccompany.votacaocooperado.domain.TipoVoto.NAO;
 import static br.com.dbccompany.votacaocooperado.domain.TipoVoto.SIM;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.springframework.test.util.AssertionErrors.assertFalse;
+import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 @SuppressWarnings("java:S5786") // Public required for JUnit test suite
 @ExtendWith(SpringExtension.class)

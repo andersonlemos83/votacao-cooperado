@@ -3,7 +3,7 @@ package br.com.dbccompany.votacaocooperado.helper.util;
 import java.util.Date;
 
 import static java.text.MessageFormat.format;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public final class AssertUtil {
 
